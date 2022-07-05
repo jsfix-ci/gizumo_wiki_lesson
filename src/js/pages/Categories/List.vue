@@ -52,7 +52,7 @@ export default {
   },
   // カテゴリーの取得
   created() {
-    this.$store.dispatch('categories/AllCategories');
+    this.$store.dispatch('categories/allCategories');
   },
   methods: {
     // モーダルウィンドウ
@@ -62,7 +62,7 @@ export default {
     // 削除ボタンのクリックイベント
     openModal(categoryId, categoryName) {
       this.modal();
-      this.$store.dispatch('categories/AddDeleteCategory', { categoryId, categoryName });
+      this.$store.dispatch('categories/addDeleteCategory', { categoryId, categoryName });
     },
   },
 };

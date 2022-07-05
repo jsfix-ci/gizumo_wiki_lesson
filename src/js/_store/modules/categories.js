@@ -12,11 +12,11 @@ export default {
   },
   mutations: {
     // 全カテゴリー名の取得
-    AllCategories(state, payload) {
+    allCategories(state, payload) {
       state.categories = payload;
     },
     // 削除する内容
-    AddDeleteCategory(state, { id, name }) {
+    addDeleteCategory(state, { id, name }) {
       state.deleteCategory.id = id;
       state.deleteCategory.name = name;
     },
@@ -27,19 +27,19 @@ export default {
   },
   actions: {
     // 全カテゴリー名の取得
-    AllCategories({ commit, rootGetters }) {
+    allCategories({ commit, rootGetters }) {
       axios(rootGetters['auth/token'])({
         method: 'GET',
         url: '/category',
       }).then(({ data }) => {
-        commit('AllCategories', data.categories.reverse());
+        commit('allCategories', data.categories.reverse());
       }).catch((err) => {
         const errTxt = err.message;
         commit('failRequest', errTxt);
       });
     },
-    AddDeleteCategory({ commit }, { categoryId: id, categoryName: name }) {
-      commit('AddDeleteCategory', { id, name });
+    addDeleteCategory({ commit }, { categoryId: id, categoryName: name }) {
+      commit('addDeleteCategory', { id, name });
     },
   },
 };
