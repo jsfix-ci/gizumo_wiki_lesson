@@ -8,7 +8,7 @@ export default {
   },
   mutations: {
     doneGetAllCategories(state, payload) {
-      state.categoryList = [...payload.categories].reverse();
+      state.categoryList = payload.categories.reverse();
     },
     failRequest(state, { message }) {
       state.errorMessage = message;
@@ -26,7 +26,6 @@ export default {
         };
         commit('doneGetAllCategories', payload);
       }).catch((err) => {
-        console.log(err);
         commit('failRequest', { message: err.message });
       });
     },
