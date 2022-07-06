@@ -10,6 +10,7 @@ export default {
     categoryList: [],
     errorMessage: '',
     doneMessage: '',
+    disabled: false,
   },
   getters: {
     targetCategory: state => state.targetCategory,
@@ -37,6 +38,9 @@ export default {
     doneMessage(state) {
       state.doneMessage = 'カテゴリー名を登録しました';
     },
+    toggleDisabled(state) {
+      state.disabled = !state.disabled;
+    },
   },
   actions: {
     // カテゴリー一覧取得
@@ -58,6 +62,7 @@ export default {
     },
     // カテゴリー追加
     postCategory({ commit, rootGetters }) {
+      commit('toggleDisabled');
       return new Promise((resolve) => {
         const data = new URLSearchParams();
         data.append('name', rootGetters['categories/targetCategory'].name);
@@ -66,9 +71,11 @@ export default {
           url: '/category',
           data,
         }).then(() => {
+          commit('toggleDisabled');
           commit('doneMessage');
           resolve();
         }).catch((err) => {
+          commit('toggleDisabled');
           commit('failRequest', { message: err.message });
         });
       }).finally(() => {
