@@ -5,6 +5,11 @@
       :access="access"
       :error-message="errorMessage"
       :done-message="doneMessage"
+      :category="category"
+      :disabled="disabled"
+      @handleSubmit="handleSubmit"
+      @updateValue="updateValue"
+      @clearMessage="clearMessage"
     />
     <app-category-list
       class="category-list"
@@ -49,6 +54,12 @@ export default {
     doneMessage() {
       return this.$store.state.categories.doneMessage;
     },
+    category() {
+      return this.$store.state.categories.targetCategory;
+    },
+    disabled() {
+      return this.$store.state.categories.loading;
+    },
   },
   // カテゴリーの取得
   created() {
@@ -63,6 +74,20 @@ export default {
     openModal(categoryId, categoryName) {
       this.modal();
       this.$store.dispatch('categories/addDeleteCategory', { categoryId, categoryName });
+    },
+    // カスタムイベント
+    updateValue($event) {
+      this.$store.dispatch('categories/addTargetCategory', $event.target.value);
+    },
+    // 追加
+    handleSubmit() {
+      this.$store.dispatch('categories/createCategory').then(() => {
+        this.$store.dispatch('categories/allCategories');
+      });
+    },
+    // メッセージ削除
+    clearMessage() {
+      this.$store.dispatch('categories/clearMessage');
     },
   },
 };
