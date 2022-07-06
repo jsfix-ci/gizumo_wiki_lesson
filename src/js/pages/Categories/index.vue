@@ -2,7 +2,13 @@
   <div class="category-wrapper">
     <app-category-post
       class="category-wrapper__post"
+      :category="category"
+      :error-message="errorMessage"
+      :done-message="doneMessage"
       :access="access"
+      @updateValue="updateName"
+      @clearMessage="clearMessage"
+      @handleSubmit="handleSubmit"
     />
     <app-category-list
       class="category-wrapper__list"
@@ -30,12 +36,34 @@ export default {
     categoriesList() {
       return this.$store.state.categories.categoryList;
     },
+    category() {
+      return this.$store.state.categories.targetCategory.name;
+    },
+    errorMessage() {
+      return this.$store.state.categories.errorMessage;
+    },
+    doneMessage() {
+      return this.$store.state.categories.doneMessage;
+    },
     access() {
       return this.$store.getters['auth/access'];
     },
   },
   created() {
     this.$store.dispatch('categories/getAllCategories');
+  },
+  methods: {
+    updateName($event) {
+      this.$store.dispatch('categories/updateName', $event.target.value);
+    },
+    handleSubmit() {
+      this.$store.dispatch('categories/postCategory').then(() => {
+        this.$store.dispatch('categories/getAllCategories');
+      });
+    },
+    clearMessage() {
+      this.$store.dispatch('categories/clearMessage');
+    },
   },
 };
 </script>
