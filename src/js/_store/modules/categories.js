@@ -36,8 +36,8 @@ export default {
       state.isLoading = !state.isLoading;
     },
     // エラー表示
-    failRequest(state, message) {
-      state.errorMessage = message;
+    failRequest(state, payload) {
+      state.errorMessage = payload.message;
     },
     // 終了メッセージの反映
     categoryDoneMessage(state, payload) {
