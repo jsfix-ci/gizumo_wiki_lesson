@@ -11,7 +11,7 @@ export default {
     },
     doneMessage: '',
     errorMessage: '',
-    loading: false,
+    isLoading: false,
   },
   getters: {
     targetCategory: state => state.targetCategory,
@@ -32,7 +32,7 @@ export default {
     },
     // ローディング状態の反映
     toggleLoading(state) {
-      state.loading = !state.loading;
+      state.isLoading = !state.isLoading;
     },
     // エラー表示
     failRequest(state, message) {
