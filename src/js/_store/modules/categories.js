@@ -9,7 +9,6 @@ export default {
     },
     categoryList: [],
   },
-  getters: {},
   mutations: {
     doneGetAllCategories(state, payload) {
       state.categoryList = [...payload.categories];
@@ -22,7 +21,6 @@ export default {
         url: '/category',
       })
         .then((res) => {
-          // res>data>categories
           const payload = {
             categories: res.data.categories.reverse(),
           };

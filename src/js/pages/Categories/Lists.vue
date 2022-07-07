@@ -12,10 +12,6 @@
         :access="access"
         :theads="thead"
       />
-      <!-- <div class="leftIsProp"></div>
-      <div class="rightIsMethod"></div>
-      :deletCateoryName="sample"
-      -->
     </div>
   </div>
 </template>
@@ -31,7 +27,6 @@ export default {
   },
   data() {
     return {
-      categories: '',
       thead: ['カテゴリー名'],
     };
   },
