@@ -11,9 +11,14 @@ export default {
     errorMessage: '',
     doneMessage: '',
     isLoading: false,
+    deleteCategory: {
+      id: null,
+      name: '',
+    },
   },
   getters: {
     targetCategory: state => state.targetCategory,
+    deleteCategoryId: state => state.deleteCategory.id,
   },
   mutations: {
     doneGetAllCategories(state, payload) {
@@ -35,11 +40,23 @@ export default {
         name: '',
       };
     },
-    doneMessage(state) {
-      state.doneMessage = 'カテゴリー名を登録しました';
+    doneMessage(state, { message }) {
+      state.doneMessage = message;
     },
     toggleDisabled(state) {
       state.isLoading = !state.isLoading;
+    },
+    confirmDeleteCategory(state, { id, name }) {
+      state.deleteCategory = {
+        id,
+        name,
+      };
+    },
+    doneDeleteCategory(state) {
+      state.deleteCategory = {
+        id: null,
+        name: '',
+      };
     },
   },
   actions: {
@@ -72,13 +89,36 @@ export default {
           data,
         }).then(() => {
           commit('toggleDisabled');
-          commit('doneMessage');
+          commit('doneMessage', { message: 'カテゴリー名を登録しました' });
           resolve();
         }).catch((err) => {
           commit('toggleDisabled');
           commit('failRequest', { message: err.message });
         }).finally(() => {
           commit('initTargetCategory');
+        });
+      });
+    },
+    confirmDeleteCategory({ commit }, { id, name }) {
+      commit('confirmDeleteCategory', { id, name });
+    },
+    // カテゴリー削除
+    deleteCategory({ commit, rootGetters }) {
+      commit('clearMessage');
+      return new Promise((resolve) => {
+        const data = new URLSearchParams();
+        data.append('id', rootGetters['categories/deleteCategoryId']);
+        axios(rootGetters['auth/token'])({
+          method: 'DELETE',
+          url: `/category/${rootGetters['categories/deleteCategoryId']}`,
+          data,
+        }).then(() => {
+          commit('doneMessage', { message: 'カテゴリー名を削除しました' });
+          resolve();
+        }).catch((err) => {
+          commit('failRequest', { message: err.message });
+        }).finally(() => {
+          commit('doneDeleteCategory');
         });
       });
     },
