@@ -77,9 +77,9 @@ export default {
         }).catch((err) => {
           commit('toggleDisabled');
           commit('failRequest', { message: err.message });
+        }).finally(() => {
+          commit('initTargetCategory');
         });
-      }).finally(() => {
-        commit('initTargetCategory');
       });
     },
     clearMessage({ commit }) {
