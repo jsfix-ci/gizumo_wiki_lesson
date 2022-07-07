@@ -18,6 +18,7 @@
       :delete-category-name="deleteCategoryName"
       :access="access"
       @openModal="openModal"
+      @handleClick="handleClick"
     />
   </div>
 </template>
@@ -67,12 +68,12 @@ export default {
   },
   methods: {
     // モーダルウィンドウ
-    modal() {
+    toggleModal() {
       this.$root.$emit('toggleModal');
     },
     // 削除ボタンのクリックイベント
     openModal(categoryId, categoryName) {
-      this.modal();
+      this.toggleModal();
       this.$store.dispatch('categories/addDeleteCategory', { categoryId, categoryName });
     },
     // カスタムイベント
@@ -82,6 +83,13 @@ export default {
     // 追加
     handleSubmit() {
       this.$store.dispatch('categories/createCategory').then(() => {
+        this.$store.dispatch('categories/allCategories');
+      });
+    },
+    // 削除
+    handleClick() {
+      this.toggleModal();
+      this.$store.dispatch('categories/deleteCategory').then(() => {
         this.$store.dispatch('categories/allCategories');
       });
     },
