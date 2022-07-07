@@ -5,7 +5,7 @@
       :category="category"
       :error-message="errorMessage"
       :done-message="doneMessage"
-      :disabled="disabled"
+      :disabled="isLoading"
       :access="access"
       @updateValue="updateName"
       @clearMessage="clearMessage"
@@ -46,8 +46,8 @@ export default {
     doneMessage() {
       return this.$store.state.categories.doneMessage;
     },
-    disabled() {
-      return this.$store.state.categories.disabled;
+    isLoading() {
+      return this.$store.state.categories.isLoading;
     },
     access() {
       return this.$store.getters['auth/access'];

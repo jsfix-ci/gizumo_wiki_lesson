@@ -10,7 +10,7 @@ export default {
     categoryList: [],
     errorMessage: '',
     doneMessage: '',
-    disabled: false,
+    isLoading: false,
   },
   getters: {
     targetCategory: state => state.targetCategory,
@@ -39,7 +39,7 @@ export default {
       state.doneMessage = 'カテゴリー名を登録しました';
     },
     toggleDisabled(state) {
-      state.disabled = !state.disabled;
+      state.isLoading = !state.isLoading;
     },
   },
   actions: {
