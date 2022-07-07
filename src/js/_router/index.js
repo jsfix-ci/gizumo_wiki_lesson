@@ -7,6 +7,10 @@ import Signout from '@Pages/Signout';
 import NotFound from '@Pages/NotFound';
 import Home from '@Pages/Home';
 
+// カテゴリー
+import Categories from '@Pages/Categories';
+import CategoriesList from '@Pages/Categories/Lists';
+
 // 記事
 import Articles from '@Pages/Articles';
 import ArticleList from '@Pages/Articles/List';
@@ -68,6 +72,17 @@ const router = new VueRouter({
       component: Profile,
     },
     {
+      path: '/categories',
+      component: Categories,
+      children: [
+        {
+          name: 'categories',
+          path: '',
+          component: CategoriesList,
+        },
+      ],
+    },
+    {
       path: '/articles',
       component: Articles,
       children: [
@@ -80,7 +95,9 @@ const router = new VueRouter({
              * 記事作成、記事更新、記事削除からリダイレクトするときは?redirect=リダイレクト元のurlのパラメータを
              * 渡してリダイレクト、パラメータが存在する場合はclearMessageアクションを通知しない
              */
-            const isArticle = from.name ? from.name.indexOf('article') >= 0 : false;
+            const isArticle = from.name
+              ? from.name.indexOf('article') >= 0
+              : false;
             const isRedirect = to.query.redirect;
             if (isArticle && isRedirect) {
               next();
