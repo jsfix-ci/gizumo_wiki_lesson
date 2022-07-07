@@ -15,6 +15,7 @@ export default {
   },
   getters: {
     targetCategory: state => state.targetCategory,
+    deleteCategory: state => state.deleteCategory.id,
   },
   mutations: {
     // 全カテゴリー名の反映
@@ -86,6 +87,20 @@ export default {
           resolve();
         }).catch((err) => {
           commit('toggleLoading');
+          commit('failRequest', { message: err.message });
+        });
+      });
+    },
+    deleteCategory({ commit, rootGetters }) {
+      return new Promise((resolve) => {
+        commit('clearMessage');
+        axios(rootGetters['auth/token'])({
+          method: 'DELETE',
+          url: `/category/${rootGetters['categories/deleteCategory']}`,
+        }).then(() => {
+          commit('categoryDoneMessage', { message: 'カテゴリーを削除しました' });
+          resolve();
+        }).catch((err) => {
           commit('failRequest', { message: err.message });
         });
       });
