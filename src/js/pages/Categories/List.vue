@@ -68,12 +68,12 @@ export default {
   },
   methods: {
     // モーダルウィンドウ
-    modal() {
+    toggleModal() {
       this.$root.$emit('toggleModal');
     },
     // 削除ボタンのクリックイベント
     openModal(categoryId, categoryName) {
-      this.modal();
+      this.toggleModal();
       this.$store.dispatch('categories/addDeleteCategory', { categoryId, categoryName });
     },
     // カスタムイベント
@@ -88,7 +88,7 @@ export default {
     },
     // 削除
     handleClick() {
-      this.modal();
+      this.toggleModal();
       this.$store.dispatch('categories/deleteCategory').then(() => {
         this.$store.dispatch('categories/allCategories');
       });
