@@ -18,7 +18,6 @@ export default {
   },
   getters: {
     targetCategory: state => state.targetCategory,
-    deleteCategoryId: state => state.deleteCategory.id,
   },
   mutations: {
     doneGetAllCategories(state, payload) {
