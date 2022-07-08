@@ -16,9 +16,6 @@ export default {
       name: '',
     },
   },
-  getters: {
-    targetCategory: state => state.targetCategory,
-  },
   mutations: {
     doneGetAllCategories(state, payload) {
       state.categoryList = payload.categories.reverse();
@@ -77,11 +74,11 @@ export default {
       commit('updateName', name);
     },
     // カテゴリー追加
-    postCategory({ commit, rootGetters }) {
+    postCategory({ commit, state, rootGetters }) {
       commit('toggleDisabled');
       return new Promise((resolve) => {
         const data = new URLSearchParams();
-        data.append('name', rootGetters['categories/targetCategory'].name);
+        data.append('name', state.targetCategory.name);
         axios(rootGetters['auth/token'])({
           method: 'POST',
           url: '/category',
