@@ -103,14 +103,14 @@ export default {
       commit('confirmDeleteCategory', { id, name });
     },
     // カテゴリー削除
-    deleteCategory({ commit, rootGetters }) {
+    deleteCategory({ commit, state, rootGetters }) {
       commit('clearMessage');
       return new Promise((resolve) => {
         const data = new URLSearchParams();
-        data.append('id', rootGetters['categories/deleteCategoryId']);
+        data.append('id', state.deleteCategory.id);
         axios(rootGetters['auth/token'])({
           method: 'DELETE',
-          url: `/category/${rootGetters['categories/deleteCategoryId']}`,
+          url: `/category/${state.deleteCategory.id}`,
           data,
         }).then(() => {
           commit('doneMessage', { message: 'カテゴリー名を削除しました' });
