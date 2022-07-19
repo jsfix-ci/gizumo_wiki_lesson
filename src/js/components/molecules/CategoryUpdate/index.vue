@@ -1,5 +1,5 @@
 <template lang="html">
-  <form @submit.prevent="updateCategory">
+  <div>
     <app-heading :level="1">カテゴリー管理</app-heading>
     <app-router-link
       class="category-management-update__link"
@@ -25,6 +25,7 @@
       button-type="submit"
       round
       :disabled="disabled || !access.create"
+      @click="updateCategory"
     >
       {{ buttonText }}
     </app-button>
@@ -36,7 +37,7 @@
     <div v-if="doneMessage" class="category-management-update__notice">
       <app-text bg-success>{{ doneMessage }}</app-text>
     </div>
-  </form>
+  </div>
 </template>
 
 <script>
@@ -84,6 +85,7 @@ export default {
   methods: {
     // 更新ボタンのクリック処理
     updateCategory() {
+      console.log("submit");
       if (!this.access.create) return;
       this.$emit('clearMessage');
       this.$validator.validate().then((valid) => {
