@@ -38,7 +38,7 @@ export default {
   },
   actions: {
     postCategory({ state, commit, rootGetters }) {
-      return new Promise((resolve, reject) => {
+      return new Promise(() => {
         commit('toggleIsConecting');
         commit('clearMessage');
         axios(rootGetters['auth/token'])({
@@ -48,16 +48,13 @@ export default {
             name: state.category.name,
           },
         }).then(() => {
-          resolve();
           commit('toggleIsConecting');
           commit('deleteCategoryName');
           commit('displayDoneMessage');
           this.dispatch('categories/getAllCategories');
-        }).catch((err) => {
-          console.log({ message: err.message });
+        }).catch(() => {
           commit('toggleIsConecting');
           commit('displayErrorMessage');
-          reject();
         });
       });
     },
