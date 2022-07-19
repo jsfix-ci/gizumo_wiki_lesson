@@ -9,6 +9,7 @@ import Home from '@Pages/Home';
 
 import Categories from '@Pages/Categories';
 import CategorieList from '@Pages/Categories/List';
+import CategoriePost from '@Pages/Categories/Update';
 
 // 記事
 import Articles from '@Pages/Articles';
@@ -78,6 +79,11 @@ const router = new VueRouter({
           name: 'CategorieList',
           path: '',
           component: CategorieList,
+        },
+        {
+          name: 'CategoriePost',
+          path: ':id',
+          component: CategoriePost,
         },
       ],
     },

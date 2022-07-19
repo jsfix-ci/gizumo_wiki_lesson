@@ -8,7 +8,7 @@
       :category="category"
       :disabled="disabled"
       @handleSubmit="handleSubmit"
-      @updateValue="updateValue"
+      @addCategoryName="addCategoryName"
       @clearMessage="clearMessage"
     />
     <app-category-list
@@ -64,6 +64,7 @@ export default {
   },
   // カテゴリーの取得
   created() {
+    this.clearMessage();
     this.$store.dispatch('categories/allCategories');
   },
   methods: {
@@ -76,8 +77,8 @@ export default {
       this.toggleModal();
       this.$store.dispatch('categories/addDeleteCategory', { categoryId, categoryName });
     },
-    // カスタムイベント
-    updateValue($event) {
+    // 追加するカテゴリー名
+    addCategoryName($event) {
       this.$store.dispatch('categories/addTargetCategory', $event.target.value);
     },
     // 追加
