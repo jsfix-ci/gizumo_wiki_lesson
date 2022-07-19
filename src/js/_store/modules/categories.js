@@ -52,19 +52,7 @@ export default {
           commit('toggleIsConecting');
           commit('deleteCategoryName');
           commit('displayDoneMessage');
-          axios(rootGetters['auth/token'])({
-            method: 'GET',
-            url: '/category',
-          })
-            .then((res) => {
-              const payload = {
-                categories: res.data.categories.reverse(),
-              };
-              commit('doneGetAllCategories', payload);
-            })
-            .catch((err) => {
-              commit('failRequest', { message: err.message });
-            });
+          this.dispatch('categories/getAllCategories');
         }).catch((err) => {
           console.log({ message: err.message });
           commit('toggleIsConecting');
