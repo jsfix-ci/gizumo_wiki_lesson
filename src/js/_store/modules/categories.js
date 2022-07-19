@@ -8,7 +8,7 @@ export default {
       name: '',
     },
     categoryList: [],
-    isConecting: false,
+    isConnecting: false,
     doneMessage: '',
     errorMessage: '',
   },
@@ -19,8 +19,8 @@ export default {
     updateInputCategories(state, event) {
       state.category.name = event;
     },
-    toggleIsConecting(state) {
-      state.isConecting = !state.isConecting;
+    toggleIsConnecting(state) {
+      state.isConnecting = !state.isConnecting;
     },
     deleteCategoryName(state) {
       state.category.name = null;
@@ -32,14 +32,13 @@ export default {
       state.doneMessage = null;
       state.errorMessage = null;
     },
-    displayErrorMessage(state, errorObject) {
-      state.errorMessage = errorObject.message;
+    displayErrorMessage(state, { message }) {
+      state.errorMessage = message;
     },
   },
   actions: {
     postCategory({ state, commit, rootGetters }) {
-      return new Promise(() => {
-        commit('toggleIsConecting');
+        commit('toggleIsConnecting');
         commit('clearMessage');
         axios(rootGetters['auth/token'])({
           method: 'POST',
@@ -48,15 +47,14 @@ export default {
             name: state.category.name,
           },
         }).then(() => {
-          commit('toggleIsConecting');
+          commit('toggleIsConnecting');
           commit('deleteCategoryName');
           commit('displayDoneMessage');
           this.dispatch('categories/getAllCategories');
         }).catch((err) => {
-          commit('toggleIsConecting');
+          commit('toggleIsConnecting');
           commit('displayErrorMessage', { message: err.message });
         });
-      });
     },
     getAllCategories({ commit, rootGetters }) {
       axios(rootGetters['auth/token'])({
