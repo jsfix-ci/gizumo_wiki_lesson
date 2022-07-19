@@ -27,7 +27,7 @@ export default {
     },
     // 通信の状況
     disabled() {
-      return this.$store.state.categories.loading;
+      return this.$store.state.categories.isLoading;
     },
     // エラーメッセージ
     errorMessage() {
