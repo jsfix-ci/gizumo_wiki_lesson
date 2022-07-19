@@ -32,8 +32,8 @@ export default {
       state.doneMessage = null;
       state.errorMessage = null;
     },
-    displayErrorMessage(state) {
-      state.errorMessage = 'すでに存在してるカテゴリーです！';
+    displayErrorMessage(state, errorObject) {
+      state.errorMessage = errorObject.message;
     },
   },
   actions: {
@@ -52,9 +52,9 @@ export default {
           commit('deleteCategoryName');
           commit('displayDoneMessage');
           this.dispatch('categories/getAllCategories');
-        }).catch(() => {
+        }).catch((err) => {
           commit('toggleIsConecting');
-          commit('displayErrorMessage');
+          commit('displayErrorMessage', { message: err.message });
         });
       });
     },
