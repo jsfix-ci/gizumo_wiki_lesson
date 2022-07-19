@@ -37,24 +37,29 @@ export default {
     },
   },
   actions: {
-    postCategory({ state, commit, rootGetters }) {
+    postCategory({
+      commit,
+      state,
+      dispatch,
+      rootGetters,
+    }) {
+      commit('toggleIsConnecting');
+      commit('clearMessage');
+      axios(rootGetters['auth/token'])({
+        method: 'POST',
+        url: '/category',
+        data: {
+          name: state.category.name,
+        },
+      }).then(() => {
         commit('toggleIsConnecting');
-        commit('clearMessage');
-        axios(rootGetters['auth/token'])({
-          method: 'POST',
-          url: '/category',
-          data: {
-            name: state.category.name,
-          },
-        }).then(() => {
-          commit('toggleIsConnecting');
-          commit('deleteCategoryName');
-          commit('displayDoneMessage');
-          this.dispatch('categories/getAllCategories');
-        }).catch((err) => {
-          commit('toggleIsConnecting');
-          commit('displayErrorMessage', { message: err.message });
-        });
+        commit('deleteCategoryName');
+        commit('displayDoneMessage');
+        dispatch('getAllCategories');
+      }).catch((err) => {
+        commit('toggleIsConnecting');
+        commit('displayErrorMessage', { message: err.message });
+      });
     },
     getAllCategories({ commit, rootGetters }) {
       axios(rootGetters['auth/token'])({
