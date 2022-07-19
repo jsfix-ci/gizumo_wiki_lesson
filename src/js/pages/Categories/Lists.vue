@@ -45,7 +45,7 @@ export default {
       return this.$store.getters['auth/access'];
     },
     disabled() {
-      return this.$store.state.categories.disabled;
+      return this.$store.state.categories.isConnecting;
     },
     category() {
       return this.$store.state.categories.category.name;
