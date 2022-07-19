@@ -69,7 +69,7 @@ export default {
       this.$store.dispatch('categories/postCategory');
     },
     clearMessage() {
-      this.$store.dispatch('categories/deleteDisplayedMessage');
+      this.$store.dispatch('categories/clearMessage');
     },
   },
 };

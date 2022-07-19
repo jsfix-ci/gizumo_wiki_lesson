@@ -28,7 +28,7 @@ export default {
     displayDoneMessage(state) {
       state.doneMessage = 'カテゴリー作成しました！';
     },
-    deleteDisplayedMessage(state) {
+    clearMessage(state) {
       state.doneMessage = null;
       state.errorMessage = null;
     },
@@ -40,7 +40,7 @@ export default {
     postCategory({ state, commit, rootGetters }) {
       return new Promise((resolve, reject) => {
         commit('toggleDisabled');
-        commit('deleteDisplayedMessage');
+        commit('clearMessage');
         axios(rootGetters['auth/token'])({
           method: 'POST',
           url: '/category',
@@ -91,8 +91,8 @@ export default {
     getInputCategories({ commit }, event) {
       commit('getInputCategories', event);
     },
-    deleteDisplayedMessage({ commit }) {
-      commit('deleteDisplayedMessage');
+    clearMessage({ commit }) {
+      commit('clearMessage');
     },
   },
 };
