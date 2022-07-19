@@ -62,7 +62,7 @@ export default {
   },
   methods: {
     inputValue($event) {
-      this.$store.dispatch('categories/getInputCategories', $event.target.value);
+      this.$store.dispatch('categories/updateInputCategories', $event.target.value);
     },
     handleSubmit() {
       if (this.disabled) return;

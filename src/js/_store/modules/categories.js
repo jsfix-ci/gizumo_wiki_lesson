@@ -16,7 +16,7 @@ export default {
     doneGetAllCategories(state, payload) {
       state.categoryList = [...payload.categories];
     },
-    getInputCategories(state, event) {
+    updateInputCategories(state, event) {
       state.category.name = event;
     },
     toggleIsConecting(state) {
@@ -88,8 +88,8 @@ export default {
           commit('failRequest', { message: err.message });
         });
     },
-    getInputCategories({ commit }, event) {
-      commit('getInputCategories', event);
+    updateInputCategories({ commit }, event) {
+      commit('updateInputCategories', event);
     },
     clearMessage({ commit }) {
       commit('clearMessage');
