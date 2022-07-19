@@ -45,7 +45,7 @@ export default {
   created() {
     this.clearMessage();
     const categoryId = this.$route.params;
-    this.$store.dispatch('categories/getCategoryName', categoryId.id);
+    this.$store.dispatch('categories/updateCategoryName', categoryId.id);
   },
   methods: {
     // カスタムイベント

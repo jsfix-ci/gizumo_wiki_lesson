@@ -39,7 +39,7 @@ export default {
       state.updateCategory.name = name;
     },
     // 更新するカテゴリーの反映
-    getCategoryName(state, { id, getName }) {
+    updateCategoryName(state, { id, getName }) {
       state.updateCategory.id = id;
       state.updateCategory.name = getName;
     },
@@ -120,13 +120,13 @@ export default {
       });
     },
     // 変更するカテゴリー名の取得
-    getCategoryName({ commit, rootGetters }, id) {
+    updateCategoryName({ commit, rootGetters }, id) {
       axios(rootGetters['auth/token'])({
         method: 'GET',
         url: `/category/${id}`,
       }).then(({ data }) => {
         const getName = data.category.name;
-        commit('getCategoryName', { id, getName });
+        commit('updateCategoryName', { id, getName });
       }).catch((err) => {
         commit('failRequest', { message: err.message });
       });
