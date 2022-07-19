@@ -3,6 +3,13 @@
     <div class="categories-post">
       <app-category-post
         :access="access"
+        :disabled="disabled"
+        :category="category"
+        :error-message="errorMessage"
+        :done-message="doneMessage"
+        @updateValue="inputValue"
+        @handleSubmit="handleSubmit"
+        @clearMessage="clearMessage"
       />
     </div>
     <div class="categories-border" />
@@ -37,9 +44,33 @@ export default {
     access() {
       return this.$store.getters['auth/access'];
     },
+    disabled() {
+      return this.$store.state.categories.isConnecting;
+    },
+    category() {
+      return this.$store.state.categories.category.name;
+    },
+    errorMessage() {
+      return this.$store.state.categories.errorMessage;
+    },
+    doneMessage() {
+      return this.$store.state.categories.doneMessage;
+    },
   },
   created() {
     this.$store.dispatch('categories/getAllCategories');
+  },
+  methods: {
+    inputValue($event) {
+      this.$store.dispatch('categories/updateInputCategories', $event.target.value);
+    },
+    handleSubmit() {
+      if (this.disabled) return;
+      this.$store.dispatch('categories/postCategory');
+    },
+    clearMessage() {
+      this.$store.dispatch('categories/clearMessage');
+    },
   },
 };
 </script>
