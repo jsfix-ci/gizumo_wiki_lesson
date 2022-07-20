@@ -40,6 +40,7 @@ export default {
   created() {
     const { id } = this.$route.params;
     this.$store.dispatch('categories/getCategoryDetail', id);
+    this.$store.dispatch('categories/clearMessage');
   },
   methods: {
     updateName($event) {
