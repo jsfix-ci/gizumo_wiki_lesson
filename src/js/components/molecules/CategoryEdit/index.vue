@@ -88,7 +88,7 @@ export default {
   },
   methods: {
     editCategory() {
-      if (!this.access.create) return;
+      if (!this.access.edit) return;
       this.$emit('clearMessage');
       this.$validator.validate().then((valid) => {
         if (valid) this.$emit('handleSubmit');
