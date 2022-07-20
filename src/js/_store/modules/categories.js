@@ -25,6 +25,9 @@ export default {
     deleteCategoryName(state) {
       state.category.name = null;
     },
+    deleteCategoryId(state) {
+      state.category.id = null;
+    },
     displayDoneMessage(state) {
       state.doneMessage = 'カテゴリー作成しました！';
     },
@@ -34,6 +37,9 @@ export default {
     },
     displayErrorMessage(state, { message }) {
       state.errorMessage = message;
+    },
+    sentDeleteData(state, { id }) {
+      state.category.id = id;
     },
   },
   actions: {
@@ -61,6 +67,24 @@ export default {
         commit('displayErrorMessage', { message: err.message });
       });
     },
+    deleteCategory({
+      commit,
+      rootGetters,
+      dispatch,
+      state,
+    }) {
+      axios(rootGetters['auth/token'])({
+        method: 'DELETE',
+        url: `/category/${state.category.id}`,
+      }).then(() => {
+        commit('deleteCategoryName');
+        commit('deleteCategoryId');
+        dispatch('getAllCategories');
+      }).catch(() => {
+        commit('deleteCategoryName');
+        commit('deleteCategoryId');
+      });
+    },
     getAllCategories({ commit, rootGetters }) {
       axios(rootGetters['auth/token'])({
         method: 'GET',
@@ -81,6 +105,9 @@ export default {
     },
     clearMessage({ commit }) {
       commit('clearMessage');
+    },
+    sentDeleteData({ commit }, { id }) {
+      commit('sentDeleteData', { id });
     },
   },
 };
