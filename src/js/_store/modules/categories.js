@@ -23,15 +23,13 @@ export default {
       state.isConnecting = !state.isConnecting;
     },
     deleteCategoryName(state) {
-      state.category.name = null;
-    },
-    deleteCategoryId(state) {
-      state.category.id = null;
+      state.category.name = '';
     },
     displayDoneMessage(state) {
       state.doneMessage = 'カテゴリー作成しました！';
     },
     displayDeleteMessage(state) {
+      state.category.id = null;
       state.doneMessage = 'カテゴリー削除しました！';
     },
     clearMessage(state) {
@@ -41,7 +39,7 @@ export default {
     displayErrorMessage(state, { message }) {
       state.errorMessage = message;
     },
-    sentDeleteData(state, { id }) {
+    setDeleteCategoryId(state, { id }) {
       state.category.id = id;
     },
   },
@@ -81,13 +79,9 @@ export default {
         method: 'DELETE',
         url: `/category/${state.category.id}`,
       }).then(() => {
-        commit('deleteCategoryName');
-        commit('deleteCategoryId');
         commit('displayDeleteMessage');
         dispatch('getAllCategories');
       }).catch((err) => {
-        commit('deleteCategoryName');
-        commit('deleteCategoryId');
         commit('displayErrorMessage', { message: err.message });
       });
     },
@@ -112,8 +106,8 @@ export default {
     clearMessage({ commit }) {
       commit('clearMessage');
     },
-    sentDeleteData({ commit }, { id }) {
-      commit('sentDeleteData', { id });
+    setDeleteCategoryId({ commit }, { id }) {
+      commit('setDeleteCategoryId', { id });
     },
   },
 };

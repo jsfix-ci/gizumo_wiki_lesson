@@ -80,7 +80,7 @@ export default {
     openModal(id, name) {
       this.deleteCategoryName = name;
       this.toggleModal();
-      this.$store.dispatch('categories/sentDeleteData', { id });
+      this.$store.dispatch('categories/setDeleteCategoryId', { id });
     },
     deleteClick() {
       this.$store.dispatch('categories/deleteCategory');
