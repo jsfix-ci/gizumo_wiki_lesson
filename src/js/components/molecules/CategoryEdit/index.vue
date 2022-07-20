@@ -59,6 +59,10 @@ export default {
     appText: Text,
   },
   props: {
+    category: {
+      type: String,
+      default: '',
+    },
     errorMessage: {
       type: String,
       default: '',
@@ -80,6 +84,15 @@ export default {
     buttonText() {
       if (!this.access.edit) return '変更権限がありません';
       return this.disabled ? '更新中です...' : '更新';
+    },
+  },
+  methods: {
+    editCategory() {
+      if (!this.access.create) return;
+      this.$emit('clearMessage');
+      this.$validator.validate().then((valid) => {
+        if (valid) this.$emit('handleSubmit');
+      });
     },
   },
 };
