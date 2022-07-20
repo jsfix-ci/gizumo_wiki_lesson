@@ -109,4 +109,10 @@ export default {
     margin-top: 20px;
   }
 }
+
+.users-detail {
+  &__notice {
+    margin-top: 20px;
+  }
+}
 </style>
