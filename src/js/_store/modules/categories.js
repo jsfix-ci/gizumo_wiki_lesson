@@ -31,6 +31,9 @@ export default {
     displayDoneMessage(state) {
       state.doneMessage = 'カテゴリー作成しました！';
     },
+    displayDeleteMessage(state) {
+      state.doneMessage = 'カテゴリー削除しました！';
+    },
     clearMessage(state) {
       state.doneMessage = null;
       state.errorMessage = null;
@@ -73,16 +76,19 @@ export default {
       dispatch,
       state,
     }) {
+      commit('clearMessage');
       axios(rootGetters['auth/token'])({
         method: 'DELETE',
         url: `/category/${state.category.id}`,
       }).then(() => {
         commit('deleteCategoryName');
         commit('deleteCategoryId');
+        commit('displayDeleteMessage');
         dispatch('getAllCategories');
-      }).catch(() => {
+      }).catch((err) => {
         commit('deleteCategoryName');
         commit('deleteCategoryId');
+        commit('displayErrorMessage', { message: err.message });
       });
     },
     getAllCategories({ commit, rootGetters }) {
