@@ -54,6 +54,12 @@ export default {
         name: '',
       };
     },
+    doneGetCategory(state, { id, name }) {
+      state.targetCategory = {
+        id,
+        name,
+      };
+    },
   },
   actions: {
     // カテゴリー一覧取得
@@ -117,6 +123,42 @@ export default {
           commit('doneDeleteCategory');
         });
       });
+    },
+    // カテゴリー１件取得
+    getCategoryDetail({ commit, rootGetters }, id) {
+      axios(rootGetters['auth/token'])({
+        method: 'GET',
+        url: '/category',
+      }).then((res) => {
+        const categoryList = res.data.categories;
+        const categoryName = categoryList.find(category => category.id === Number(id));
+        commit('doneGetCategory', categoryName);
+      }).catch((err) => {
+        commit('failRequest', { message: err.message });
+      });
+    },
+    // カテゴリー更新
+    editCategory({ commit, state, rootGetters }) {
+      commit('toggleDisabled');
+      return new Promise((resolve) => {
+        const data = new URLSearchParams();
+        data.append('name', state.targetCategory.name);
+        axios(rootGetters['auth/token'])({
+          method: 'PUT',
+          url: `/category/${state.targetCategory.id}`,
+          data,
+        }).then(() => {
+          commit('toggleDisabled');
+          commit('doneMessage', { message: 'カテゴリー名を更新しました' });
+          resolve();
+        }).catch((err) => {
+          commit('toggleDisabled');
+          commit('failRequest', { message: err.message });
+        });
+      });
+    },
+    initTargetCategory({ commit }) {
+      commit('initTargetCategory');
     },
     clearMessage({ commit }) {
       commit('clearMessage');
