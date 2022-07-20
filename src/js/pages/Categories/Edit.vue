@@ -39,7 +39,7 @@ export default {
   },
   created() {
     const { id } = this.$route.params;
-    this.$store.dispatch('categories/getCategory', id);
+    this.$store.dispatch('categories/getCategoryDetail', id);
   },
   methods: {
     updateName($event) {

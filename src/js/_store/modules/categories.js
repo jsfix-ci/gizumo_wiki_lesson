@@ -125,7 +125,7 @@ export default {
       });
     },
     // カテゴリー１件取得
-    getCategory({ commit, rootGetters }, id) {
+    getCategoryDetail({ commit, rootGetters }, id) {
       axios(rootGetters['auth/token'])({
         method: 'GET',
         url: '/category',
