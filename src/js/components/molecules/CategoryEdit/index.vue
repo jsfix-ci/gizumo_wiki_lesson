@@ -10,6 +10,11 @@
     </div>
     <div class="make-space-top">
       <app-input
+        name="category"
+        type="text"
+        v-validate="'required'"
+        data-vv-as="カテゴリー名"
+        :error-messages="errors.collect('category')"
         :value="categoryName"
         @updateValue="$emit('updateValue', $event)"
       ></app-input>
@@ -18,7 +23,7 @@
       <app-button
         button-type="submit"
         round
-        :disabled="disabled || !access.create"
+        :disabled="disabled || !access.edit"
         @click="updateCategory"
       >
       {{ buttonText }}
@@ -70,22 +75,25 @@ export default {
     },
   },
   created() {
-    const getId = this.$route.params.id;
-    this.$store.dispatch('categories/getCategoryName', getId);
+    const categoryId = this.$route.params.id;
+    this.$store.dispatch('categories/getCategoryName', categoryId);
   },
   computed: {
     categoryName() {
       return this.$store.state.categories.category.name;
     },
     buttonText() {
-      if (!this.access.create) return '更新権限がありません';
+      if (!this.access.edit) return '更新権限がありません';
       return this.disabled ? '更新中...' : '更新';
     },
   },
   methods: {
     updateCategory() {
-      if (!this.access.create) return;
-      this.$store.dispatch('categories/updateCategoryName');
+      if (!this.access.edit) return;
+      this.$store.dispatch('categories/clearMessage');
+      this.$validator.validate().then((valid) => {
+        if (valid) this.$store.dispatch('categories/updateCategoryName');
+      });
     },
   },
 };

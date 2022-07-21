@@ -4,7 +4,7 @@
     :disabled="disabled"
     :error-message="errorMessage"
     :done-message="doneMessage"
-    @updateValue="inputValue"
+    @updateValue="updateValue"
   />
 </template>
 
@@ -33,7 +33,7 @@ export default {
     },
   },
   methods: {
-    inputValue($event) {
+    updateValue($event) {
       this.$store.dispatch('categories/updateInputCategories', $event.target.value);
     },
   },
