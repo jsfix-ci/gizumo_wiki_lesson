@@ -25,6 +25,10 @@ export default {
     deleteCategoryName(state) {
       state.category.name = '';
     },
+    setCategoryData(state, { id, name }) {
+      state.category.name = name;
+      state.category.id = id;
+    },
     displayDoneMessage(state) {
       state.doneMessage = 'カテゴリー作成しました！';
     },
@@ -42,8 +46,22 @@ export default {
     setDeleteCategoryId(state, { id }) {
       state.category.id = id;
     },
+    displayUpdatedMessage(state) {
+      state.doneMessage = 'カテゴリー更新しました！';
+    },
   },
   actions: {
+    getCategoryName({ commit, rootGetters }, id) {
+      axios(rootGetters['auth/token'])({
+        method: 'GET',
+        url: `/category/${id}`,
+      }).then((val) => {
+        const { name } = val.data.category;
+        commit('setCategoryData', { id, name });
+      }).catch((err) => {
+        commit('displayErrorMessage', { message: err.message });
+      });
+    },
     postCategory({
       commit,
       state,
@@ -108,6 +126,32 @@ export default {
     },
     setDeleteCategoryId({ commit }, { id }) {
       commit('setDeleteCategoryId', { id });
+    },
+    deleteCategoryName({ commit }) {
+      commit('deleteCategoryName');
+    },
+    updateCategoryName({
+      state,
+      rootGetters,
+      commit,
+    }) {
+      commit('clearMessage');
+      commit('toggleIsConnecting');
+      axios(rootGetters['auth/token'])({
+        method: 'PUT',
+        url: `/category/${state.category.id}`,
+        data: {
+          name: state.category.name,
+        },
+      })
+        .then(() => {
+          commit('toggleIsConnecting');
+          commit('displayUpdatedMessage');
+        })
+        .catch((err) => {
+          commit('toggleIsConnecting');
+          commit('displayErrorMessage', { message: err.message });
+        });
     },
   },
 };

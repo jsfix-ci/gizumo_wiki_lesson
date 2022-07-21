@@ -65,6 +65,8 @@ export default {
   },
   created() {
     this.$store.dispatch('categories/getAllCategories');
+    this.$store.dispatch('categories/deleteCategoryName');
+    this.$store.dispatch('categories/clearMessage');
   },
   methods: {
     inputValue($event) {
