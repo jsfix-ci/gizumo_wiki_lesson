@@ -78,9 +78,12 @@ export default {
     const categoryId = this.$route.params.id;
     this.$store.dispatch('categories/getCategoryName', categoryId);
   },
+  destroyed() {
+    this.$store.dispatch('categories/deleteCategoryData');
+  },
   computed: {
     categoryName() {
-      return this.$store.state.categories.category.name;
+      return this.$store.state.categories.category.updateName;
     },
     buttonText() {
       if (!this.access.edit) return '更新権限がありません';

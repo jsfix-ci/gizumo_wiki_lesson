@@ -6,6 +6,7 @@ export default {
     category: {
       id: null,
       name: '',
+      updateName: '',
     },
     categoryList: [],
     isConnecting: false,
@@ -18,6 +19,7 @@ export default {
     },
     updateInputCategories(state, event) {
       state.category.name = event;
+      state.category.updateName = event;
     },
     toggleIsConnecting(state) {
       state.isConnecting = !state.isConnecting;
@@ -26,7 +28,7 @@ export default {
       state.category.name = '';
     },
     setCategoryData(state, { id, name }) {
-      state.category.name = name;
+      state.category.updateName = name;
       state.category.id = id;
     },
     displayDoneMessage(state) {
@@ -48,6 +50,11 @@ export default {
     },
     displayUpdatedMessage(state) {
       state.doneMessage = 'カテゴリー更新しました！';
+    },
+    deleteCategoryData(state) {
+      state.category.name = '';
+      state.category.id = null;
+      state.category.updateName = '';
     },
   },
   actions: {
@@ -141,7 +148,7 @@ export default {
         method: 'PUT',
         url: `/category/${state.category.id}`,
         data: {
-          name: state.category.name,
+          name: state.category.updateName,
         },
       })
         .then(() => {
@@ -152,6 +159,9 @@ export default {
           commit('toggleIsConnecting');
           commit('displayErrorMessage', { message: err.message });
         });
+    },
+    deleteCategoryData({ commit }) {
+      commit('deleteCategoryData');
     },
   },
 };
