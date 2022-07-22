@@ -65,12 +65,11 @@ export default {
   },
   created() {
     this.$store.dispatch('categories/getAllCategories');
-    this.$store.dispatch('categories/deleteCategoryName');
     this.$store.dispatch('categories/clearMessage');
   },
   methods: {
     inputValue($event) {
-      this.$store.dispatch('categories/updateInputCategories', $event.target.value);
+      this.$store.dispatch('categories/inputCategories', $event.target.value);
     },
     handleSubmit() {
       if (this.disabled) return;

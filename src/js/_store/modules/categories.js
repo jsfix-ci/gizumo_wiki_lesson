@@ -17,8 +17,10 @@ export default {
     doneGetAllCategories(state, payload) {
       state.categoryList = [...payload.categories];
     },
-    updateInputCategories(state, event) {
+    inputCategories(state, event) {
       state.category.name = event;
+    },
+    updateCategories(state, event) {
       state.category.updateName = event;
     },
     toggleIsConnecting(state) {
@@ -51,8 +53,7 @@ export default {
     displayUpdatedMessage(state) {
       state.doneMessage = 'カテゴリー更新しました！';
     },
-    deleteCategoryData(state) {
-      state.category.name = '';
+    deleteUpdateCategory(state) {
       state.category.id = null;
       state.category.updateName = '';
     },
@@ -125,8 +126,11 @@ export default {
           commit('failRequest', { message: err.message });
         });
     },
-    updateInputCategories({ commit }, event) {
-      commit('updateInputCategories', event);
+    updateCategories({ commit }, event) {
+      commit('updateCategories', event);
+    },
+    inputCategories({ commit }, event) {
+      commit('inputCategories', event);
     },
     clearMessage({ commit }) {
       commit('clearMessage');
@@ -160,8 +164,8 @@ export default {
           commit('displayErrorMessage', { message: err.message });
         });
     },
-    deleteCategoryData({ commit }) {
-      commit('deleteCategoryData');
+    deleteUpdateCategory({ commit }) {
+      commit('deleteUpdateCategory');
     },
   },
 };

@@ -34,7 +34,7 @@ export default {
   },
   methods: {
     updateValue($event) {
-      this.$store.dispatch('categories/updateInputCategories', $event.target.value);
+      this.$store.dispatch('categories/updateCategories', $event.target.value);
     },
   },
 };

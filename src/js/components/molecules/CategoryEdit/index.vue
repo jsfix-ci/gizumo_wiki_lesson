@@ -79,7 +79,7 @@ export default {
     this.$store.dispatch('categories/getCategoryName', categoryId);
   },
   destroyed() {
-    this.$store.dispatch('categories/deleteCategoryData');
+    this.$store.dispatch('categories/deleteUpdateCategory');
   },
   computed: {
     categoryName() {
