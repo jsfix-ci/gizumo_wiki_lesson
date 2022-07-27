@@ -13,6 +13,10 @@ export default {
     doneMessage: '',
     errorMessage: '',
   },
+  getters: {
+    // これがないと外からrootGettersで取得できない
+    categoryList: state => state.categoryList,
+  },
   mutations: {
     doneGetAllCategories(state, payload) {
       state.categoryList = [...payload.categories];

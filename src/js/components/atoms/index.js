@@ -9,6 +9,7 @@ import MarkdownPreview from './MarkdownPreview';
 import Select from './Select';
 import Modal from './Modal';
 import MarkdownIndex from './MarkdownIndex';
+import Pagenation from './Pagination';
 
 export {
   Button,
@@ -22,4 +23,5 @@ export {
   MarkdownIndex,
   Select,
   Modal,
+  Pagenation,
 };

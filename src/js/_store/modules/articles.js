@@ -28,6 +28,10 @@ export default {
     loading: false,
     doneMessage: '',
     errorMessage: '',
+    lastLink: '',
+    firstLink: '',
+    nextLink: '',
+    prevLink: '',
   },
   getters: {
     transformedArticles(state) {
@@ -119,6 +123,12 @@ export default {
     displayDoneMessage(state, payload = { message: '成功しました' }) {
       state.doneMessage = payload.message;
     },
+    setArticleUrl(state, links) {
+      state.firstLink = links.firstLink;
+      state.lastLink = links.lastLink;
+      state.nextLink = links.nextLink;
+      state.prevLink = links.prevLink;
+    },
   },
   actions: {
     initPostArticle({ commit }) {
@@ -129,6 +139,16 @@ export default {
         method: 'GET',
         url: '/article',
       }).then((res) => {
+        const firstLink = res.data.links.first;
+        const lastLink = res.data.links.last;
+        const nextLink = res.data.links.next;
+        const prevLink = res.data.links.prev;
+        commit('setArticleUrl', {
+          firstLink,
+          lastLink,
+          nextLink,
+          prevLink,
+        });
         const payload = {
           articles: res.data.articles,
         };
@@ -197,6 +217,7 @@ export default {
     },
     selectedArticleCategory({ commit, rootGetters }, categoryName) {
       const categoryList = rootGetters['categories/categoryList'];
+      console.log(categoryList);
       let matches = categoryList.find(category => category.name === categoryName);
       // カテゴリーが空のときのidとnameは下記をセット
       if (!matches) {
@@ -287,6 +308,102 @@ export default {
     },
     clearMessage({ commit }) {
       commit('clearMessage');
+    },
+    getNextArticles({ commit, rootGetters, state }) {
+      commit('clearMessage');
+      axios(rootGetters['auth/token'])({
+        method: 'GET',
+        url: `${state.nextLink}`,
+      }).then((res) => {
+        const firstLink = res.data.links.first;
+        const lastLink = res.data.links.last;
+        const nextLink = res.data.links.next;
+        const prevLink = res.data.links.prev;
+        commit('setArticleUrl', {
+          firstLink,
+          lastLink,
+          nextLink,
+          prevLink,
+        });
+        const payload = {
+          articles: res.data.articles,
+        };
+        commit('doneGetAllArticles', payload);
+      }).catch((err) => {
+        commit('failRequest', { message: err.message });
+      });
+    },
+    getPrevArticles({ commit, rootGetters, state }) {
+      commit('clearMessage');
+      axios(rootGetters['auth/token'])({
+        method: 'GET',
+        url: `${state.prevLink}`,
+      }).then((res) => {
+        const firstLink = res.data.links.first;
+        const lastLink = res.data.links.last;
+        const nextLink = res.data.links.next;
+        const prevLink = res.data.links.prev;
+        commit('setArticleUrl', {
+          firstLink,
+          lastLink,
+          nextLink,
+          prevLink,
+        });
+        const payload = {
+          articles: res.data.articles,
+        };
+        commit('doneGetAllArticles', payload);
+      }).catch((err) => {
+        commit('failRequest', { message: err.message });
+      });
+    },
+    getFirstArticles({ commit, rootGetters, state }) {
+      commit('clearMessage');
+      axios(rootGetters['auth/token'])({
+        method: 'GET',
+        url: `${state.firstLink}`,
+      }).then((res) => {
+        const firstLink = res.data.links.first;
+        const lastLink = res.data.links.last;
+        const nextLink = res.data.links.next;
+        const prevLink = res.data.links.prev;
+        commit('setArticleUrl', {
+          firstLink,
+          lastLink,
+          nextLink,
+          prevLink,
+        });
+        const payload = {
+          articles: res.data.articles,
+        };
+        commit('doneGetAllArticles', payload);
+      }).catch((err) => {
+        commit('failRequest', { message: err.message });
+      });
+    },
+    getLastArticles({ commit, rootGetters, state }) {
+      commit('clearMessage');
+      axios(rootGetters['auth/token'])({
+        method: 'GET',
+        url: `${state.lastLink}`,
+      }).then((res) => {
+        const firstLink = res.data.links.first;
+        const lastLink = res.data.links.last;
+        const nextLink = res.data.links.next;
+        const prevLink = res.data.links.prev;
+        commit('setArticleUrl', {
+          firstLink,
+          lastLink,
+          nextLink,
+          prevLink,
+        });
+        const payload = {
+          articles: res.data.articles,
+        };
+        commit('doneGetAllArticles', payload);
+      }).catch((err) => {
+        commit('failRequest', { message: err.message });
+      });
     },
   },
 };

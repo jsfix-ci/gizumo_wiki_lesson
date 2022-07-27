@@ -81,11 +81,22 @@
         削除
       </app-button>
     </app-modal>
+    <div class="article-list__pagenation">
+      <app-pagenation
+        :nextLink="nextLink"
+        :prevLink="prevLink"
+        @toFirst="$emit('firstClick')"
+        @toNext="$emit('nextClick')"
+        @toPrev="$emit('prevClick')"
+        @toLast="$emit('lastClick')"
+      />
+    </div>
   </div>
 </template>
 
 <script>
 import {
+  Pagenation,
   Heading,
   ListItem,
   RouterLink,
@@ -95,6 +106,7 @@ import {
 
 export default {
   components: {
+    appPagenation: Pagenation,
     appHeading: Heading,
     appListItem: ListItem,
     appRouterLink: RouterLink,
@@ -125,6 +137,14 @@ export default {
     access: {
       type: Object,
       default: () => ({}),
+    },
+    nextLink: {
+      type: String,
+      default: '',
+    },
+    prevLink: {
+      type: String,
+      default: '',
     },
   },
   computed: {
@@ -168,6 +188,9 @@ export default {
     }
     &__notice--create {
       margin-bottom: 16px;
+    }
+    &__pagenation {
+      margin-top: 30px;
     }
   }
 </style>
