@@ -28,6 +28,10 @@ export default {
     loading: false,
     doneMessage: '',
     errorMessage: '',
+    current_page: 1,
+    lastPage: null,
+    isPrevDisabled: false,
+    isNextDisabled: false,
   },
   getters: {
     transformedArticles(state) {
@@ -89,6 +93,7 @@ export default {
     },
     doneGetAllArticles(state, payload) {
       state.articleList = [...payload.articles];
+      state.lastPage = payload.lastPage;
     },
     failRequest(state, { message }) {
       state.errorMessage = message;
@@ -119,23 +124,55 @@ export default {
     displayDoneMessage(state, payload = { message: '成功しました' }) {
       state.doneMessage = payload.message;
     },
+    togglePrevDisabled(state) {
+      state.isPrevDisabled = !state.isPrevDisabled;
+    },
+    toggleNextDisabled(state) {
+      state.isNextDisabled = !state.isNextDisabled;
+    },
+    prevPageCount(state) {
+      state.current_page -= 1;
+    },
+    nextPageCount(state) {
+      state.current_page += 1;
+    },
   },
   actions: {
     initPostArticle({ commit }) {
       commit('initPostArticle');
     },
-    getAllArticles({ commit, rootGetters }) {
+    getAllArticles({ commit, state, rootGetters }) {
+      const pageNum = state.current_page;
       axios(rootGetters['auth/token'])({
         method: 'GET',
-        url: '/article',
+        url: `/article?page=${pageNum}`,
       }).then((res) => {
         const payload = {
           articles: res.data.articles,
+          lastPage: res.data.meta.last_page,
         };
         commit('doneGetAllArticles', payload);
+        if (res.data.meta.current_page === 1) {
+          commit('togglePrevDisabled');
+        }
+        if (res.data.meta.last_page === pageNum) {
+          commit('toggleNextDisabled');
+        }
       }).catch((err) => {
         commit('failRequest', { message: err.message });
       });
+    },
+    prevPageCount({ commit }) {
+      commit('prevPageCount');
+    },
+    nextPageCount({ commit }) {
+      commit('nextPageCount');
+    },
+    togglePrevDisabled({ commit }) {
+      commit('togglePrevDisabled');
+    },
+    toggleNextDisabled({ commit }) {
+      commit('toggleNextDisabled');
     },
     getArticleDetail({ commit, rootGetters }, articleId) {
       return new Promise((resolve, reject) => {
