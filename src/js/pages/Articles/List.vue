@@ -26,7 +26,7 @@ export default {
   },
   mixins: [Mixins],
   beforeRouteUpdate(to, from, next) {
-    this.fetchArticles();
+    this.fetchArticles(to.query.page);
     next();
   },
   data() {
@@ -45,14 +45,14 @@ export default {
       return this.$store.getters['auth/access'];
     },
     isPrevDisabled() {
-      return this.$store.state.articles.isPrevDisabled;
+      return (Number(this.$route.query.page) || 1) === 1;
     },
     isNextDisabled() {
-      return this.$store.state.articles.isNextDisabled;
+      return this.$route.query.page === this.$store.state.articles.lastPage;
     },
   },
   created() {
-    this.fetchArticles();
+    this.fetchArticles(Number(this.$route.query.page) || 1);
   },
   methods: {
     openModal(articleId) {
@@ -77,7 +77,7 @@ export default {
         this.$store.dispatch('articles/getAllArticles');
       }
     },
-    fetchArticles() {
+    fetchArticles(pageNum) {
       if (this.$route.query.category) {
         const { category } = this.$route.query;
         this.title = category;
@@ -90,26 +90,24 @@ export default {
             // console.log(err);
           });
       } else {
-        this.$store.dispatch('articles/getAllArticles');
+        this.$store.dispatch('articles/getAllArticles', pageNum);
       }
     },
     prevPage() {
-      if (this.$store.state.articles.isPrevDisabled) return;
-      const currentPage = this.$store.state.articles.current_page;
-      const { lastPage } = this.$store.state.articles.lastPage;
-      if (currentPage === lastPage) {
-        this.$store.dispatch('articles/toggleNextDisabled');
-      }
-      this.$store.dispatch('articles/prevPageCount');
-      this.$store.dispatch('articles/getAllArticles');
+      if ((Number(this.$route.query.page) || 1) === 1) return;
+      const pageId = Number(this.$route.query.page) - 1;
+      this.$router.push({
+        path: '/articles',
+        query: { page: pageId },
+      });
     },
     nextPage() {
-      if (this.$store.state.articles.isNextDisabled) return;
-      if (this.$store.state.articles.current_page === 1) {
-        this.$store.dispatch('articles/togglePrevDisabled');
-      }
-      this.$store.dispatch('articles/nextPageCount');
-      this.$store.dispatch('articles/getAllArticles');
+      if (this.$route.query.page === this.$store.state.articles.lastPage) return;
+      const pageId = this.$route.query.page ? Number(this.$route.query.page) + 1 : 2;
+      this.$router.push({
+        path: '/articles',
+        query: { page: pageId },
+      });
     },
   },
 };
