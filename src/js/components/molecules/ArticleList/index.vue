@@ -143,11 +143,11 @@ export default {
     },
     isPrevDisabled: {
       type: Boolean,
-      default: false,
+      require: true,
     },
     isNextDisabled: {
       type: Boolean,
-      default: false,
+      require: true,
     },
   },
   computed: {
