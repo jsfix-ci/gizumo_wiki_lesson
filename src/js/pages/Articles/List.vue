@@ -5,9 +5,13 @@
       :target-array="articlesList"
       :done-message="doneMessage"
       :access="access"
+      :is-prev-disabled="isPrevDisabled"
+      :is-next-disabled="isNextDisabled"
       border-gray
       @openModal="openModal"
       @handleClick="handleClick"
+      @prevPage="prevPage"
+      @nextPage="nextPage"
     />
   </div>
 </template>
@@ -22,7 +26,7 @@ export default {
   },
   mixins: [Mixins],
   beforeRouteUpdate(to, from, next) {
-    this.fetchArticles();
+    this.fetchArticles(to.query.page);
     next();
   },
   data() {
@@ -40,9 +44,15 @@ export default {
     access() {
       return this.$store.getters['auth/access'];
     },
+    isPrevDisabled() {
+      return (Number(this.$route.query.page) || 1) === 1;
+    },
+    isNextDisabled() {
+      return Number(this.$route.query.page) === this.$store.state.articles.lastPage;
+    },
   },
   created() {
-    this.fetchArticles();
+    this.fetchArticles(Number(this.$route.query.page) || 1);
   },
   methods: {
     openModal(articleId) {
@@ -67,7 +77,7 @@ export default {
         this.$store.dispatch('articles/getAllArticles');
       }
     },
-    fetchArticles() {
+    fetchArticles(pageNum) {
       if (this.$route.query.category) {
         const { category } = this.$route.query;
         this.title = category;
@@ -80,8 +90,24 @@ export default {
             // console.log(err);
           });
       } else {
-        this.$store.dispatch('articles/getAllArticles');
+        this.$store.dispatch('articles/getAllArticles', pageNum);
       }
+    },
+    prevPage() {
+      if (this.isPrevDisabled) return;
+      const pageId = Number(this.$route.query.page) - 1;
+      this.$router.push({
+        path: '/articles',
+        query: { page: pageId },
+      });
+    },
+    nextPage() {
+      if (this.isNextDisabled) return;
+      const pageId = this.$route.query.page ? Number(this.$route.query.page) + 1 : 2;
+      this.$router.push({
+        path: '/articles',
+        query: { page: pageId },
+      });
     },
   },
 };

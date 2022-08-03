@@ -16,6 +16,9 @@ export default {
       name: '',
     },
   },
+  getters: {
+    categoryList: state => state.categoryList,
+  },
   mutations: {
     doneGetAllCategories(state, payload) {
       state.categoryList = payload.categories.reverse();
