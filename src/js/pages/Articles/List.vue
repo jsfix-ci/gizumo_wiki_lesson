@@ -11,7 +11,7 @@
       @openModal="openModal"
       @handleClick="handleClick"
       @prevPage="prevPage(isPrevDisabled)"
-      @nextPage="nextPage"
+      @nextPage="nextPage(isNextDisabled)"
     />
   </div>
 </template>
@@ -101,8 +101,8 @@ export default {
         query: { page: pageId },
       });
     },
-    nextPage() {
-      if (this.$route.query.page === this.$store.state.articles.lastPage) return;
+    nextPage(isNextDisabled) {
+      if (isNextDisabled) return;
       const pageId = this.$route.query.page ? Number(this.$route.query.page) + 1 : 2;
       this.$router.push({
         path: '/articles',
