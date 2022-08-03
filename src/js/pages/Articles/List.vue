@@ -10,8 +10,8 @@
       border-gray
       @openModal="openModal"
       @handleClick="handleClick"
-      @prevPage="prevPage(isPrevDisabled)"
-      @nextPage="nextPage(isNextDisabled)"
+      @prevPage="prevPage"
+      @nextPage="nextPage"
     />
   </div>
 </template>
@@ -93,16 +93,16 @@ export default {
         this.$store.dispatch('articles/getAllArticles', pageNum);
       }
     },
-    prevPage(isPrevDisabled) {
-      if (isPrevDisabled) return;
+    prevPage() {
+      if (this.isPrevDisabled) return;
       const pageId = Number(this.$route.query.page) - 1;
       this.$router.push({
         path: '/articles',
         query: { page: pageId },
       });
     },
-    nextPage(isNextDisabled) {
-      if (isNextDisabled) return;
+    nextPage() {
+      if (this.isNextDisabled) return;
       const pageId = this.$route.query.page ? Number(this.$route.query.page) + 1 : 2;
       this.$router.push({
         path: '/articles',
