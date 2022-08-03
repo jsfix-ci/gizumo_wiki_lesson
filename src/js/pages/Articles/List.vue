@@ -48,7 +48,7 @@ export default {
       return (Number(this.$route.query.page) || 1) === 1;
     },
     isNextDisabled() {
-      return this.$route.query.page === this.$store.state.articles.lastPage;
+      return Number(this.$route.query.page) === this.$store.state.articles.lastPage;
     },
   },
   created() {
