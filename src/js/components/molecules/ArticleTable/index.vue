@@ -23,7 +23,9 @@
             </app-text>
           </td>
           <td>
-            <app-text tag="span" small>{{ article.created_at | displayDate(10) }}</app-text>
+            <app-text tag="span" small>
+              {{ article.created_at | displayDate(10) }}
+            </app-text>
           </td>
         </tr>
       </transition-group>
@@ -50,7 +52,7 @@ export default {
     },
     displayDate(text, length) {
       return text.substring(0, length);
-    }
+    },
   },
   props: {
     targetArray: {
