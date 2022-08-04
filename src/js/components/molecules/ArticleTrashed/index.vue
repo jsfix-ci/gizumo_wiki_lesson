@@ -13,27 +13,30 @@
     >
       すべての記事一覧へ戻る
     </app-router-link>
-    <app-list-item />
+    <div v-if="errorMessage" class="users-list__notice">
+      <app-text bg-error>{{ errorMessage }}</app-text>
+    </div>
+
   </div>
 </template>
 
 <script>
-import { Heading, RouterLink, ListItem } from '@Components/atoms';
+import {
+  Heading,
+  RouterLink,
+  Text,
+} from '@Components/atoms';
 
 export default {
   components: {
     appHeading: Heading,
     appRouterLink: RouterLink,
-    appListItem: ListItem,
+    appText: Text,
   },
   props: {
-    targetArray: {
-      type: Array,
-      default: () => [],
-    },
-    access: {
-      type: Object,
-      default: () => ({}),
+    errorMessage: {
+      type: String,
+      default: '',
     },
   },
 };
