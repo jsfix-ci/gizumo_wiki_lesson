@@ -3,7 +3,7 @@
     <table class="article-table">
       <thead class="article-table__head">
         <tr>
-          <th v-for="(thead, index) in theads" :key="index">
+          <th v-for="(thead, index) in $options.const.theads" :key="index">
             <app-text tag="span" theme-color bold>
               {{ thead }}
             </app-text>
@@ -37,6 +37,9 @@
 import { Text } from '@Components/atoms';
 
 export default {
+  const: {
+    theads: ['タイトル', '本文', '作成日'],
+  },
   components: {
     appText: Text,
   },
@@ -59,11 +62,6 @@ export default {
       type: Array,
       required: true,
     },
-  },
-  data() {
-    return {
-      theads: ['タイトル', '本文', '作成日'],
-    };
   },
 };
 </script>
