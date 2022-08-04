@@ -57,7 +57,7 @@ export default {
   props: {
     targetArray: {
       type: Array,
-      default: () => [],
+      required: true,
     },
   },
   data() {
