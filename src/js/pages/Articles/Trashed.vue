@@ -4,6 +4,7 @@
       :error-message="errorMessage"
     />
     <app-article-table
+      v-if="articleList"
       :target-array="articleList"
     />
   </div>
