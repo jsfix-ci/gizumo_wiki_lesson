@@ -16,7 +16,6 @@
     <div v-if="errorMessage" class="article-trashed__notice">
       <app-text bg-error>{{ errorMessage }}</app-text>
     </div>
-    
   </div>
 </template>
 
