@@ -13,10 +13,10 @@
     >
       すべての記事一覧へ戻る
     </app-router-link>
-    <div v-if="errorMessage" class="users-list__notice">
+    <div v-if="errorMessage" class="article-trashed__notice">
       <app-text bg-error>{{ errorMessage }}</app-text>
     </div>
-
+    
   </div>
 </template>
 
@@ -45,6 +45,9 @@ export default {
 <style lang="postcss" scoped>
   .article-trashed {
     &__create-link {
+      margin-top: 15px;
+    }
+    &__notice {
       margin-top: 15px;
     }
   }
