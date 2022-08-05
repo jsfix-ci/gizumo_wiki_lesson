@@ -14,17 +14,17 @@
         <tr v-for="article in targetArray" :key="article.id">
           <td>
             <app-text tag="span" small>
-              {{ article.title | readMore(30, '...') }}
+              {{ readMore(article.title) }}
             </app-text>
           </td>
           <td>
             <app-text tag="span" small>
-              {{ article.content | readMore(30, '...') }}
+              {{ readMore(article.content) }}
             </app-text>
           </td>
           <td>
             <app-text tag="span" small>
-              {{ article.created_at | displayDate(10) }}
+              {{ displayDate(article.created_at) }}
             </app-text>
           </td>
         </tr>
@@ -43,24 +43,18 @@ export default {
   components: {
     appText: Text,
   },
-  filters: {
-    readMore(text, length, suffix) {
-      let articleText = '';
-      if (text.length > 30) {
-        articleText = text.substring(0, length) + suffix;
-      } else {
-        articleText = text.substring(0, length);
-      }
-      return articleText;
-    },
-    displayDate(text, length) {
-      return text.substring(0, length);
-    },
-  },
   props: {
     targetArray: {
       type: Array,
       required: true,
+    },
+  },
+  computed: {
+    readMore() {
+      return articleText => (articleText.length > 30 ? `${articleText.substring(0, 30)}...` : articleText);
+    },
+    displayDate() {
+      return createdDate => createdDate.substring(0, 10);
     },
   },
 };
