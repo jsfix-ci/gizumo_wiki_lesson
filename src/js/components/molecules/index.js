@@ -14,6 +14,8 @@ import CategoryList from './CategoryList';
 import ArticleEdit from './ArticleEdit';
 import ArticlePost from './ArticlePost';
 import ArticleDetail from './ArticleDetail';
+import ArticleTrashed from './ArticleTrashed';
+import ArticleTable from './ArticleTable';
 import DeleteModal from './Modal';
 import Notice from './Notice';
 
@@ -34,6 +36,8 @@ export {
   ArticleEdit,
   ArticlePost,
   ArticleDetail,
+  ArticleTrashed,
+  ArticleTable,
   DeleteModal,
   Notice,
 };
