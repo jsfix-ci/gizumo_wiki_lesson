@@ -15,6 +15,7 @@
       class="category-management-post__submit"
       button-type="submit"
       round
+      bg-caution
       :disabled="disabled || !access.create"
     >
       {{ buttonText }}

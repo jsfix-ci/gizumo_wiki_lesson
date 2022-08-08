@@ -10,7 +10,7 @@
   --textLinkColor: #36f; /* テキストリンクに使う */
   --createColor: #59994d; /* 新規系に使う（作成） */
   --errorColor: #e61717; /* エラー系に使う（削除） */
-  --cautionColor: #e6c72e; /* 注意系に使う（編集） */
+  --: #e6c72e; /* 注意系に使う（編集） */
   --disabledColor: #c0c6c9; /* ボタンの無効時に使ってる */
   --separatorColor: #eaeaea; /* ボーダーや区切り線に使う */
   --white: #fff; /* 白に使用 */
