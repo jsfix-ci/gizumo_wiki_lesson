@@ -2,8 +2,8 @@
   <div class="categories-wrapper">
     <app-category-post
       class="category-post"
-     />
-    <app-category-list 
+    />
+    <app-category-list
       class="category-list"
       :categories="categories"
       :theads="theads"
@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { CategoryList,CategoryPost } from '@Components/molecules';
+import { CategoryList, CategoryPost } from '@Components/molecules';
 
 export default {
   components: {
@@ -28,12 +28,9 @@ export default {
     categories() {
       return this.$store.state.categories.categories;
     },
-    //    access() {
-    //   return this.$store.getters['auth/access'];
-    // },
   },
   created() {
-    this.$store.dispatch('categories/AllCategories');
+    this.$store.dispatch('categories/getAllCategories');
   },
 };
 </script>
@@ -54,4 +51,3 @@ export default {
   border-right: 2px solid #eee;
 }
 </style>
-

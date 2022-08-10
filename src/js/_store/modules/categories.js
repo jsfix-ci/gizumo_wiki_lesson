@@ -3,25 +3,28 @@ import axios from '@Helpers/axiosDefault';
 export default {
   namespaced: true,
   state: {
-    categories:[],
+    categories: [],
+    errorMessage: '',
   },
   mutations: {
-    AllCategories(state, payload) {
+    getAllCategories(state, payload) {
       state.categories = payload;
+    },
+    failRequest(state, errTxt) {
+      state.errorMessage = errTxt;
     },
   },
   actions: {
-    AllCategories({ commit, rootGetters }) {
-      axios(rootGetters['auth/token']) ({
+    getAllCategories({ commit, rootGetters }) {
+      axios(rootGetters['auth/token'])({
         method: 'GET',
-        url:'/category',
+        url: '/category',
       }).then(({ data }) => {
-        commit('AllCategories', data.categories.reverse());
+        commit('getAllCategories', data.categories.reverse());
       }).catch((err) => {
         const errTxt = err.message;
         commit('failRequest', errTxt);
       });
     },
   },
-
 };
