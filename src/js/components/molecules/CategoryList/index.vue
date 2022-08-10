@@ -148,7 +148,6 @@ export default {
     }
     &__body {
       td {
-        height: 10px;
         padding: 10px;
         vertical-align: middle;
         &.is-disabled {
@@ -176,9 +175,5 @@ export default {
   &__button {
     margin-top: 48px;
   }
-}
-
-.category-list__tr {
-  height: 10px;
 }
 </style>
