@@ -9,10 +9,11 @@ export default {
     doneMessage: '',
     loading: false,
   },
-  getters: {
-    targetCategory: state => state.targetCategory,
-  },
+
   mutations: {
+    resetTargetCategory(state) {
+      state.targetCategory = '';
+    },
     getAllCategories(state, payload) {
       state.categories = payload;
     },
@@ -45,12 +46,12 @@ export default {
         commit('failRequest', errTxt);
       });
     },
-    postCategory({ commit, rootGetters }) {
-      return new Promise((resolve, reject) => {
+    postCategory({ commit, rootGetters, state }) {
+      return new Promise((resolve) => {
         commit('clearMessage');
         commit('toggleLoading');
         const data = new URLSearchParams();
-        data.append('name', rootGetters['categories/targetCategory']);
+        data.append('name', state.targetCategory);
         axios(rootGetters['auth/token'])({
           method: 'POST',
           url: '/category',
@@ -58,11 +59,12 @@ export default {
         }).then(() => {
           commit('toggleLoading');
           commit('displayDoneMessage', { message: 'カテゴリーを作成しました' });
+          commit('resetTargetCategory');
           resolve();
         }).catch((err) => {
           commit('toggleLoading');
-          commit('failRequest', { message: err.message });
-          reject();
+          const errTxt = err.message;
+          commit('failRequest', errTxt);
         });
       });
     },

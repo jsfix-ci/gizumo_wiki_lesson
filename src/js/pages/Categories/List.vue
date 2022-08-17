@@ -5,7 +5,11 @@
       :access="access"
       @handleSubmit="handleSubmit"
       @updateValue="updateValue"
+      @clearMessage="clearMessage"
       :category="categoryName"
+      :done-message="doneMessage"
+      :error-message="errorMessage"
+      :disabled="loading"
     />
     <app-category-list
       class="category-list"
@@ -38,6 +42,15 @@ export default {
     categoryName() {
       return this.$store.state.categories.targetCategory;
     },
+    doneMessage() {
+      return this.$store.state.categories.doneMessage;
+    },
+    errorMessage() {
+      return this.$store.state.categories.errorMessage;
+    },
+    loading() {
+      return this.$store.state.categories.loading;
+    },
   },
   created() {
     this.$store.dispatch('categories/getAllCategories');
@@ -50,6 +63,9 @@ export default {
     },
     updateValue($event) {
       this.$store.dispatch('categories/updateValue', $event.target.value);
+    },
+    clearMessage() {
+      this.$store.dispatch('categories/clearMessage');
     },
   },
 };
