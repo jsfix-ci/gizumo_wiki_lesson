@@ -2,6 +2,10 @@
   <div class="categories-wrapper">
     <app-category-post
       class="category-post"
+      :access="access"
+      @handleSubmit="handleSubmit"
+      @updateValue="updateValue"
+      :category="categoryName"
     />
     <app-category-list
       class="category-list"
@@ -28,9 +32,25 @@ export default {
     categories() {
       return this.$store.state.categories.categories;
     },
+    access() {
+      return this.$store.getters['auth/access'];
+    },
+    categoryName() {
+      return this.$store.state.categories.targetCategory;
+    },
   },
   created() {
     this.$store.dispatch('categories/getAllCategories');
+  },
+  methods: {
+    handleSubmit() {
+      this.$store.dispatch('categories/postCategory').then(() => {
+        this.$store.dispatch('categories/getAllCategories');
+      });
+    },
+    updateValue($event) {
+      this.$store.dispatch('categories/updateValue', $event.target.value);
+    },
   },
 };
 </script>
