@@ -4,7 +4,7 @@
       <app-button
         class="page-item"
         :class="{'button--disabled' : 1 === currentPage}"
-        @click="setPage(1)"
+        @click="handlePageButtonClick(1)"
       >
         1
       </app-button>
@@ -24,7 +24,7 @@
     >
       <app-button
         :class="{'button--disabled' : num === currentPage}"
-        @click="setPage(num)"
+        @click="handlePageButtonClick(num)"
       >
         {{ num }}
       </app-button>
@@ -41,7 +41,7 @@
       <app-button
         class="page-item"
         :class="{'button--disabled' : lastPage === currentPage}"
-        @click="setPage(lastPage)"
+        @click="handlePageButtonClick(lastPage)"
       >
         {{ lastPage }}
       </app-button>
@@ -74,11 +74,11 @@ export default {
     },
   },
   methods: {
-    setPage(page) {
-      if (page === this.currentPage) {
+    handlePageButtonClick(pageId) {
+      if (pageId === this.currentPage) {
         return;
       }
-      this.$emit('nextPage', page);
+      this.$emit('nextPage', pageId);
     },
   },
 };
