@@ -7,7 +7,9 @@
     >
       1
     </app-button>
-    <div class="page-item">
+    <div class="page-item"
+    v-if="!(currentPage === 1)"
+    >
       ・・・
     </div>
     <div
@@ -22,7 +24,9 @@
         {{ num }}
       </app-button>
     </div>
-    <div class="page-item">
+    <div class="page-item"
+    v-if="!(currentPage === lastPage)"
+    >
       ・・・
     </div>
     <app-button
