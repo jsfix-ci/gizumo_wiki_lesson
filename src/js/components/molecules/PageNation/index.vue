@@ -1,18 +1,23 @@
 <template lang="html">
-  <div class="page-wrapper">
-    <app-button
-      class="page-item"
-      :class="{'button--disabled' : 1 === currentPage}"
-      @click="setPage(1)"
-    >
-      1
-    </app-button>
-    <div class="page-item"
-    v-if="!(currentPage === 1)"
-    >
-      ・・・
-    </div>
-    <div
+  <ul class="page-wrapper">
+    <li>
+      <app-button
+        class="page-item"
+        :class="{'button--disabled' : 1 === currentPage}"
+        @click="setPage(1)"
+      >
+        1
+      </app-button>
+    </li>
+    <li>
+      <div
+        v-if="!(currentPage === 1)"
+        class="page-item"
+      >
+        ・・・
+      </div>
+    </li>
+    <li
       v-for="num in currentPages"
       :key="num"
       class="page-item"
@@ -23,20 +28,25 @@
       >
         {{ num }}
       </app-button>
-    </div>
-    <div class="page-item"
-    v-if="!(currentPage === lastPage)"
-    >
-      ・・・
-    </div>
-    <app-button
-      class="page-item"
-      :class="{'button--disabled' : lastPage === currentPage}"
-      @click="setPage(lastPage)"
-    >
-      {{ lastPage }}
-    </app-button>
-  </div>
+    </li>
+    <li>
+      <div
+        v-if="!(currentPage === lastPage)"
+        class="page-item"
+      >
+        ・・・
+      </div>
+    </li>
+    <li>
+      <app-button
+        class="page-item"
+        :class="{'button--disabled' : lastPage === currentPage}"
+        @click="setPage(lastPage)"
+      >
+        {{ lastPage }}
+      </app-button>
+    </li>
+  </ul>
 </template>
 <script>
 import { Button } from '@Components/atoms';
@@ -65,8 +75,8 @@ export default {
   },
   methods: {
     setPage(page) {
-      if(page === this.currentPage){
-        return
+      if (page === this.currentPage) {
+        return;
       }
       this.$emit('nextPage', page);
     },
@@ -77,7 +87,7 @@ export default {
 .page-wrapper {
   text-align: center;
   margin-top: 30px;
-  .page-item {
+  li {
     margin-left: 15px;
     display: inline-block;
   }
