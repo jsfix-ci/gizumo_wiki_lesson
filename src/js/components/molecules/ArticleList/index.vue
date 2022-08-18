@@ -81,6 +81,44 @@
         削除
       </app-button>
     </app-modal>
+    <div class="pageNation">
+      <app-button
+        v-for="page in leftPageButton"
+        :key="page"
+        @click="$emit('pageLoading', page)"
+        :disabled="targetButton(page) ? true : false"
+      >
+        {{ page }}
+      </app-button>
+      <div
+        class="dot button"
+        v-show="this.firstDot"
+      >
+        …
+      </div>
+      <app-button
+        v-for="page in centerPageButton"
+        :key="page"
+        @click="$emit('pageLoading', page)"
+        :disabled="targetButton(page) ? true : false"
+      >
+        {{ page }}
+      </app-button>
+      <div
+        class="dot button"
+        v-show="this.lastDot"
+      >
+        …
+      </div>
+      <app-button
+        v-for="page in rightPageButton"
+        :key="page"
+        @click="$emit('pageLoading', page)"
+        :disabled="targetButton(page) ? true : false"
+      >
+        {{ page }}
+      </app-button>
+    </div>
   </div>
 </template>
 
@@ -100,6 +138,12 @@ export default {
     appRouterLink: RouterLink,
     appButton: Button,
     appText: Text,
+  },
+  data() {
+    return {
+      firstDot: false,
+      lastDot: false
+    }
   },
   props: {
     className: {
@@ -126,6 +170,10 @@ export default {
       type: Object,
       default: () => ({}),
     },
+    pageData: {
+      type: Object,
+      default: () => ({}),
+    }
   },
   computed: {
     articleTitle() {
@@ -134,8 +182,50 @@ export default {
     buttonText() {
       return this.access.delete ? '削除' : '削除権限がありません';
     },
+    // 最初の2つのボタンを作る処理
+    leftPageButton() {
+      return this.pageArray(1, 2);
+    },
+    // 真ん中のボタンを作る処理
+    centerPageButton() {
+      let first;
+      let last;
+      if (this.pageData.currentPage <= this.pageData.range) {
+        first = 3;
+        last = this.pageData.range + 2;
+        this.firstDot = false;
+        this.lastDot = true;
+      } else if (this.pageData.currentPage > this.pageData.lastPage - this.pageData.range) {
+        first = this.pageData.lastPage - this.pageData.range - 1;
+        last = this.pageData.lastPage - 2;
+        this.firstDot = true;
+        this.lastDot = false;
+      } else {
+        first = this.pageData.currentPage - 2;
+        last = this.pageData.currentPage + 2;
+        this.firstDot = true;
+        this.lastDot = true;
+      }
+      return this.pageArray(first, last);
+    },
+    // 最後の2つのボタンを作る処理
+    rightPageButton() {
+      return this.pageArray(this.pageData.lastPage - 1, this.pageData.lastPage);
+    }
   },
   methods: {
+    // ページ番号の配列を作る処理
+    pageArray(from, to) {
+      const pageNumber = [];
+      for (let i = from; i <= to; i++) {
+        pageNumber.push(i);
+      }
+      return pageNumber;
+    },
+    // 選択中のページを確認する処理(真偽地によってクラスを付与している)
+    targetButton(page) {
+      return page === this.pageData.currentPage;
+    },
     openModal(articleId) {
       if (!this.access.delete) return;
       this.$emit('openModal', articleId);
@@ -168,6 +258,18 @@ export default {
     }
     &__notice--create {
       margin-bottom: 16px;
+    }
+    .pageNation {
+      text-align: center;
+      margin-top: 50px;
+      .dot {
+        display: inline-block;
+        padding: 8px 10px;
+        font-size: 16px;
+      }
+      .button {
+        margin-left: 10px;
+      }
     }
   }
 </style>
