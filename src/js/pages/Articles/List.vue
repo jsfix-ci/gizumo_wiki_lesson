@@ -10,7 +10,6 @@
       @handleClick="handleClick"
     />
     <app-page-nation
-      :show-pages="showPages"
       :current-pages="currentPages"
       :last-page="lastPage"
       :current-page="currentPage"
