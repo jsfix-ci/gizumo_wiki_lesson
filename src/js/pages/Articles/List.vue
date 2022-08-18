@@ -109,7 +109,7 @@ export default {
             // console.log(err);
           });
       } else {
-        this.$store.dispatch('articles/getAllArticles');
+        this.$store.dispatch('articles/getArticles');
       }
     },
     fetchArticles(page) {
@@ -127,7 +127,7 @@ export default {
       } else {
         this.$router.push({ query: { page } });
         const pageQuery = this.$route.query.page;
-        this.$store.dispatch('articles/getAllArticles', pageQuery);
+        this.$store.dispatch('articles/getArticles', pageQuery);
       }
     },
   },
