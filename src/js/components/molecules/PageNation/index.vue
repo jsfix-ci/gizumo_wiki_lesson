@@ -61,6 +61,9 @@ export default {
   },
   methods: {
     setPage(page) {
+      if(page === this.currentPage){
+        return
+      }
       this.$emit('nextPage', page);
     },
   },
