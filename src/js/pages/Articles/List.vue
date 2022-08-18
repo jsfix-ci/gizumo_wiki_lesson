@@ -86,8 +86,8 @@ export default {
     },
   },
   created() {
-    const pageQuery = this.$route.query.page;
-    this.fetchArticles(pageQuery);
+    const pageId = this.$route.query.page;
+    this.fetchArticles(pageId);
   },
   methods: {
     openModal(articleId) {
@@ -126,8 +126,8 @@ export default {
           });
       } else {
         this.$router.push({ query: { page } });
-        const pageQuery = this.$route.query.page;
-        this.$store.dispatch('articles/getArticles', pageQuery);
+        const pageId= this.$route.query.page;
+        this.$store.dispatch('articles/getArticles', pageId);
       }
     },
   },
