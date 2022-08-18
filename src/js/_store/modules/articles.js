@@ -31,7 +31,6 @@ export default {
     pageData: {
       currentPage: 'null',
       lastPage: 'null',
-      range: 5,
     },
   },
   getters: {

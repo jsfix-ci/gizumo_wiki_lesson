@@ -173,6 +173,7 @@ export default {
     return {
       firstDot: false,
       lastDot: false,
+      range: 5,
     };
   },
   computed: {
@@ -190,7 +191,8 @@ export default {
     centerPageButton() {
       let first;
       let last;
-      const { currentPage, lastPage, range } = this.pageData;
+      const { currentPage, lastPage } = this.pageData;
+      const range = this.range;
       if (currentPage <= range) {
         first = 3;
         last = range + 2;
