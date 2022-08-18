@@ -5,7 +5,7 @@
       :target-array="articlesList"
       :done-message="doneMessage"
       :access="access"
-      :pageData="pageData"
+      :page-data="pageData"
       border-gray
       @openModal="openModal"
       @handleClick="handleClick"
@@ -45,7 +45,7 @@ export default {
     },
     pageData() {
       return this.$store.state.articles.pageData;
-    }
+    },
   },
   created() {
     this.fetchArticles(this.$route.query.page ? Number(this.$route.query.page) : 1);
@@ -99,9 +99,9 @@ export default {
     pageLoading(id) {
       this.$router.push({
         path: '/articles',
-        query: { page: id }
-      })
-    }
+        query: { page: id },
+      });
+    },
   },
 };
 </script>

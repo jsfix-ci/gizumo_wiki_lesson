@@ -127,10 +127,8 @@ export default {
     },
     // 取得したページ番号情報をstateに反映
     getPageNumber(state, { currentPage, lastPage }) {
-      state.pageData = Object.assign({}, { ...state.pageData }, {
-        currentPage: currentPage,
-        lastPage: lastPage,
-      });
+      state.pageData.currentPage = currentPage;
+      state.pageData.lastPage = lastPage;
     },
   },
   actions: {
@@ -142,7 +140,7 @@ export default {
       axios(rootGetters['auth/token'])({
         method: 'GET',
         url: `/article?page=${pageNumber}`,
-      }).then(({data}) => {
+      }).then(({ data }) => {
         const pageNum = {
           currentPage: pageNumber === undefined ? 1 : pageNumber,
           lastPage: data.meta.last_page,

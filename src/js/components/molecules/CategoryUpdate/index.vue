@@ -85,7 +85,6 @@ export default {
   methods: {
     // 更新ボタンのクリック処理
     updateCategory() {
-      console.log("submit");
       if (!this.access.create) return;
       this.$emit('clearMessage');
       this.$validator.validate().then((valid) => {

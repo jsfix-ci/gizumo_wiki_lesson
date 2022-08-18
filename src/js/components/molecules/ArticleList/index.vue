@@ -85,36 +85,36 @@
       <app-button
         v-for="page in leftPageButton"
         :key="page"
-        @click="$emit('pageLoading', page)"
         :disabled="targetButton(page) ? true : false"
+        @click="$emit('pageLoading', page)"
       >
         {{ page }}
       </app-button>
       <div
+        v-show="firstDot"
         class="dot button"
-        v-show="this.firstDot"
       >
         …
       </div>
       <app-button
         v-for="page in centerPageButton"
         :key="page"
-        @click="$emit('pageLoading', page)"
         :disabled="targetButton(page) ? true : false"
+        @click="$emit('pageLoading', page)"
       >
         {{ page }}
       </app-button>
       <div
+        v-show="lastDot"
         class="dot button"
-        v-show="this.lastDot"
       >
         …
       </div>
       <app-button
         v-for="page in rightPageButton"
         :key="page"
-        @click="$emit('pageLoading', page)"
         :disabled="targetButton(page) ? true : false"
+        @click="$emit('pageLoading', page)"
       >
         {{ page }}
       </app-button>
@@ -138,12 +138,6 @@ export default {
     appRouterLink: RouterLink,
     appButton: Button,
     appText: Text,
-  },
-  data() {
-    return {
-      firstDot: false,
-      lastDot: false
-    }
   },
   props: {
     className: {
@@ -173,7 +167,13 @@ export default {
     pageData: {
       type: Object,
       default: () => ({}),
-    }
+    },
+  },
+  data() {
+    return {
+      firstDot: false,
+      lastDot: false,
+    };
   },
   computed: {
     articleTitle() {
@@ -190,34 +190,36 @@ export default {
     centerPageButton() {
       let first;
       let last;
-      if (this.pageData.currentPage <= this.pageData.range) {
+      const { currentPage, lastPage, range } = this.pageData;
+      if (currentPage <= range) {
         first = 3;
-        last = this.pageData.range + 2;
-        this.firstDot = false;
-        this.lastDot = true;
-      } else if (this.pageData.currentPage > this.pageData.lastPage - this.pageData.range) {
-        first = this.pageData.lastPage - this.pageData.range - 1;
-        last = this.pageData.lastPage - 2;
-        this.firstDot = true;
-        this.lastDot = false;
+        last = range + 2;
+        this.dotchenge(false, true);
+      } else if (currentPage > lastPage - range) {
+        first = lastPage - range - 1;
+        last = lastPage - 2;
+        this.dotchenge(true, false);
       } else {
-        first = this.pageData.currentPage - 2;
-        last = this.pageData.currentPage + 2;
-        this.firstDot = true;
-        this.lastDot = true;
+        first = currentPage - 2;
+        last = currentPage + 2;
+        this.dotchenge(true, true);
       }
       return this.pageArray(first, last);
     },
     // 最後の2つのボタンを作る処理
     rightPageButton() {
       return this.pageArray(this.pageData.lastPage - 1, this.pageData.lastPage);
-    }
+    },
   },
   methods: {
+    dotchenge(first, last) {
+      this.firstDot = first;
+      this.lastDot = last;
+    },
     // ページ番号の配列を作る処理
     pageArray(from, to) {
       const pageNumber = [];
-      for (let i = from; i <= to; i++) {
+      for (let i = from; i <= to; i += 1) {
         pageNumber.push(i);
       }
       return pageNumber;
