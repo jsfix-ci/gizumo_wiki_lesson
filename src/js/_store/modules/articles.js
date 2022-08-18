@@ -135,13 +135,13 @@ export default {
       commit('initPostArticle');
     },
     // アーティクルの全取得処理
-    getPageArticles({ commit, rootGetters }, pageNumber) {
+    getPageArticles({ commit, rootGetters }, pageNumber = 1) {
       axios(rootGetters['auth/token'])({
         method: 'GET',
         url: `/article?page=${pageNumber}`,
       }).then(({ data }) => {
         const pageNum = {
-          currentPage: pageNumber === undefined ? 1 : pageNumber,
+          currentPage: pageNumber,
           lastPage: data.meta.last_page,
         };
         // 取得した記事をstateに反映
