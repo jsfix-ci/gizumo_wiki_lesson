@@ -57,13 +57,12 @@ export default {
   },
   methods: {
     handleSubmit() {
-      if(this.loading) {
-        return
-      } else {
-        this.$store.dispatch('categories/postCategory').then(() => {
-          this.$store.dispatch('categories/getAllCategories');
-        });
+      if (this.loading) {
+        return;
       }
+      this.$store.dispatch('categories/postCategory').then(() => {
+        this.$store.dispatch('categories/getAllCategories');
+      });
     },
     updateValue($event) {
       this.$store.dispatch('categories/updateValue', $event.target.value);
