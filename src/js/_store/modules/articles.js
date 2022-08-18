@@ -28,6 +28,10 @@ export default {
     loading: false,
     doneMessage: '',
     errorMessage: '',
+    pages: {
+      lastPage: 0,
+      currentPage: 1,
+    },
   },
   getters: {
     transformedArticles(state) {
@@ -89,6 +93,8 @@ export default {
     },
     doneGetAllArticles(state, payload) {
       state.articleList = [...payload.articles];
+      state.pages.lastPage = payload.lastPage;
+      state.pages.currentPage = payload.currentPage;
     },
     failRequest(state, { message }) {
       state.errorMessage = message;
@@ -124,13 +130,15 @@ export default {
     initPostArticle({ commit }) {
       commit('initPostArticle');
     },
-    getAllArticles({ commit, rootGetters }) {
+    getAllArticles({ commit, rootGetters }, page) {
       axios(rootGetters['auth/token'])({
         method: 'GET',
-        url: '/article',
+        url: `/article?page=${page}`,
       }).then((res) => {
         const payload = {
           articles: res.data.articles,
+          currentPage: res.data.meta.current_page,
+          lastPage: res.data.meta.last_page,
         };
         commit('doneGetAllArticles', payload);
       }).catch((err) => {
