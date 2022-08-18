@@ -135,7 +135,7 @@ export default {
       commit('initPostArticle');
     },
     // アーティクルの全取得処理
-    getAllArticles({ commit, rootGetters }, pageNumber) {
+    getPageArticles({ commit, rootGetters }, pageNumber) {
       axios(rootGetters['auth/token'])({
         method: 'GET',
         url: `/article?page=${pageNumber}`,

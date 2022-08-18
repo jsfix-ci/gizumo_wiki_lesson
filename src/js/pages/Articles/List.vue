@@ -75,7 +75,7 @@ export default {
             // console.log(err);
           });
       } else {
-        this.$store.dispatch('articles/getAllArticles');
+        this.$store.dispatch('articles/getPageArticles');
       }
     },
     // created後にデータを取得するための処理
@@ -92,7 +92,7 @@ export default {
             // console.log(err);
           });
       } else {
-        this.$store.dispatch('articles/getAllArticles', id);
+        this.$store.dispatch('articles/getPageArticles', id);
       }
     },
 
