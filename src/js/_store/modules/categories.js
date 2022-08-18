@@ -47,9 +47,9 @@ export default {
       });
     },
     postCategory({ commit, rootGetters, state }) {
+      commit('clearMessage');
+      commit('toggleLoading');
       return new Promise((resolve) => {
-        commit('clearMessage');
-        commit('toggleLoading');
         const data = new URLSearchParams();
         data.append('name', state.targetCategory);
         axios(rootGetters['auth/token'])({

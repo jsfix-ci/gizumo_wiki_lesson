@@ -3,13 +3,13 @@
     <app-category-post
       class="category-post"
       :access="access"
-      @handleSubmit="handleSubmit"
-      @updateValue="updateValue"
-      @clearMessage="clearMessage"
       :category="categoryName"
       :done-message="doneMessage"
       :error-message="errorMessage"
       :disabled="loading"
+      @handleSubmit="handleSubmit"
+      @updateValue="updateValue"
+      @clearMessage="clearMessage"
     />
     <app-category-list
       class="category-list"
