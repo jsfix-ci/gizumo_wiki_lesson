@@ -78,7 +78,7 @@ export default {
       if (pageId === this.currentPage) {
         return;
       }
-      this.$emit('nextPage', pageId);
+      this.$emit('handle-page-button-click', pageId);
     },
   },
 };

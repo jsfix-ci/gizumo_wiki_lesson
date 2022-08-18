@@ -14,7 +14,7 @@
       :current-pages="currentPages"
       :last-page="lastPage"
       :current-page="currentPage"
-      @nextPage="fetchArticles"
+      @handle-page-button-click="fetchArticles"
     />
   </div>
 </template>
