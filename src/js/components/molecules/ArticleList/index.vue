@@ -81,44 +81,10 @@
         削除
       </app-button>
     </app-modal>
-    <div class="pageNation">
-      <app-button
-        v-for="page in leftPageButton"
-        :key="page"
-        :disabled="targetButton(page) ? true : false"
-        @click="$emit('pageLoading', page)"
-      >
-        {{ page }}
-      </app-button>
-      <div
-        v-show="firstDot"
-        class="dot button"
-      >
-        …
-      </div>
-      <app-button
-        v-for="page in centerPageButton"
-        :key="page"
-        :disabled="targetButton(page) ? true : false"
-        @click="$emit('pageLoading', page)"
-      >
-        {{ page }}
-      </app-button>
-      <div
-        v-show="lastDot"
-        class="dot button"
-      >
-        …
-      </div>
-      <app-button
-        v-for="page in rightPageButton"
-        :key="page"
-        :disabled="targetButton(page) ? true : false"
-        @click="$emit('pageLoading', page)"
-      >
-        {{ page }}
-      </app-button>
-    </div>
+    <app-page-nation
+      :page-data="pageData"
+      @handle-page-button-click="handlePageButtonClick"
+    />
   </div>
 </template>
 
@@ -130,6 +96,7 @@ import {
   Button,
   Text,
 } from '@Components/atoms';
+import PageNation from '@Components/molecules/PageNation';
 
 export default {
   components: {
@@ -138,6 +105,7 @@ export default {
     appRouterLink: RouterLink,
     appButton: Button,
     appText: Text,
+    appPageNation: PageNation,
   },
   props: {
     className: {
@@ -169,13 +137,6 @@ export default {
       default: () => ({}),
     },
   },
-  data() {
-    return {
-      firstDot: false,
-      lastDot: false,
-      range: 5,
-    };
-  },
   computed: {
     articleTitle() {
       return `${this.title}の一覧`;
@@ -183,56 +144,17 @@ export default {
     buttonText() {
       return this.access.delete ? '削除' : '削除権限がありません';
     },
-    // 最初の2つのボタンを作る処理
-    leftPageButton() {
-      return this.pageArray(1, 2);
-    },
-    // 真ん中のボタンを作る処理
-    centerPageButton() {
-      let first;
-      let last;
-      const { currentPage, lastPage } = this.pageData;
-      const range = this.range;
-      if (currentPage <= range) {
-        first = 3;
-        last = range + 2;
-        this.dotchenge(false, true);
-      } else if (currentPage > lastPage - range) {
-        first = lastPage - range - 1;
-        last = lastPage - 2;
-        this.dotchenge(true, false);
-      } else {
-        first = currentPage - 2;
-        last = currentPage + 2;
-        this.dotchenge(true, true);
-      }
-      return this.pageArray(first, last);
-    },
-    // 最後の2つのボタンを作る処理
-    rightPageButton() {
-      return this.pageArray(this.pageData.lastPage - 1, this.pageData.lastPage);
-    },
   },
   methods: {
-    dotchenge(first, last) {
-      this.firstDot = first;
-      this.lastDot = last;
-    },
-    // ページ番号の配列を作る処理
-    pageArray(from, to) {
-      const pageNumber = [];
-      for (let i = from; i <= to; i += 1) {
-        pageNumber.push(i);
-      }
-      return pageNumber;
-    },
-    // 選択中のページを確認する処理(真偽地によってクラスを付与している)
-    targetButton(page) {
-      return page === this.pageData.currentPage;
-    },
     openModal(articleId) {
       if (!this.access.delete) return;
       this.$emit('openModal', articleId);
+    },
+    handlePageButtonClick(id) {
+      this.$router.push({
+        path: '/articles',
+        query: { page: id },
+      });
     },
   },
 };
@@ -262,18 +184,6 @@ export default {
     }
     &__notice--create {
       margin-bottom: 16px;
-    }
-    .pageNation {
-      text-align: center;
-      margin-top: 50px;
-      .dot {
-        display: inline-block;
-        padding: 8px 10px;
-        font-size: 16px;
-      }
-      .button {
-        margin-left: 10px;
-      }
     }
   }
 </style>

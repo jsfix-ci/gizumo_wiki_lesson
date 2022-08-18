@@ -9,7 +9,6 @@
       border-gray
       @openModal="openModal"
       @handleClick="handleClick"
-      @pageLoading="pageLoading"
     />
   </div>
 </template>
@@ -94,13 +93,6 @@ export default {
       } else {
         this.$store.dispatch('articles/getPageArticles', id);
       }
-    },
-
-    pageLoading(id) {
-      this.$router.push({
-        path: '/articles',
-        query: { page: id },
-      });
     },
   },
 };
