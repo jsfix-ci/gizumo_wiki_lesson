@@ -131,10 +131,10 @@ export default {
       commit('initPostArticle');
     },
     getArticles({ commit, rootGetters }, page) {
-      if(page === undefined) {
+      if (page === undefined) {
         axios(rootGetters['auth/token'])({
           method: 'GET',
-          url: `/article`,
+          url: '/article',
         }).then((res) => {
           const payload = {
             articles: res.data.articles,
@@ -145,7 +145,7 @@ export default {
         }).catch((err) => {
           commit('failRequest', { message: err.message });
         });
-        return
+        return;
       }
       axios(rootGetters['auth/token'])({
         method: 'GET',
