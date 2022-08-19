@@ -10,7 +10,7 @@
       @handleClick="handleClick"
     />
     <app-page-nation
-      :current-pages="currentPages"
+      :total-pages="totalPages"
       :last-page="lastPage"
       :current-page="currentPage"
       @handle-page-button-click="fetchArticles"
@@ -34,42 +34,16 @@ export default {
   data() {
     return {
       title: 'すべて',
-      showPages: 2,
     };
   },
   computed: {
+    totalPages() {
+      const targetLastPage = this.$store.state.articles.pages.lastPage;
+      const targetTotalPages = [...Array(targetLastPage).keys()].map(i => i + 1);
+      return targetTotalPages;
+    },
     currentPage() {
       return this.$store.state.articles.pages.currentPage;
-    },
-    currentPages() {
-      const targetPage = this.$store.state.articles.pages.currentPage;
-      if (targetPage === 1 || targetPage === 2 || targetPage === 3) {
-        const targetPages = [2, 3, 4, 5, 6];
-        return targetPages;
-      }
-      const targetLastPage = this.$store.state.articles.pages.lastPage;
-      if (
-        targetLastPage === targetPage
-        || targetLastPage - 1 === targetPage
-        || targetLastPage - 2 === targetPage
-      ) {
-        const targetPages = [
-          targetLastPage - 5,
-          targetLastPage - 4,
-          targetLastPage - 3,
-          targetLastPage - 2,
-          targetLastPage - 1,
-        ];
-        return targetPages;
-      }
-      const targetPages = [
-        targetPage - 2,
-        targetPage - 1,
-        targetPage,
-        targetPage + 1,
-        targetPage + 2,
-      ];
-      return targetPages;
     },
     lastPage() {
       return this.$store.state.articles.pages.lastPage;
@@ -125,7 +99,7 @@ export default {
           });
       } else {
         this.$router.push({ query: { page } });
-        const pageId= this.$route.query.page;
+        const pageId = this.$route.query.page;
         this.$store.dispatch('articles/getArticles', pageId);
       }
     },
