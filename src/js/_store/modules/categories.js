@@ -10,6 +10,7 @@ export default {
     loading: false,
     deleteCategoryId: null,
     deleteCategoryName: '',
+    editCategoryName: '',
   },
 
   mutations: {
@@ -42,6 +43,9 @@ export default {
     doneDeleteCategory(state) {
       state.deleteCategoryId = null;
       state.deleteCategoryName = '';
+    },
+    getCategory(state, payload) {
+      state.editCategoryName = payload;
     },
   },
   actions: {
@@ -102,6 +106,18 @@ export default {
     },
     confirmDeleteCategory({ commit }, { categoryId, categoryName }) {
       commit('confirmDeleteCategory', { categoryId, categoryName });
+    },
+    getCategory({ commit, rootGetters }, categoryId) {
+      axios(rootGetters['auth/token'])({
+        method: 'GET',
+        url: `/category/${categoryId}`,
+      }).then(({ data }) => {
+        console.log(data.category.name);
+        commit('getCategory', data.category.name);
+      }).catch((err) => {
+        const errTxt = err.message;
+        commit('failRequest', errTxt);
+      });
     },
   },
 };
