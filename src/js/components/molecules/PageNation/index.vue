@@ -13,7 +13,7 @@
       </app-button>
     </li>
     <li
-      v-show="firstDot"
+      v-show="firstDotChenge"
       class="dot button"
     >
       …
@@ -31,7 +31,7 @@
       </app-button>
     </li>
     <li
-      v-show="lastDot"
+      v-show="lastDotChenge"
       class="dot button"
     >
       …
@@ -66,8 +66,6 @@ export default {
   },
   data() {
     return {
-      firstDot: false,
-      lastDot: false,
       range: 5,
     };
   },
@@ -101,21 +99,32 @@ export default {
     isCurrentPage() {
       return page => this.pageData.currentPage === page;
     },
-  },
-  created() {
-    if (this.pageData.currentPage <= this.range) {
-      this.dotchenge(false, true);
-    } else if (this.pageData.currentPage > this.pageData.lastPage - this.range) {
-      this.dotchenge(true, false);
-    } else {
-      this.dotchenge(true, true);
-    }
+    // 最初のdotを表示するかしないかの判定
+    firstDotChenge() {
+      let firstDot;
+      if (this.pageData.currentPage <= this.range) {
+        firstDot = false;
+      } else if (this.pageData.currentPage > this.pageData.lastPage - this.range) {
+        firstDot = true;
+      } else {
+        firstDot = true;
+      }
+      return firstDot;
+    },
+    // 最後のdotを表示するかしないかの判定
+    lastDotChenge() {
+      let lastDot;
+      if (this.pageData.currentPage <= this.range) {
+        lastDot = true;
+      } else if (this.pageData.currentPage > this.pageData.lastPage - this.range) {
+        lastDot = false;
+      } else {
+        lastDot = true;
+      }
+      return lastDot;
+    },
   },
   methods: {
-    dotchenge(first, last) {
-      this.firstDot = first;
-      this.lastDot = last;
-    },
     // ページ番号の配列を作る処理
     pageArray(from, to) {
       const pageNumber = [];
