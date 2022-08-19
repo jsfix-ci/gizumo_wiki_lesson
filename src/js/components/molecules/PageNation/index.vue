@@ -18,7 +18,7 @@
       </div>
     </li>
     <li
-      v-for="num in currentPages"
+      v-for="num in organizedPages"
       :key="num"
       class="page-item"
     >
@@ -56,21 +56,36 @@ export default {
     appButton: Button,
   },
   props: {
-    showPages: {
-      type: Number,
-      default: 0,
-    },
     currentPage: {
       type: Number,
       default: 1,
     },
-    currentPages: {
+    totalPages: {
       type: Array,
       default: () => [],
     },
     lastPage: {
       type: Number,
       default: 0,
+    },
+  },
+  computed: {
+    organizedPages() {
+      const pages = this.totalPages;
+      const showPage = this.$store.state.articles.pages.currentPage;
+      if (showPage <= 3) {
+        const showPages = pages.slice(1, 6);
+        return showPages;
+      }
+      const targetLastPage = this.$store.state.articles.pages.lastPage;
+      if (
+        targetLastPage - 2 <= showPage
+      ) {
+        const showPages = pages.slice(this.lastPage - 6, this.lastPage - 1);
+        return showPages;
+      }
+      const showPages = pages.slice(showPage - 3, showPage + 2);
+      return showPages;
     },
   },
   methods: {
