@@ -1,5 +1,5 @@
 <template lang="html">
-  <form @submit.prevent="addCategory">
+  <form @submit.prevent="updateCategoryName">
     <app-heading :level="1">カテゴリー管理</app-heading>
     <app-router-link
       class="category-edit"
@@ -19,7 +19,7 @@
       data-vv-as="カテゴリー名"
       :error-messages="errors.collect('category')"
       :value="editCategoryName"
-      @updateValue="$emit('updateValue', $event)"
+      @updateValue="$emit('editCategory', $event)"
     />
     <app-button
       class="category-edit__submit"
@@ -74,7 +74,7 @@ export default {
       default: () => ({}),
     },
     editCategoryName: {
-      // type:string,
+      type: String,
       default: '',
     },
   },
@@ -85,11 +85,11 @@ export default {
     },
   },
   methods: {
-    addCategory() {
-      if (!this.access.create) return;
+    updateCategoryName() {
+      if (!this.access.edit) return;
       this.$emit('clearMessage');
       this.$validator.validate().then((valid) => {
-        if (valid) this.$emit('handleSubmit');
+        if (valid) this.$emit('updateCategoryName');
       });
     },
   },

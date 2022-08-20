@@ -5,7 +5,10 @@
     :done-message="doneMessage"
     :error-message="errorMessage"
     :disabled="loading"
-    :editCategoryName="editCategoryName"
+    :edit-category-name="editCategoryName"
+    @clearMessage="clearMessage"
+    @editCategory="editCategory"
+    @updateCategoryName="updateCategoryName"
   />
 </template>
 
@@ -34,12 +37,27 @@ export default {
       return this.$store.state.categories.loading;
     },
     editCategoryName() {
-      return this.$store.state.categories.editCategoryName;
+      return this.$store.state.categories.editCategory.name;
     },
   },
   created() {
+    this.clearMessage();
     const { id } = this.$route.params;
     this.$store.dispatch('categories/getCategory', id);
+  },
+  methods: {
+    clearMessage() {
+      this.$store.dispatch('categories/clearMessage');
+    },
+    editCategory($event) {
+      this.$store.dispatch('categories/editCategory', $event.target.value);
+    },
+    updateCategoryName() {
+      this.$store.dispatch('categories/updateCategoryName')
+        .then(() => {
+          this.$store.dispatch('categories/getAllCategories');
+        });
+    },
   },
 
 
