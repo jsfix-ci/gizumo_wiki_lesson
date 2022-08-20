@@ -84,12 +84,12 @@ export default {
     clearMessage({ commit }) {
       commit('clearMessage');
     },
-    deleteCategory({ commit, rootGetters }, categoryId) {
+    deleteCategory({ commit, rootGetters, state }) {
       commit('clearMessage');
       return new Promise((resolve) => {
         axios(rootGetters['auth/token'])({
           method: 'DELETE',
-          url: `/category/${categoryId}`,
+          url: `/category/${state.deleteCategoryId}`,
         }).then(() => {
           commit('doneDeleteCategory');
           commit('displayDoneMessage', { message: 'カテゴリーを削除しました' });
@@ -100,7 +100,7 @@ export default {
         });
       });
     },
-    confirmDeleteCategory({ commit }, { categoryName, categoryId }) {
+    confirmDeleteCategory({ commit }, { categoryId, categoryName }) {
       commit('confirmDeleteCategory', { categoryId, categoryName });
     },
   },
