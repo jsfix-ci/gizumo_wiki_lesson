@@ -130,23 +130,7 @@ export default {
     initPostArticle({ commit }) {
       commit('initPostArticle');
     },
-    getArticles({ commit, rootGetters }, page) {
-      if (page === undefined) {
-        axios(rootGetters['auth/token'])({
-          method: 'GET',
-          url: '/article',
-        }).then((res) => {
-          const payload = {
-            articles: res.data.articles,
-            currentPage: res.data.meta.current_page,
-            lastPage: res.data.meta.last_page,
-          };
-          commit('doneGetArticles', payload);
-        }).catch((err) => {
-          commit('failRequest', { message: err.message });
-        });
-        return;
-      }
+    getArticles({ commit, rootGetters }, page = 1) {
       axios(rootGetters['auth/token'])({
         method: 'GET',
         url: `/article?page=${page}`,
