@@ -58,17 +58,13 @@ export default {
       type: Number,
       default: 1,
     },
-    totalPages: {
-      type: Array,
-      default: () => [],
-    },
     lastPage: {
       type: Number,
       default: 0,
     },
   },
   computed: {
-      totalPages() {
+    totalPages() {
       const targetTotalPages = [...Array(this.lastPage).keys()].map(i => i + 1);
       return targetTotalPages;
     },
