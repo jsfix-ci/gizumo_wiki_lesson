@@ -60,9 +60,6 @@ export default {
     deleteCategoryName() {
       return this.$store.state.categories.deleteCategoryName;
     },
-    deleteCategoryId() {
-      return this.$store.state.categories.deleteCategoryId;
-    },
   },
   created() {
     this.$store.dispatch('categories/getAllCategories');
