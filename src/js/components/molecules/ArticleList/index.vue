@@ -81,6 +81,10 @@
         削除
       </app-button>
     </app-modal>
+    <app-page-nation
+      :page-data="pageData"
+      @handle-page-button-click="handlePageButtonClick"
+    />
   </div>
 </template>
 
@@ -92,6 +96,7 @@ import {
   Button,
   Text,
 } from '@Components/atoms';
+import PageNation from '@Components/molecules/PageNation';
 
 export default {
   components: {
@@ -100,6 +105,7 @@ export default {
     appRouterLink: RouterLink,
     appButton: Button,
     appText: Text,
+    appPageNation: PageNation,
   },
   props: {
     className: {
@@ -126,6 +132,10 @@ export default {
       type: Object,
       default: () => ({}),
     },
+    pageData: {
+      type: Object,
+      default: () => ({}),
+    },
   },
   computed: {
     articleTitle() {
@@ -139,6 +149,12 @@ export default {
     openModal(articleId) {
       if (!this.access.delete) return;
       this.$emit('openModal', articleId);
+    },
+    handlePageButtonClick(id) {
+      this.$router.push({
+        path: '/articles',
+        query: { page: id },
+      });
     },
   },
 };

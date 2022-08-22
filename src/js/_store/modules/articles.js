@@ -28,6 +28,10 @@ export default {
     loading: false,
     doneMessage: '',
     errorMessage: '',
+    pageData: {
+      currentPage: 'null',
+      lastPage: 'null',
+    },
   },
   getters: {
     transformedArticles(state) {
@@ -87,8 +91,9 @@ export default {
       );
       state.articleList = [...filteredArticles];
     },
+    // 取得した全ての記事情報をstateの中に代入
     doneGetAllArticles(state, payload) {
-      state.articleList = [...payload.articles];
+      state.articleList = payload;
     },
     failRequest(state, { message }) {
       state.errorMessage = message;
@@ -119,20 +124,30 @@ export default {
     displayDoneMessage(state, payload = { message: '成功しました' }) {
       state.doneMessage = payload.message;
     },
+    // 取得したページ番号情報をstateに反映
+    getPageNumber(state, { currentPage, lastPage }) {
+      state.pageData.currentPage = currentPage;
+      state.pageData.lastPage = lastPage;
+    },
   },
   actions: {
     initPostArticle({ commit }) {
       commit('initPostArticle');
     },
-    getAllArticles({ commit, rootGetters }) {
+    // アーティクルの全取得処理
+    getPageArticles({ commit, rootGetters }, pageNumber = 1) {
       axios(rootGetters['auth/token'])({
         method: 'GET',
-        url: '/article',
-      }).then((res) => {
-        const payload = {
-          articles: res.data.articles,
+        url: `/article?page=${pageNumber}`,
+      }).then(({ data }) => {
+        const pageNum = {
+          currentPage: pageNumber,
+          lastPage: data.meta.last_page,
         };
-        commit('doneGetAllArticles', payload);
+        // 取得した記事をstateに反映
+        commit('doneGetAllArticles', data.articles);
+        // 取得したページ番号情報をstateに反映
+        commit('getPageNumber', pageNum);
       }).catch((err) => {
         commit('failRequest', { message: err.message });
       });
@@ -241,9 +256,11 @@ export default {
         commit('toggleLoading');
       });
     },
+    // 削除モーダルを開いた時に削除IDをstateに保存しておく
     confirmDeleteArticle({ commit }, articleId) {
       commit('confirmDeleteArticle', { articleId });
     },
+    // 削除処理
     deleteArticle({ commit, rootGetters }) {
       commit('clearMessage');
       const data = new URLSearchParams();
