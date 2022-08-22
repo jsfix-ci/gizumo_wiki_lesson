@@ -3,7 +3,7 @@
     <li>
       <app-button
         class="page-item"
-        :disabled="1 === currentPage ? true : false"
+        :disabled="1 === currentPage"
         @click="handlePageButtonClick(1)"
       >
         1
@@ -22,7 +22,7 @@
       class="page-item"
     >
       <app-button
-        :disabled="num === currentPage ? true : false"
+        :disabled="num === currentPage"
         @click="handlePageButtonClick(num)"
       >
         {{ num }}
@@ -38,7 +38,7 @@
     <li>
       <app-button
         class="page-item"
-        :disabled="lastPage === currentPage ? true : false"
+        :disabled="lastPage === currentPage"
         @click="handlePageButtonClick(lastPage)"
       >
         {{ lastPage }}
