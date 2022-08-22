@@ -68,6 +68,10 @@ export default {
     },
   },
   computed: {
+      totalPages() {
+      const targetTotalPages = [...Array(this.lastPage).keys()].map(i => i + 1);
+      return targetTotalPages;
+    },
     organizedPages() {
       const pages = this.totalPages;
       const showPage = this.$store.state.articles.pages.currentPage;

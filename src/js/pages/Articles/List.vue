@@ -10,7 +10,6 @@
       @handleClick="handleClick"
     />
     <app-page-nation
-      :total-pages="totalPages"
       :last-page="lastPage"
       :current-page="currentPage"
       @handle-page-button-click="fetchArticles"
@@ -37,11 +36,6 @@ export default {
     };
   },
   computed: {
-    totalPages() {
-      const targetLastPage = this.$store.state.articles.pages.lastPage;
-      const targetTotalPages = [...Array(targetLastPage).keys()].map(i => i + 1);
-      return targetTotalPages;
-    },
     currentPage() {
       return this.$store.state.articles.pages.currentPage;
     },
