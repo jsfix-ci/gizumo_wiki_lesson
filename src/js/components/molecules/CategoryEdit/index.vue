@@ -1,11 +1,9 @@
 <template lang="html">
-  <form @submit.prevent="updateCategoryName">
+  <form @submit.prevent="handleSubmit">
     <app-heading :level="1">カテゴリー管理</app-heading>
     <app-router-link
       class="category-edit"
-      block
       underline
-      key-color
       hover-opacity
       to="/categories"
     >
@@ -19,7 +17,7 @@
       data-vv-as="カテゴリー名"
       :error-messages="errors.collect('category')"
       :value="editCategoryName"
-      @updateValue="$emit('editCategory', $event)"
+      @updateValue="$emit('updateValue', $event)"
     />
     <app-button
       class="category-edit__submit"
@@ -53,10 +51,6 @@ export default {
     appRouterLink: RouterLink,
   },
   props: {
-    category: {
-      type: String,
-      default: '',
-    },
     errorMessage: {
       type: String,
       default: '',
@@ -85,11 +79,11 @@ export default {
     },
   },
   methods: {
-    updateCategoryName() {
+    handleSubmit() {
       if (!this.access.edit) return;
       this.$emit('clearMessage');
       this.$validator.validate().then((valid) => {
-        if (valid) this.$emit('updateCategoryName');
+        if (valid) this.$emit('handleSubmit');
       });
     },
   },

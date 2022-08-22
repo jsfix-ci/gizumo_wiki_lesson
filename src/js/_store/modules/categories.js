@@ -51,8 +51,8 @@ export default {
       state.editCategory.id = categoryId;
       state.editCategory.name = getName;
     },
-    updateCategoryName(state, payload) {
-      state.updateCategoryName = payload;
+    updateEditValue(state, payload) {
+      state.editCategory.name = payload;
     },
   },
   actions: {
@@ -126,6 +126,9 @@ export default {
         commit('failRequest', errTxt);
       });
     },
+    updateEditValue({ commit }, $event) {
+      commit('updateEditValue', $event);
+    },
     updateCategoryName({ commit, rootGetters, state }) {
       commit('clearMessage');
       commit('toggleLoading');
@@ -134,13 +137,11 @@ export default {
         data.append('name', state.editCategory.name);
         axios(rootGetters['auth/token'])({
           method: 'PUT',
-          url: `/categories/${state.editCategory.id}`,
+          url: `/category/${state.editCategory.id}`,
           data,
-        }).then((res) => {
+        }).then(() => {
           commit('toggleLoading');
-          console.log(res);
-          const payload = res.data.categoryName;
-          commit('updateCategoryName', payload);
+          commit('displayDoneMessage', { message: 'カテゴリー名を更新しました' });
           resolve();
         }).catch((err) => {
           commit('toggleLoading');

@@ -1,14 +1,13 @@
 <template lang="html">
   <app-category-edit
     :access="access"
-    :category="categoryName"
     :done-message="doneMessage"
     :error-message="errorMessage"
     :disabled="loading"
     :edit-category-name="editCategoryName"
     @clearMessage="clearMessage"
-    @editCategory="editCategory"
-    @updateCategoryName="updateCategoryName"
+    @updateValue="updateValue"
+    @handleSubmit="handleSubmit"
   />
 </template>
 
@@ -23,9 +22,6 @@ export default {
   computed: {
     access() {
       return this.$store.getters['auth/access'];
-    },
-    categoryName() {
-      return this.$store.state.categories.targetCategory;
     },
     doneMessage() {
       return this.$store.state.categories.doneMessage;
@@ -49,10 +45,13 @@ export default {
     clearMessage() {
       this.$store.dispatch('categories/clearMessage');
     },
-    editCategory($event) {
-      this.$store.dispatch('categories/editCategory', $event.target.value);
+    updateValue($event) {
+      this.$store.dispatch('categories/updateEditValue', $event.target.value);
     },
-    updateCategoryName() {
+    handleSubmit() {
+      if (this.loading) {
+        return;
+      }
       this.$store.dispatch('categories/updateCategoryName')
         .then(() => {
           this.$store.dispatch('categories/getAllCategories');
