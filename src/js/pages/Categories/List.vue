@@ -13,20 +13,26 @@
     />
     <app-category-list
       class="category-list"
+      :access="access"
       :categories="categories"
       :theads="theads"
+      :delete-category-name="deleteCategoryName"
+      @handleClick="deleteCategory"
+      @openModal="openModal"
     />
   </div>
 </template>
 
 <script>
 import { CategoryList, CategoryPost } from '@Components/molecules';
+import Mixins from '@Helpers/mixins';
 
 export default {
   components: {
     appCategoryList: CategoryList,
     appCategoryPost: CategoryPost,
   },
+  mixins: [Mixins],
   data() {
     return {
       theads: ['カテゴリー名'],
@@ -51,6 +57,9 @@ export default {
     loading() {
       return this.$store.state.categories.loading;
     },
+    deleteCategoryName() {
+      return this.$store.state.categories.deleteCategoryName;
+    },
   },
   created() {
     this.$store.dispatch('categories/getAllCategories');
@@ -60,15 +69,30 @@ export default {
       if (this.loading) {
         return;
       }
-      this.$store.dispatch('categories/postCategory').then(() => {
-        this.$store.dispatch('categories/getAllCategories');
-      });
+      this.$store.dispatch('categories/postCategory')
+        .then(() => {
+          this.$store.dispatch('categories/getAllCategories');
+        });
     },
     updateValue($event) {
       this.$store.dispatch('categories/updateValue', $event.target.value);
     },
     clearMessage() {
       this.$store.dispatch('categories/clearMessage');
+    },
+    openModal(categoryId, categoryName) {
+      this.$store.dispatch('categories/confirmDeleteCategory',
+        {
+          categoryId, categoryName,
+        });
+      this.toggleModal();
+    },
+    deleteCategory() {
+      this.toggleModal();
+      this.$store.dispatch('categories/deleteCategory')
+        .then(() => {
+          this.$store.dispatch('categories/getAllCategories');
+        });
     },
   },
 };
