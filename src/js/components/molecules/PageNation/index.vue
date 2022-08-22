@@ -28,7 +28,7 @@
         {{ num }}
       </app-button>
     </li>
-    <li  v-if="currentPage !== lastPage">
+    <li v-if="currentPage !== lastPage">
       <div
         class="page-item"
       >
