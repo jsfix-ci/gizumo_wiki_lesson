@@ -74,12 +74,12 @@ export default {
     },
     organizedPages() {
       const pages = this.totalPages;
-      const showPage = this.$store.state.articles.pages.currentPage;
+      const showPage = this.currentPage;
       if (showPage <= 3) {
         const showPages = pages.slice(1, 6);
         return showPages;
       }
-      const targetLastPage = this.$store.state.articles.pages.lastPage;
+      const targetLastPage = this.lastPage;
       if (
         targetLastPage - 2 <= showPage
       ) {
