@@ -9,9 +9,8 @@
         1
       </app-button>
     </li>
-    <li>
+    <li v-if="!(currentPage === 1)">
       <div
-        v-if="!(currentPage === 1)"
         class="page-item"
       >
         ・・・
@@ -29,9 +28,8 @@
         {{ num }}
       </app-button>
     </li>
-    <li>
+    <li  v-if="!(currentPage === lastPage)">
       <div
-        v-if="!(currentPage === lastPage)"
         class="page-item"
       >
         ・・・
