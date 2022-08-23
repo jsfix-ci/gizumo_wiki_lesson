@@ -132,22 +132,19 @@ export default {
     updateCategoryName({ commit, rootGetters, state }) {
       commit('clearMessage');
       commit('toggleLoading');
-      return new Promise((resolve) => {
-        const data = new URLSearchParams();
-        data.append('name', state.editCategory.name);
-        axios(rootGetters['auth/token'])({
-          method: 'PUT',
-          url: `/category/${state.editCategory.id}`,
-          data,
-        }).then(() => {
-          commit('toggleLoading');
-          commit('displayDoneMessage', { message: 'カテゴリー名を更新しました' });
-          resolve();
-        }).catch((err) => {
-          commit('toggleLoading');
-          const errTxt = err.message;
-          commit('failRequest', errTxt);
-        });
+      const data = new URLSearchParams();
+      data.append('name', state.editCategory.name);
+      axios(rootGetters['auth/token'])({
+        method: 'PUT',
+        url: `/category/${state.editCategory.id}`,
+        data,
+      }).then(() => {
+        commit('toggleLoading');
+        commit('displayDoneMessage', { message: 'カテゴリー名を更新しました' });
+      }).catch((err) => {
+        commit('toggleLoading');
+        const errTxt = err.message;
+        commit('failRequest', errTxt);
       });
     },
   },
