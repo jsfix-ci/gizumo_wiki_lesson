@@ -3,7 +3,7 @@
     <app-article-trashed-head />
     <app-article-trashed-table
       :theads="theads"
-      :trashe-list="trashedList"
+      :trashed-list="trashedList"
     />
   </div>
 </template>
