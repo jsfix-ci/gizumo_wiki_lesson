@@ -39,14 +39,14 @@ export default {
   created() {
     this.clearMessage();
     const { id } = this.$route.params;
-    this.$store.dispatch('categories/getCategory', id);
+    this.$store.dispatch('categories/getCategoryDetail', id);
   },
   methods: {
     clearMessage() {
       this.$store.dispatch('categories/clearMessage');
     },
-    updateValue($event) {
-      this.$store.dispatch('categories/updateEditValue', $event.target.value);
+    updateValue(inputEvent) {
+      this.$store.dispatch('categories/updateEditValue', inputEvent.target.value);
     },
     handleSubmit() {
       if (this.loading) {

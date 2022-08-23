@@ -47,9 +47,9 @@ export default {
       state.deleteCategoryId = null;
       state.deleteCategoryName = '';
     },
-    getCategory(state, { categoryId, getName }) {
+    setCategoryDetail(state, { categoryId, categoryName }) {
       state.editCategory.id = categoryId;
-      state.editCategory.name = getName;
+      state.editCategory.name = categoryName;
     },
     updateEditValue(state, payload) {
       state.editCategory.name = payload;
@@ -89,8 +89,8 @@ export default {
         });
       });
     },
-    updateValue({ commit }, $event) {
-      commit('updateValue', $event);
+    updateValue({ commit }, inputText) {
+      commit('updateValue', inputText);
     },
     clearMessage({ commit }) {
       commit('clearMessage');
@@ -114,20 +114,20 @@ export default {
     confirmDeleteCategory({ commit }, { categoryId, categoryName }) {
       commit('confirmDeleteCategory', { categoryId, categoryName });
     },
-    getCategory({ commit, rootGetters }, categoryId) {
+    getCategoryDetail({ commit, rootGetters }, categoryId) {
       axios(rootGetters['auth/token'])({
         method: 'GET',
         url: `/category/${categoryId}`,
       }).then(({ data }) => {
-        const getName = data.category.name;
-        commit('getCategory', { categoryId, getName });
+        const categoryName = data.category.name;
+        commit('setCategoryDetail', { categoryId, categoryName });
       }).catch((err) => {
         const errTxt = err.message;
         commit('failRequest', errTxt);
       });
     },
-    updateEditValue({ commit }, $event) {
-      commit('updateEditValue', $event);
+    updateEditValue({ commit }, inputText) {
+      commit('updateEditValue', inputText);
     },
     updateCategoryName({ commit, rootGetters, state }) {
       commit('clearMessage');
