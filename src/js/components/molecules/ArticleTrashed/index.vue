@@ -86,7 +86,7 @@ export default {
           const contentLength = article.content.length;
           const articleTitle = titleLength >= 30 ? `${article.title.slice(0, 30)}…` : article.title;
           const articleContent = contentLength >= 30 ? `${article.content.slice(0, 30)}…` : article.content;
-          const articleTime = `${article.created_at.slice(0, 10)}…`;
+          const articleTime = article.created_at.slice(0, 10);
           return {
             ...article,
             title: articleTitle,
