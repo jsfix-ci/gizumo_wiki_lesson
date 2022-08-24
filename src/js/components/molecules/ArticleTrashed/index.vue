@@ -84,34 +84,27 @@ export default {
         (article) => {
           const titleLength = article.title.length;
           const thisText = article.title;
-          if (titleLength >= 30) {
-            const showText = thisText.slice(0, 30);
-            const showTitle = `${showText}…`;
-            return { ...article, title: showTitle };
-          }
-          return article;
-        },
-      );
-      const filteredContent = (filteredTitle).map(
-        (article) => {
           const contentLength = article.content.length;
-          const thisText = article.content;
-          if (contentLength >= 30) {
-            const showText = thisText.slice(0, 30);
-            const showContent = `${showText}…`;
-            return { ...article, content: showContent };
+          const thisContent = article.content;
+          const thisTime = article.created_at;
+          const showTime = thisTime.slice(0, 10);
+          const sliceText = thisText.slice(0, 30);
+          const showTitle = `${sliceText}…`;
+          const sliceContent = thisContent.slice(0, 30);
+          const showContent = `${sliceContent}…`;
+          if (titleLength >= 30 && contentLength >= 30) {
+            return { ...article, title: showTitle, content: showContent, created_at: showTime };
           }
-          return article;
+          if (titleLength >= 30) {
+            return { ...article, title: showTitle, created_at: showTime };
+          }
+          if (contentLength >= 30) {
+            return { ...article, content: showContent, created_at: showTime };
+          }
+          return {...article, created_at: showTime};
         },
       );
-      const filteredTime = (filteredContent).map(
-        (article) => {
-          const thisText = article.created_at;
-          const showTime = thisText.slice(0, 10);
-          return { ...article, created_at: showTime };
-        },
-      );
-      return filteredTime;
+        return filteredTitle;
     },
   },
 };
