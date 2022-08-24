@@ -17,6 +17,7 @@ import DeleteModal from './Modal';
 import Notice from './Notice';
 import Edit from './CategoryEdit';
 import PageNation from './PageNation';
+import ArticleTrashed from './ArticleTrashed';
 
 export {
   SigninForm,
@@ -38,4 +39,5 @@ export {
   Notice,
   Edit,
   PageNation,
+  ArticleTrashed,
 };

@@ -32,6 +32,7 @@ export default {
       lastPage: 0,
       currentPage: 1,
     },
+    trashedArray: [],
   },
   getters: {
     transformedArticles(state) {
@@ -51,6 +52,9 @@ export default {
     deleteArticleId: state => state.deleteArticleId,
   },
   mutations: {
+    getTrashedArticles(state, payload) {
+      state.trashedArray = payload;
+    },
     initPostArticle(state) {
       state.targetArticle = Object.assign({}, {
         id: null,
@@ -295,6 +299,17 @@ export default {
     },
     clearMessage({ commit }) {
       commit('clearMessage');
+    },
+    getTrashedArticles({ commit, rootGetters }) {
+      axios(rootGetters['auth/token'])({
+        method: 'GET',
+        url: '/article/trashed',
+      }).then(({ data }) => {
+        const payload = data.articles;
+        commit('getTrashedArticles', payload);
+      }).catch((err) => {
+        commit('failRequest', { message: err.message });
+      });
     },
   },
 };
