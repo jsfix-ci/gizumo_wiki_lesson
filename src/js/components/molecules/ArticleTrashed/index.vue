@@ -71,11 +71,11 @@ export default {
     },
     targetArray: {
       type: Array,
-      default: () => [],
+      required: true,
     },
     theads: {
       type: Array,
-      default: () => [],
+      required: true,
     },
   },
   computed: {
