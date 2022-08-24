@@ -93,7 +93,9 @@ export default {
           const sliceContent = thisContent.slice(0, 30);
           const showContent = `${sliceContent}…`;
           if (titleLength >= 30 && contentLength >= 30) {
-            return { ...article, title: showTitle, content: showContent, created_at: showTime };
+            return {
+              ...article, title: showTitle, content: showContent, created_at: showTime,
+            };
           }
           if (titleLength >= 30) {
             return { ...article, title: showTitle, created_at: showTime };
@@ -101,10 +103,10 @@ export default {
           if (contentLength >= 30) {
             return { ...article, content: showContent, created_at: showTime };
           }
-          return {...article, created_at: showTime};
+          return { ...article, created_at: showTime };
         },
       );
-        return filteredTitle;
+      return filteredTitle;
     },
   },
 };
