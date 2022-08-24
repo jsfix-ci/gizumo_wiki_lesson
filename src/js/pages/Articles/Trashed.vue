@@ -2,8 +2,8 @@
   <div>
     <app-article-trashed
       v-if="targetArray"
-      :theads="this.$options.constants.theads"
-      :title="this.$options.constants.title"
+      :theads="$options.constants.theads"
+      :title="$options.constants.title"
       :target-array="targetArray"
     />
     <app-notice
