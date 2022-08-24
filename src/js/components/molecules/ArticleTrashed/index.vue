@@ -88,7 +88,10 @@ export default {
           const articleContent = contentLength >= 30 ? `${article.content.slice(0, 30)}…` : article.content;
           const articleTime = `${article.created_at.slice(0, 10)}…`;
           return {
-            ...article, title: articleTitle, content: articleContent, created_at: articleTime,
+            ...article,
+            title: articleTitle,
+            content: articleContent,
+            created_at: articleTime,
           };
         },
       );
