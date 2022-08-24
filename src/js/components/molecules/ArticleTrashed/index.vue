@@ -83,27 +83,13 @@ export default {
       const filteredTitle = (this.targetArray).map(
         (article) => {
           const titleLength = article.title.length;
-          const thisText = article.title;
           const contentLength = article.content.length;
-          const thisContent = article.content;
-          const thisTime = article.created_at;
-          const showTime = thisTime.slice(0, 10);
-          const sliceText = thisText.slice(0, 30);
-          const showTitle = `${sliceText}…`;
-          const sliceContent = thisContent.slice(0, 30);
-          const showContent = `${sliceContent}…`;
-          if (titleLength >= 30 && contentLength >= 30) {
-            return {
-              ...article, title: showTitle, content: showContent, created_at: showTime,
-            };
-          }
-          if (titleLength >= 30) {
-            return { ...article, title: showTitle, created_at: showTime };
-          }
-          if (contentLength >= 30) {
-            return { ...article, content: showContent, created_at: showTime };
-          }
-          return { ...article, created_at: showTime };
+          const articleTitle = titleLength >= 30 ? `${article.title.slice(0, 30)}…` : article.title;
+          const articleContent = contentLength >= 30 ? `${article.content.slice(0, 30)}…` : article.content;
+          const articleTime = `${article.created_at.slice(0, 10)}…`;
+          return {
+            ...article, title: articleTitle, content: articleContent, created_at: articleTime,
+          };
         },
       );
       return filteredTitle;
