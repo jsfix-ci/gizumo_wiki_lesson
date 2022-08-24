@@ -1,8 +1,8 @@
 <template lang="html">
   <div>
     <app-article-trashed
-      :theads="theads"
-      :title="title"
+      :theads="this.$options.constants.theads"
+      :title="this.$options.constants.title"
       :target-array="targetArray"
     />
   </div>
@@ -16,15 +16,13 @@ export default {
   components: {
     appArticleTrashed: ArticleTrashed,
   },
-  data() {
-    return {
-      title: '削除済み記事一覧',
-      theads: [
-        'タイトル',
-        '本文',
-        '作成日',
-      ],
-    };
+  constants: {
+    title: '削除済み記事一覧',
+    theads: [
+      'タイトル',
+      '本文',
+      '作成日',
+    ],
   },
   computed: {
     targetArray() {
