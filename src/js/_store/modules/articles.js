@@ -53,7 +53,7 @@ export default {
   },
   mutations: {
     getTrashedArticles(state, payload) {
-      state.trashedArray.push(...payload);
+      state.trashedArray = payload;
     },
     initPostArticle(state) {
       state.targetArticle = Object.assign({}, {
