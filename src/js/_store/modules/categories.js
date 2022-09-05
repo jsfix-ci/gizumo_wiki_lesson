@@ -7,7 +7,7 @@ export default {
     errorMessage: '',
   },
   mutations: {
-    getCategoriesList(state, payload) {
+    putCategoriesList(state, payload) {
       state.categoriesList = payload;
     },
     failRequest(state, payload) {
@@ -20,7 +20,7 @@ export default {
         method: 'GET',
         url: '/category',
       }).then(({ data }) => {
-        commit('getCategoriesList', data.categories.reverse());
+        commit('putCategoriesList', data.categories.reverse());
       }).catch((err) => {
         const errTxt = err.message;
         commit('failRequest', errTxt);
