@@ -24,10 +24,10 @@ export default defineConfig({
   resolve: {
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
-      '@Components': `${__dirname}/src/js/components`,
+      '@Components': `${__dirname}/src/components`,
       '@Helpers': `${__dirname}/src/js/_helpers`,
-      '@Pages': `${__dirname}/src/js/pages`,
-      '@Scss': `${__dirname}/src/scss`,
+      '@Pages': `${__dirname}/src/components/pages`,
+      '@Styles': `${__dirname}/src/styles`,
     },
   },
   css: {
@@ -35,6 +35,11 @@ export default defineConfig({
       plugins: [
         require('autoprefixer'),
       ],
+    },
+    preprocessorOptions: {
+      scss: {
+        additionalData: `@use '@Styles/scss/_utils/_utils.scss' as *;`,
+      },
     },
   },
   server: {
