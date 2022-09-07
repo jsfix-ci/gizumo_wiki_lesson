@@ -1,3 +1,5 @@
+@use './_utils/utils' as *;
+
 /* ---------------------------------------------- */
 /* Base */
 /* ---------------------------------------------- */
@@ -15,25 +17,24 @@ body {
   position: relative;
   color: #000;
   font-family: "Noto", Arial, "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
-  font-weight: var(--normal);
+  font-weight: $normal;
   line-height: 1.7;
   background-color: #fff;
 }
 
-ul {
-  /* list-style: dics; */
-}
 a {
   display: inline-block;
   color: #000;
   text-decoration: none;
   outline: none;
 }
+
 img {
   max-width: 100%;
   height: auto;
   vertical-align: bottom;
 }
+
 hr {
   display: block;
   padding: 0;
@@ -41,21 +42,26 @@ hr {
   border: 0;
   border-top: 1px solid #ccc;
 }
+
 table {
   border-collapse: collapse;
   border-spacing: 0;
 }
+
 input, select {
   vertical-align: middle;
 }
+
 input, select, button {
   cursor: pointer;
 }
+
 input[type="text"],
 input[type="password"],
 input[type="email"] {
   cursor: auto;
 }
+
 article,aside,details,figcaption,figure,
 footer,header,hgroup,menu,nav,section {
   display: block;
