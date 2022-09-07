@@ -1,4 +1,4 @@
-<template lang="html">
+<template>
   <div>
     <textarea
       :class="classes"
@@ -63,7 +63,7 @@ export default {
 };
 </script>
 
-<style lang="postcss" scoped>
+<style lang="scss" scoped>
 /* Defaultスタイル */
 .textarea {
   display: block;
@@ -75,7 +75,7 @@ export default {
   border: 1px solid #ccc;
   transition: all .5s;
   &:focus {
-    border-color: var(--themeColor);
+    border-color: $theme-color;
   }
 }
 
@@ -88,10 +88,10 @@ export default {
   &__text {
     display: inline-block;
     padding: 5px 20px;
-    color: var(--errorColor);
+    color: $error-color;
     opacity: .8;
     font-size: 13px;
-    background-color: color(var(--errorColor) a(8%));
+    background-color: color($error-color a(8%));
   }
 }
 .shake-enter-active {

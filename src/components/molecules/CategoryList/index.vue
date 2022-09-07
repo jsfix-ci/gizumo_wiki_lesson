@@ -129,7 +129,7 @@ export default {
 };
 </script>
 
-<style lang="postcss" scoped>
+<style lang="scss" scoped>
 .category-list {
   padding: 10px 0 20px;
   height: 100%;
@@ -138,7 +138,7 @@ export default {
     width: 100%;
     text-align: left;
     tr {
-      border-bottom: 1px solid var(--separatorColor);
+      border-bottom: 1px solid $separator-color;
     }
     &__head {
       th {
@@ -151,7 +151,7 @@ export default {
         padding: 10px;
         vertical-align: middle;
         &.is-disabled {
-          color: var(--disabledColor);
+          color: $disabled-color;
           font-size: 12px;
         }
       }
@@ -170,7 +170,7 @@ export default {
   &__name {
     margin-top: 16px;
     font-size: 16px;
-    color: var(--themeColor);
+    color: $theme-color;
   }
   &__button {
     margin-top: 48px;

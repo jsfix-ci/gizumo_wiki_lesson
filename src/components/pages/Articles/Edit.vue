@@ -1,4 +1,4 @@
-<template lang="html">
+<template>
   <app-article-edit
     :article-id="articleId"
     :article-title="articleTitle"

@@ -1,4 +1,4 @@
-<template lang="html">
+<template>
   <div class="article-list">
     <div v-if="doneMessage" class="article-list__notice--create">
       <app-text bg-success>{{ doneMessage }}</app-text>
@@ -144,7 +144,7 @@ export default {
 };
 </script>
 
-<style lang="postcss" scoped>
+<style lang="scss" scoped>
   .article-list {
     &__articles {
       margin-top: 16px;

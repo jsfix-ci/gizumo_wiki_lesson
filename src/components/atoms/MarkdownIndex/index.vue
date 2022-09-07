@@ -50,19 +50,19 @@ export default {
 };
 </script>
 
-<style lang="postcss" scoped>
+<style lang="scss" scoped>
 
 /* markdown-view__index */
 .markdown-index {
-  background: var(--white);
+  background: $white;
   padding: 16px;
 }
 
 .markdown-index-title {
   font-size: 16px;
-  color: var(--themeColor);
+  color: $theme-color;
   font-weight: bold;
-  border-bottom: 1px solid var(--themeColor);
+  border-bottom: 1px solid $theme-color;
   padding-left: 16px;
   margin-bottom: 16px;
 }
@@ -70,7 +70,7 @@ export default {
 .markdown-index__anchor {
   display: block;
   cursor: pointer;
-  @mixin hoverOpacity;
+  @include hoverOpacity;
   &.is-article-title-h1 {
     font-size: 20px;
     font-weight: bold;
@@ -86,7 +86,7 @@ export default {
       display: block;
       width: 10px;
       height: 2px;
-      background-color: var(--themeColor);
+      background-color: $theme-color;
       top: calc(50% - 2px);
       left: 0;
     }

@@ -1,4 +1,4 @@
-<template lang="html">
+<template>
   <table class="user-table">
     <thead class="user-table__head">
       <tr>
@@ -87,13 +87,13 @@ export default {
 };
 </script>
 
-<style lang="postcss" scoped>
+<style lang="scss" scoped>
 .user-table {
   width: 100%;
   text-align: left;
   background-color: #fff;
   tr {
-    border-bottom: 1px solid var(--separatorColor);
+    border-bottom: 1px solid $separator-color;
   }
   &__head {
     th {
@@ -106,7 +106,7 @@ export default {
       padding: 10px;
       vertical-align: middle;
       &.is-disabled {
-        color: var(--disabledColor);
+        color: $disabled-color;
         font-size: 12px;
       }
     }

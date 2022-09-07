@@ -1,4 +1,4 @@
-<template lang="html">
+<template>
   <section class="profile">
     <app-heading :level="1">ログインアカウントの詳細</app-heading>
 
@@ -70,7 +70,7 @@ export default {
 };
 </script>
 
-<style lang="postcss" scoped>
+<style lang="scss" scoped>
 .profile {
   &__info {
     margin: 0 auto;
@@ -80,7 +80,7 @@ export default {
       display: flex;
       align-items: center;
       padding: 10px;
-      border-bottom: 1px solid var(--separatorColor);
+      border-bottom: 1px solid $separator-color;
       &:first-child {
         margin-top: 0;
       }

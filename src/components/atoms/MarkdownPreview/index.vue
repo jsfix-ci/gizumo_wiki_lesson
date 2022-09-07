@@ -1,4 +1,4 @@
-<template lang="html">
+<template>
   <div :class="wrapperClasses">
     <div
       :class="classes"
@@ -78,7 +78,7 @@ export default {
 };
 </script>
 
-<style lang="postcss">
+<style lang="scss" scoped>
 /* markdown-view */
 .markdown-view--flex {
   display: flex;
@@ -94,21 +94,21 @@ export default {
   padding: 10px 30px 50px;
 }
 .markdown-view__body--white-bg {
-  background-color: var(--white);
+  background-color: $white;
 }
 /* markdown-view__index */
 .markdown-view__index {
   margin-left: 5%;
   width: 30%;
-  background: var(--white);
+  background: $white;
   padding: 16px;
 }
 
 .markdown-view__index-title {
   font-size: 16px;
-  color: var(--themeColor);
+  color: $theme-color;
   font-weight: bold;
-  border-bottom: 1px solid var(--themeColor);
+  border-bottom: 1px solid $theme-color;
   padding-left: 16px;
   margin-bottom: 16px;
 }
@@ -116,7 +116,7 @@ export default {
 .markdown-view__index__anchor {
   display: block;
   cursor: pointer;
-  @mixin hoverOpacity;
+  @include hoverOpacity;
   &.is-article-title-h1 {
     font-size: 20px;
     font-weight: bold;
@@ -132,7 +132,7 @@ export default {
       display: block;
       width: 10px;
       height: 2px;
-      background-color: var(--themeColor);
+      background-color: $theme-color;
       top: calc(50% - 2px);
       left: 0;
     }
@@ -147,7 +147,7 @@ export default {
   }
   .attention {
     font-weight: $black;
-    color: var(--errorColor);
+    color: $error-color;
   }
   pre {
     margin-left: -30px;
@@ -169,7 +169,7 @@ export default {
     padding: 10px 15px;
     font-size: 34px;
     line-height: 1.4;
-    border-bottom: 1px solid var(--themeColor);
+    border-bottom: 1px solid $theme-color;
     & + h2 {
       margin-top: 0;
     }
@@ -218,13 +218,13 @@ export default {
       padding: 3px 5px;
       color: #ebdbb2;
       font-family: SourceCodePro;
-      font-weight: var(--normal);
+      font-weight: $normal;
       font-size: 15px;
       background-color: #282828;
       border-radius: 3px;
     }
     strong {
-      font-weight: var(--black);
+      font-weight: $black;
     }
     a {
       text-decoration: underline;

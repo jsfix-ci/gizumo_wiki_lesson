@@ -1,4 +1,4 @@
-<template lang="html">
+<template>
   <app-password-form
     :loading="loading"
     heading-text="パスワードの更新"

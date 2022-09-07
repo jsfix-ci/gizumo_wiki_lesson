@@ -1,4 +1,4 @@
-<template lang="html">
+<template>
   <div class="notice">
     <app-text ex-large>
       {{ noticeText }}
@@ -37,7 +37,7 @@ export default {
 };
 </script>
 
-<style lang="postcss" scoped>
+<style lang="scss" scoped>
 .notice {
   margin-top: 80px;
   width: 100%;

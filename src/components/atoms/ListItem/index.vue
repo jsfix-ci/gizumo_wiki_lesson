@@ -1,4 +1,4 @@
-<template lang="html">
+<template>
   <li :class="classes">
     <slot />
   </li>
@@ -48,7 +48,7 @@ export default {
 };
 </script>
 
-<style lang="postcss" scoped>
+<style lang="scss" scoped>
 /* Defaultスタイル */
 .list-item {
   font-size: 14px;
@@ -66,12 +66,12 @@ export default {
   align-items: center;
 }
 .list-item--bg-white {
-  background-color: var(--white);
+  background-color: $white;
 }
 .list-item--large {
   padding: 10px;
 }
 .list-item--border-bottom-gray {
-  border-bottom: 1px solid var(--separatorColor);
+  border-bottom: 1px solid $separator-color;
 }
 </style>

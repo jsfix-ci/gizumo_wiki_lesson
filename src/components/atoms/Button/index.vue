@@ -1,4 +1,4 @@
-<template lang="html">
+<template>
   <button
     :class="classes"
     :type="buttonType"
@@ -76,7 +76,7 @@ export default {
 };
 </script>
 
-<style lang="postcss" scoped>
+<style lang="scss" scoped>
 /* Defaultスタイル */
 .button {
   padding: 8px 20px;
@@ -84,8 +84,8 @@ export default {
   font-size: 16px;
   line-height: 1.4;
   color: #fff;
-  background-color: var(--themeColor);
-  @mixin hoverOpacity;
+  background-color: $theme-color;
+  @include hoverOpacity;
 }
 
 .button--block {
@@ -100,22 +100,22 @@ export default {
   border-radius: 5px;
 }
 .button--bold {
-  font-weight: var(--bold);
+  font-weight: $bold;
 }
 .button--theme-color {
-  color: var(--themeColor);
+  color: $theme-color;
 }
 .button--danger {
-  background-color: var(--errorColor);
+  background-color: $error-color;
 }
 .button--bg-caution {
-  background-color: var(--cautionColor);
+  background-color: $caution-color;
 }
 .button--bg-white {
   background-color: #fff;
 }
 .button--disabled {
-  background-color: var(--disabledColor);
+  background-color: $disabled-color;
   cursor: default;
   &:hover {
     opacity: 1;

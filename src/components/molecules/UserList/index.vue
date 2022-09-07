@@ -60,7 +60,7 @@ export default {
 };
 </script>
 
-<style lang="postcss" scoped>
+<style lang="scss" scoped>
 .users-list {
   &__create {
     margin-top: 20px;

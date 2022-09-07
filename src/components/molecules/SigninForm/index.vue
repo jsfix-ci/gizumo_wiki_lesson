@@ -1,4 +1,4 @@
-<template lang="html">
+<template>
   <form class="login" @submit.prevent="handleSubmit">
     <div class="login-form">
       <app-input
@@ -89,7 +89,7 @@ export default {
 };
 </script>
 
-<style lang="postcss" scoped>
+<style lang="scss" scoped>
 .login {
   margin: 100px auto 0;
   padding: 40px;

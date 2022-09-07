@@ -1,4 +1,4 @@
-<template lang="html">
+<template>
   <app-user-create
     caution-message="※ 文頭・文末・文中の全角・半角スペースは削除されます。"
     :error-message="errorMessage"

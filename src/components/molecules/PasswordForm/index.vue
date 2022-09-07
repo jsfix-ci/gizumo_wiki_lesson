@@ -124,7 +124,7 @@ export default {
 };
 </script>
 
-<style lang="postcss" scoped>
+<style lang="scss" scoped>
 .password-form {
   &__body {
     margin-top: 20px;

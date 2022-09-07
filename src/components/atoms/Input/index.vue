@@ -1,4 +1,4 @@
-<template lang="html">
+<template>
   <div>
     <input
       :class="classes"
@@ -66,17 +66,17 @@ export default {
 };
 </script>
 
-<style lang="postcss" scoped>
+<style lang="scss" scoped>
 /* Defaultスタイル */
 .input {
   margin-top: 5px;
   padding: 10px;
   width: 100%;
   font-size: 16px;
-  border-bottom: 1px solid var(--separatorColor);
+  border-bottom: 1px solid $separator-color;
   transition: all .5s;
   &:focus {
-    border-bottom-color: var(--themeColor);
+    border-bottom-color: $theme-color;
   }
 }
 
@@ -89,10 +89,10 @@ export default {
   &__text {
     display: inline-block;
     padding: 5px 20px;
-    color: var(--errorColor);
+    color: $error-color;
     opacity: .8;
     font-size: 13px;
-    background-color: color(var(--errorColor) a(8%));
+    background-color: color($error-color a(8%));
   }
 }
 .shake-enter-active {

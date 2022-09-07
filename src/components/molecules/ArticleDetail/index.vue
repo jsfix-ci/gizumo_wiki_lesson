@@ -1,4 +1,4 @@
-<template lang="html">
+<template>
   <div>
     <section class="article-detail">
       <app-heading :level="1">記事詳細（プレビュー）</app-heading>
@@ -100,7 +100,7 @@ export default {
 };
 </script>
 
-<style lang="postcss" scoped>
+<style lang="scss" scoped>
 .article-detail {
   &__markdown {
     display: flex;

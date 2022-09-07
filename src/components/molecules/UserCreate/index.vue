@@ -140,7 +140,7 @@ export default {
 };
 </script>
 
-<style lang="postcss" scoped>
+<style lang="scss" scoped>
 .users-create {
   &__back {
     margin-top: 20px;

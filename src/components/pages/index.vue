@@ -1,4 +1,4 @@
-<template lang="html">
+<template>
   <div class="wrapper">
     <app-header :signed-in="signedIn" />
     <div :class="contentClasses">
@@ -40,17 +40,17 @@ export default {
 };
 </script>
 
-<style lang="postcss" scoped>
+<style lang="scss" scoped>
 .content {
   display: flex;
-  padding-top: var(--headerHight);
-  z-index: var(--z-content);
+  padding-top: $header-height;
+  z-index: $z-content;
   &.articlePost,
   &.articleEdit {
     height: 100vh;
   }
   &-main {
-    padding-left: var(--sidebarWidth);
+    padding-left: $sidebar-width;
     width: 100%;
     &.signin,
     &.signout,

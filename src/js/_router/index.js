@@ -2,30 +2,30 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Cookies from 'js-cookie';
 
-import Signin from '@Pages/Signin';
-import Signout from '@Pages/Signout';
-import NotFound from '@Pages/NotFound';
-import Home from '@Pages/Home';
+import Signin from '@Pages/Signin/index.vue';
+import Signout from '@Pages/Signout/index.vue';
+import NotFound from '@Pages/NotFound/index.vue';
+import Home from '@Pages/Home/index.vue';
 
 // 記事
-import Articles from '@Pages/Articles';
-import ArticleList from '@Pages/Articles/List';
-import ArticleDetail from '@Pages/Articles/Detail';
-import ArticleEdit from '@Pages/Articles/Edit';
-import ArticlePost from '@Pages/Articles/Post';
+import Articles from '@Pages/Articles/index.vue';
+import ArticleList from '@Pages/Articles/List.vue';
+import ArticleDetail from '@Pages/Articles/Detail.vue';
+import ArticleEdit from '@Pages/Articles/Edit.vue';
+import ArticlePost from '@Pages/Articles/Post.vue';
 
 // 自分のアカウントページ
-import Profile from '@Pages/Profile';
+import Profile from '@Pages/Profile/index.vue';
 
 // ユーザー
-import Users from '@Pages/Users';
-import UserList from '@Pages/Users/List';
-import UserDetail from '@Pages/Users/Detail';
-import UserCreate from '@Pages/Users/Create';
+import Users from '@Pages/Users/index.vue';
+import UserList from '@Pages/Users/List.vue';
+import UserDetail from '@Pages/Users/Detail.vue';
+import UserCreate from '@Pages/Users/Create.vue';
 
 // パスワード
-import PasswordInit from '@Pages/Password/init';
-import PasswordUpdate from '@Pages/Password/update';
+import PasswordInit from '@Pages/Password/init.vue';
+import PasswordUpdate from '@Pages/Password/update.vue';
 
 import Store from '../_store';
 

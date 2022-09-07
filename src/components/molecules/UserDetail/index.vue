@@ -187,7 +187,7 @@ export default {
 };
 </script>
 
-<style lang="postcss" scoped>
+<style lang="scss" scoped>
 .users-detail {
   &__back {
     margin-top: 20px;

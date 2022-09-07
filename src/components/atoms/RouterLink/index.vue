@@ -1,4 +1,4 @@
-<template lang="html">
+<template>
   <router-link
     :to="to"
     :active-class="activeClass"
@@ -100,23 +100,23 @@ export default {
 };
 </script>
 
-<style lang="postcss" scoped>
+<style lang="scss" scoped>
 .router-link {
   font-size: 16px;
   transition: all .5s;
   line-height: 1.4;
   &.is-active {
-    color: var(--subthemeColor);
+    color: $sub-theme-color;
     font-weight: bold;
     background-color: #fff;
     pointer-events: none;
   }
 }
 .router-link--hover-opacity {
-  @mixin hoverOpacity;
+  @include hoverOpacity;
 }
 .router-link--hover-underline {
-  @mixin hoverUnderline;
+  @include hoverUnderline;
 }
 .router-link--block {
   display: block;
@@ -132,22 +132,22 @@ export default {
   text-decoration: underline;
 }
 .router-link--themecolor {
-  color: var(--themeColor);
+  color: $theme-color;
 }
 .router-link--danger {
-  color: var(--errorColor);
+  color: $error-color;
 }
 .router-link--white {
   color: #fff;
 }
 .router-link--bg-themecolor {
-  background-color: var(--themeColor);
+  background-color: $theme-color;
 }
 .router-link--bg-danger {
-  background-color: var(--errorColor);
+  background-color: $error-color;
 }
 .router-link--bg-lightgreen {
-  background-color: var(--createColor);
+  background-color: $create-color;
 }
 .router-link--round {
   border-radius: 5px;

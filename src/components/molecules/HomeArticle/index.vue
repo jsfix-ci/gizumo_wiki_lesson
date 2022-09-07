@@ -1,4 +1,4 @@
-<template lang="html">
+<template>
   <div class="home-article">
     <app-heading>最新記事 10件</app-heading>
 
@@ -51,12 +51,12 @@ export default {
 };
 </script>
 
-<style lang="postcss" scoped>
+<style lang="scss" scoped>
 .home-article__list {
   margin-top: 10px;
   > li {
     padding: 10px;
-    border-top: 1px solid var(--separatorColor);
+    border-top: 1px solid $separator-color;
     &:first-child {
       border-top: none;
     }
@@ -65,7 +65,7 @@ export default {
     display: block;
     font-weight: bold;
     font-size: 14px;
-    color: var(--themeColor);
+    color: $theme-color;
   }
   &__title {
     margin-top: 5px;

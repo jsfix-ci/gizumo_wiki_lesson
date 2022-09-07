@@ -29,7 +29,7 @@ export default {
   },
 };
 </script>
-<style lang="postcss" scoped>
+<style lang="scss" scoped>
   .modal-wrapper {
     position: fixed;
     top: 0;
@@ -57,7 +57,7 @@ export default {
   .modal-content {
     position: absolute;
     padding: 10px;
-    background-color: var(--white);
+    background-color: $white;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);

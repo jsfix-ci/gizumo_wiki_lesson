@@ -1,4 +1,4 @@
-<template lang="html">
+<template>
   <app-article-detail
     :article-id="articleId"
     :markdown-indexes="markdownIndexes"

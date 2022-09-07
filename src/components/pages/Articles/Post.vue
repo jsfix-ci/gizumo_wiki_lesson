@@ -1,4 +1,4 @@
-<template lang="html">
+<template>
   <app-article-post
     :article-title="articleTitle"
     :article-content="articleContent"
@@ -85,7 +85,7 @@ export default {
 };
 </script>
 
-<style lang="postcss" scoped>
+<style lang="scss" scoped>
 .article-edit {
   display: flex;
   height: 100%;

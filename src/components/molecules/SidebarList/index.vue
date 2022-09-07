@@ -1,4 +1,4 @@
-<template lang="html">
+<template>
   <ul :class="className">
     <app-list-item
       v-for="item in targetArray"
@@ -40,5 +40,5 @@ export default {
 };
 </script>
 
-<style lang="css" scoped>
+<style lang="scss" scoped>
 </style>

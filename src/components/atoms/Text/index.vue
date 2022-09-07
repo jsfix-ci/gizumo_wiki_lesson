@@ -1,4 +1,4 @@
-<template lang="html">
+<template>
   <component :is="tag" :class="classes"><slot /></component>
 </template>
 
@@ -65,35 +65,35 @@ export default {
 };
 </script>
 
-<style lang="css" scoped>
+<style lang="scss" scoped>
 /* Defaultスタイル */
 .text {
   font-size: 16px;
 }
 
 .text--bold {
-  font-weight: var(--bold);
+  font-weight: $bold;
 }
 .text--inline-block {
   display: inline-block;
 }
 .text--themecolor {
-  color: var(--themeColor);
+  color: $theme-color;
 }
 .text--bg-success {
   padding: 10px 15px;
   color: #fff;
-  border-left: 8px solid var(--themeColor);
-  background-color: color(var(--themeColor) a(80%));
+  border-left: 8px solid $theme-color;
+  background-color: color($theme-color a(80%));
 }
 .text--error {
-  color: var(--errorColor);
+  color: $error-color;
 }
 .text--bg-error {
   padding: 10px 15px;
   color: #fff;
-  border-left: 8px solid var(--errorColor);
-  background-color: color(var(--errorColor) a(80%));
+  border-left: 8px solid $error-color;
+  background-color: color($error-color a(80%));
 }
 .text--ex-large {
   font-size: 24px;

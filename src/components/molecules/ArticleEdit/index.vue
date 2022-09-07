@@ -1,4 +1,4 @@
-<template lang="html">
+<template>
   <div class="article-edit">
     <div v-if="doneMessage" class="article-edit__notice--update">
       <app-text bg-success>{{ doneMessage }}</app-text>
@@ -153,7 +153,7 @@ export default {
 };
 </script>
 
-<style lang="postcss" scoped>
+<style lang="scss" scoped>
 .article-edit {
   &__columns {
     display: flex;

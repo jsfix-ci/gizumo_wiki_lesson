@@ -1,4 +1,4 @@
-<template lang="html">
+<template>
   <form @submit.prevent="addCategory">
     <app-heading :level="1">カテゴリー管理</app-heading>
     <app-input
@@ -80,7 +80,7 @@ export default {
   },
 };
 </script>
-<style lang="postcss" scoped>
+<style lang="scss" scoped>
 .category-management-post {
   &__input {
     margin-top: 16px;

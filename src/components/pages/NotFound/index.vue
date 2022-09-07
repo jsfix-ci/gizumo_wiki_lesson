@@ -1,4 +1,4 @@
-<template lang="html">
+<template>
   <app-notice
     notice-text="お探しのページは削除されている可能性があります。"
     link-path="/"

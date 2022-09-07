@@ -1,4 +1,4 @@
-<template lang="html">
+<template>
   <aside class="sidebar">
     <app-sidebar-list
       class-name="sidebar-list"
@@ -23,17 +23,17 @@ export default {
 };
 </script>
 
-<style lang="css" scoped>
+<style lang="scss" scoped>
 .sidebar {
   position: fixed;
-  top: var(--headerHight);
+  top: $header-height;
   left: 0;
   padding: 10px;
-  width: var(--sidebarWidth);
+  width: $sidebar-width;
   height: 100%;
   color: #fff;
   text-align: center;
-  background-color: var(--subthemeColor);
-  z-index: var(--z-sidebar);
+  background-color: $sub-theme-color;
+  z-index: $z-sidebar;
 }
 </style>

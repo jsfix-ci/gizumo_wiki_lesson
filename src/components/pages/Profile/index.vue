@@ -1,4 +1,4 @@
-<template lang="html">
+<template>
   <app-profile :user="user" />
 </template>
 

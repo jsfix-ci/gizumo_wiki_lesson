@@ -1,4 +1,4 @@
-<template lang="html">
+<template>
   <div class="article-post">
     <div v-if="errorMessage" class="article-post__notice">
       <app-text bg-error>{{ errorMessage }}</app-text>
@@ -152,7 +152,7 @@ export default {
 };
 </script>
 
-<style lang="postcss" scoped>
+<style lang="scss" scoped>
 .article-post {
   &-editor {
     padding-right: 2%;

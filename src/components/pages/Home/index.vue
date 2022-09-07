@@ -1,4 +1,4 @@
-<template lang="html">
+<template>
   <div class="home">
     <article class="home__content">
       <app-home-article :article-list="articleList" />
@@ -24,7 +24,7 @@ export default {
 };
 </script>
 
-<style lang="postcss" scoped>
+<style lang="scss" scoped>
 .home__content {
   margin-top: 20px;
   &:first-child {

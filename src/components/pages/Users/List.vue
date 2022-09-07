@@ -1,4 +1,4 @@
-<template lang="html">
+<template>
   <section class="user-list">
     <app-user-list
       :error-message="errorMessage"
@@ -79,7 +79,7 @@ export default {
 };
 </script>
 
-<style lang="postcss" scoped>
+<style lang="scss" scoped>
 .user-list {
   &__table {
     margin-top: 20px;

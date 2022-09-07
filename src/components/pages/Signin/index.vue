@@ -1,4 +1,4 @@
-<template lang="html">
+<template>
   <app-signin-form
     :loading="loading"
     :email="email"
@@ -47,7 +47,7 @@ export default {
 };
 </script>
 
-<style lang="postcss" scoped>
+<style lang="scss" scoped>
 .login {
   margin: 100px auto 0;
   padding: 40px;
@@ -61,7 +61,7 @@ export default {
   }
   &-error {
     margin-top: 20px;
-    color: var(--errorColor);
+    color: $error-color;
   }
   &-button {
     margin-top: 20px;

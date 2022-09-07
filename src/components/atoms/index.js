@@ -1,14 +1,14 @@
-import Button from './Button';
-import Heading from './Heading';
-import Input from './Input';
-import ListItem from './ListItem';
-import Text from './Text';
-import Textarea from './Textarea';
-import RouterLink from './RouterLink';
-import MarkdownPreview from './MarkdownPreview';
-import Select from './Select';
-import Modal from './Modal';
-import MarkdownIndex from './MarkdownIndex';
+import Button from './Button/index.vue';
+import Heading from './Heading/index.vue';
+import Input from './Input/index.vue';
+import ListItem from './ListItem/index.vue';
+import Text from './Text/index.vue';
+import Textarea from './Textarea/index.vue';
+import RouterLink from './RouterLink/index.vue';
+import MarkdownPreview from './MarkdownPreview/index.vue';
+import Select from './Select/index.vue';
+import Modal from './Modal/index.vue';
+import MarkdownIndex from './MarkdownIndex/index.vue';
 
 export {
   Button,

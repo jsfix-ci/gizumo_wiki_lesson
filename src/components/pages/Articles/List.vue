@@ -1,4 +1,4 @@
-<template lang="html">
+<template>
   <div class="articles">
     <app-article-list
       :title="title"

@@ -1,4 +1,4 @@
-<template lang="html">
+<template>
   <component
     :is="tag"
     :class="className || defaultClass"
@@ -45,19 +45,19 @@ export default {
 };
 </script>
 
-<style lang="postcss" scoped>
+<style lang="scss" scoped>
 /* Defaultスタイル */
 .heading--primary {
   padding: 3px 5px;
   padding-left: 15px;
   font-size: 24px;
-  border-left: 5px solid var(--themeColor);
-  border-bottom: 1px solid var(--separatorColor);
+  border-left: 5px solid $theme-color;
+  border-bottom: 1px solid $separator-color;
 }
 .heading--secondary {
   font-size: 20px;
   padding: 0 20px 4px 20px;
-  border-bottom: 6px double var(--themeColor);
+  border-bottom: 6px double $theme-color;
 }
 .heading--tertiary {}
 .heading--quaternary {}
@@ -67,6 +67,6 @@ export default {
 .header__title {
   font-size: 20px;
   color: #fff;
-  font-weight: var(--bold);
+  font-weight: $bold;
 }
 </style>

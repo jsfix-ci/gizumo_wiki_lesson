@@ -1,4 +1,4 @@
-<template lang="html">
+<template>
   <app-notice
     :notice-text="signoutMessage"
     link-path="/signin"

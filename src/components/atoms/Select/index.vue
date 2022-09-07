@@ -49,15 +49,15 @@ export default {
 };
 </script>
 
-<style lang="postcss" scoped>
+<style lang="scss" scoped>
 select {
   padding: 10px;
   width: 100%;
   font-size: 16px;
-  border-bottom: 1px solid var(--separatorColor);
+  border-bottom: 1px solid $separator-color;
   transition: all .5s;
   &:focus {
-    border-bottom-color: var(--themeColor);
+    border-bottom-color: $theme-color;
   }
 }
 
@@ -69,7 +69,7 @@ select {
     right: 20px;
     top: 50%;
     transform: translateY(-50%);
-    border-top: 5px solid var(--themeColor);
+    border-top: 5px solid $theme-color;
     border-right: 5px solid transparent;
     border-left: 5px solid transparent;
     content: "";
@@ -82,10 +82,10 @@ select {
   &__text {
     display: inline-block;
     padding: 5px 20px;
-    color: var(--errorColor);
+    color: $error-color;
     opacity: .8;
     font-size: 13px;
-    background-color: color(var(--errorColor) a(8%));
+    background-color: color($error-color a(8%));
   }
 }
 .shake-enter-active {

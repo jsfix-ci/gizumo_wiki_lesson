@@ -1,4 +1,4 @@
-<template lang="html">
+<template>
   <header class="header">
     <app-heading class-name="header__title">
       Gizumo Wiki
@@ -83,7 +83,7 @@ export default {
 };
 </script>
 
-<style lang="postcss" scoped>
+<style lang="scss" scoped>
 .header {
   position: fixed;
   top: 0;
@@ -93,9 +93,9 @@ export default {
   align-items: center;
   padding: 10px 20px;
   width: 100%;
-  background-color: var(--themeColor);
+  background-color: $theme-color;
   box-shadow: 0 0 5px 1px rgba(0, 0, 0, .6);
-  z-index: var(--z-header);
+  z-index: $z-header;
   &__profile {
     position: relative;
     .fade-enter-active, .fade-leave-active {
@@ -111,11 +111,11 @@ export default {
       margin-top: 5px;
       padding: 5px 10px;
       width: 160px;
-      border: 1px solid var(--separatorColor);
+      border: 1px solid $separator-color;
       border-radius: 5px;
       background-color: #fff;
       & > li {
-        border-top: 1px solid var(--separatorColor);
+        border-top: 1px solid $separator-color;
         &:first-child {
           border: none;
         }
