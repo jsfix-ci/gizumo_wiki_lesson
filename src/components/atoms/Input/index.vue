@@ -92,7 +92,7 @@ export default {
     color: $error-color;
     opacity: .8;
     font-size: 13px;
-    background-color: color($error-color a(8%));
+    background-color: $error-color;
   }
 }
 .shake-enter-active {

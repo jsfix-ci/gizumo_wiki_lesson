@@ -84,7 +84,7 @@ export default {
   padding: 10px 15px;
   color: #fff;
   border-left: 8px solid $theme-color;
-  background-color: color($theme-color a(80%));
+  background-color: $theme-color;
 }
 .text--error {
   color: $error-color;
@@ -93,7 +93,7 @@ export default {
   padding: 10px 15px;
   color: #fff;
   border-left: 8px solid $error-color;
-  background-color: color($error-color a(80%));
+  background-color: $error-color;
 }
 .text--ex-large {
   font-size: 24px;
