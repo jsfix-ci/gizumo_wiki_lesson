@@ -11,14 +11,14 @@
         :target-array="userList"
         :theads="theads"
         :access="access"
-        @deleteModal="openDeleteModal"
+        @delete-modal="openDeleteModal"
       />
     </div>
 
     <app-delete-modal
       :access="access"
-      @closeModal="toggleModal"
-      @deleteUser="deleteUser"
+      @close-modal="toggleModal"
+      @delete-user="deleteUser"
     />
   </section>
 </template>

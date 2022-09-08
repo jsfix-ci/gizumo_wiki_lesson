@@ -14,7 +14,7 @@ import store from './_store';
 Validator.localize('ja', ja);
 Vue.use(VeeValidate, { locale: ja });
 Vue.use(vueSmoothScroll);
-Vue.component('app-modal', AppModal);
+Vue.component('AppModal', AppModal);
 
 new Vue({
   el: '#app',

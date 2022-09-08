@@ -7,9 +7,9 @@
     :options="roleList"
     :disabled="loading ? true : false"
     :access="access"
-    @clearMessage="clearMessage"
-    @updateValue="updateValue"
-    @editUser="editUser"
+    @clear-message="clearMessage"
+    @update-value="updateValue"
+    @edit-user="editUser"
   />
 </template>
 

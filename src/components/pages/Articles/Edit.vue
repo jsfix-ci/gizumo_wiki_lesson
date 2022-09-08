@@ -9,10 +9,10 @@
     :loading="loading"
     :done-message="doneMessage"
     :access="access"
-    @selectedArticleCategory="selectedArticleCategory"
-    @editedTitle="editedTitle"
-    @editedContent="editedContent"
-    @handleSubmit="handleSubmit"
+    @selected-article-category="selectedArticleCategory"
+    @edited-title="editedTitle"
+    @edited-content="editedContent"
+    @handle-submit="handleSubmit"
   />
 </template>
 

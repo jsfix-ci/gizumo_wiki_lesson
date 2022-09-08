@@ -38,7 +38,7 @@ export default {
     signInSuccess(state, { token, user }) {
       Cookies.set('user-token', token, { expires: 10 });
       state.token = token;
-      state.user = Object.assign({}, { ...state.user }, { ...user });
+      state.user = { ...state.user, ...user };
       state.loading = false;
       state.signedIn = true;
     },
@@ -52,16 +52,16 @@ export default {
       state.token = '';
       state.loading = false;
       state.signedIn = false;
-      state.user = Object.assign({}, {
+      state.user = {
         email: '',
         id: null,
         account_name: '',
         password_reset_flg: null,
         role: '',
-      });
+      };
     },
     doneChangePassword(state, { user }) {
-      state.user = Object.assign({}, { ...state.user }, { ...user });
+      state.user = { ...state.user, ...user };
       state.loading = false;
     },
     failRequest(state, { message }) {
@@ -82,7 +82,7 @@ export default {
           axios(token)({
             method: 'GET',
             url: '/me',
-          }).then((response) => {
+          }).then(response => {
             if (response.data.code === 0) {
               commit('signInFailure');
               return reject();
@@ -108,18 +108,18 @@ export default {
           url: '/me',
           method: 'POST',
           data,
-        }).then((response) => {
+        }).then(response => {
           if (!response.data.token) reject(new Error());
 
           return axios(response.data.token)({
             method: 'GET',
             url: '/me',
-          }).then((ownData) => {
+          }).then(ownData => {
             if (ownData.data.code === 0) return reject(new Error());
 
             return { token: response.data.token, user: ownData.data.user };
           }).catch(() => reject(new Error()));
-        }).then((payload) => {
+        }).then(payload => {
           commit('signInSuccess', payload);
           resolve();
         }).catch(() => {
@@ -138,12 +138,12 @@ export default {
     changePassword({ commit, rootGetters }, data) {
       commit('sendRequest');
 
-      return new Promise((resolve) => {
+      return new Promise(resolve => {
         axios(rootGetters['auth/token'])({
           url: '/user/password/update',
           method: 'POST',
           data,
-        }).then((response) => {
+        }).then(response => {
           if (response.data.code === 0) throw new Error(response.data.message);
 
           const user = {
@@ -151,7 +151,7 @@ export default {
           };
           commit('doneChangePassword', { user });
           resolve();
-        }).catch((err) => {
+        }).catch(err => {
           commit('failRequest', { message: err.message });
         });
       });

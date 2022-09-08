@@ -81,7 +81,7 @@ export default {
   methods: {
     deleteModal(id) {
       if (!this.access.delete) return;
-      this.$emit('deleteModal', id);
+      this.$emit('delete-modal', id);
     },
   },
 };

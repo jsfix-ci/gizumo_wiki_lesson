@@ -18,11 +18,11 @@ export default (({ mode }) => {
         targets: ['ie >= 11'],
         additionalLegacyPolyfills: ['regenerator-runtime/runtime'],
       }),
-      // checker({
-      //   eslint: {
-      //     lintCommand: 'eslint "js/**/*.{js,vue}"'
-      //   },
-      // }),
+      checker({
+        eslint: {
+          lintCommand: 'eslint "{js,components}/**/*.{js,vue}" --ignore-path ../.eslintignore'
+        },
+      }),
     ],
     resolve: {
       alias: {

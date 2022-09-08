@@ -47,11 +47,11 @@ export default {
   },
   methods: {
     closeModal() {
-      this.$emit('closeModal');
+      this.$emit('close-modal');
     },
     deleteUser() {
       if (!this.access.delete) return;
-      this.$emit('deleteUser');
+      this.$emit('delete-user');
     },
   },
 };

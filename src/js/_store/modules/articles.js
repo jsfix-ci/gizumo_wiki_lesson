@@ -48,7 +48,7 @@ export default {
   },
   mutations: {
     initPostArticle(state) {
-      state.targetArticle = Object.assign({}, {
+      state.targetArticle = {
         id: null,
         title: '',
         content: '',
@@ -66,20 +66,16 @@ export default {
           role: '',
           updated_at: '',
         },
-      });
+      };
     },
     doneGetArticle(state, payload) {
-      state.targetArticle = Object.assign({}, state.targetArticle, payload.article);
+      state.targetArticle = { ...state.targetArticle, ...payload.article };
     },
     editedTitle(state, payload) {
-      state.targetArticle = Object.assign({}, { ...state.targetArticle }, {
-        title: payload.title,
-      });
+      state.targetArticle = { ...state.targetArticle, title: payload.title };
     },
     editedContent(state, payload) {
-      state.targetArticle = Object.assign({}, { ...state.targetArticle }, {
-        content: payload.content,
-      });
+      state.targetArticle = { ...state.targetArticle, content: payload.content };
     },
     doneFilteredArticles(state, payload) {
       const filteredArticles = payload.articles.filter(
@@ -94,14 +90,14 @@ export default {
       state.errorMessage = message;
     },
     selectedArticleCategory(state, payload) {
-      state.targetArticle.category = Object.assign(
-        {},
-        { ...state.targetArticle.category },
-        { ...payload.category },
-      );
+      state.targetArticle.category = {
+
+        ...state.targetArticle.category,
+        ...payload.category,
+      };
     },
     updateArticle(state, { article }) {
-      state.targetArticle = Object.assign({}, state.targetArticle, { ...article });
+      state.targetArticle = { ...state.targetArticle, ...article };
     },
     confirmDeleteArticle(state, { articleId }) {
       state.deleteArticleId = articleId;
@@ -128,12 +124,12 @@ export default {
       axios(rootGetters['auth/token'])({
         method: 'GET',
         url: '/article',
-      }).then((res) => {
+      }).then(res => {
         const payload = {
           articles: res.data.articles,
         };
         commit('doneGetAllArticles', payload);
-      }).catch((err) => {
+      }).catch(err => {
         commit('failRequest', { message: err.message });
       });
     },
@@ -142,7 +138,7 @@ export default {
         axios(rootGetters['auth/token'])({
           method: 'GET',
           url: `/article/${articleId}`,
-        }).then((res) => {
+        }).then(res => {
           const category = res.data.article.category
             ? res.data.article.category
             : { id: null, name: '' };
@@ -159,7 +155,7 @@ export default {
           };
           commit('doneGetArticle', payload);
           resolve();
-        }).catch((err) => {
+        }).catch(err => {
           commit('failRequest', { message: err.message });
           reject();
         });
@@ -182,14 +178,14 @@ export default {
         axios(rootGetters['auth/token'])({
           method: 'GET',
           url: '/article',
-        }).then((res) => {
+        }).then(res => {
           const payload = {
             category,
             articles: res.data.articles,
           };
           commit('doneFilteredArticles', payload);
           resolve();
-        }).catch((err) => {
+        }).catch(err => {
           commit('failRequest', { message: err.message });
           reject(new Error('エラーが発生しました'));
         });
@@ -222,7 +218,7 @@ export default {
         method: 'PUT',
         url: `/article/${rootGetters['articles/targetArticle'].id}`,
         data,
-      }).then((res) => {
+      }).then(res => {
         const payload = {
           article: {
             id: res.data.article.id,
@@ -255,7 +251,7 @@ export default {
       }).then(() => {
         commit('doneDeleteArticle');
         commit('displayDoneMessage', { message: 'ドキュメントを削除しました' });
-      }).catch((err) => {
+      }).catch(err => {
         commit('failRequest', { message: err.message });
       });
     },
@@ -278,7 +274,7 @@ export default {
           commit('toggleLoading');
           commit('displayDoneMessage', { message: 'ドキュメントを作成しました' });
           resolve();
-        }).catch((err) => {
+        }).catch(err => {
           commit('toggleLoading');
           commit('failRequest', { message: err.message });
           reject();

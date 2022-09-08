@@ -18,7 +18,7 @@
           data-vv-as="カテゴリー"
           :error-messages="errors.collect('category')"
           :value="value"
-          @updateValue="$emit('selectedArticleCategory', $event)"
+          @update-value="$emit('selected-article-category', $event)"
         >
           <option value=""> --- </option>
           <option
@@ -46,7 +46,7 @@
             data-vv-as="記事のタイトル"
             :error-messages="errors.collect('title')"
             :value="articleTitle"
-            @updateValue="$emit('editedTitle', $event)"
+            @update-value="$emit('edited-title', $event)"
           />
         </div>
 
@@ -60,7 +60,7 @@
             data-vv-as="記事の本文"
             :error-messages="errors.collect('content')"
             :value="articleContent"
-            @updateValue="$emit('editedContent', $event)"
+            @update-value="$emit('edited-content', $event)"
           />
         </div>
         <app-button
@@ -144,8 +144,8 @@ export default {
   methods: {
     handleSubmit() {
       if (!this.access.create) return;
-      this.$validator.validate().then((valid) => {
-        if (valid) this.$emit('handleSubmit');
+      this.$validator.validate().then(valid => {
+        if (valid) this.$emit('handle-submit');
       });
     },
   },

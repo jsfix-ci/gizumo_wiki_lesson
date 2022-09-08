@@ -76,7 +76,7 @@
       </app-text>
       <app-button
         bg-danger
-        @click="$emit('handleClick')"
+        @click="$emit('handle-click')"
       >
         削除
       </app-button>
@@ -138,7 +138,7 @@ export default {
   methods: {
     openModal(articleId) {
       if (!this.access.delete) return;
-      this.$emit('openModal', articleId);
+      this.$emit('open-modal', articleId);
     },
   },
 };

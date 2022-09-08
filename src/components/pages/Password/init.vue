@@ -5,7 +5,7 @@
     :button-text="buttonText"
     :error-message="errorMessage"
     :done-message="doneMessage"
-    @handleSubmit="setPassword"
+    @handle-submit="setPassword"
   />
 </template>
 

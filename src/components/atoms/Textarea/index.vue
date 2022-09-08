@@ -7,7 +7,7 @@
       :required="required"
       :placeholder="placeholder"
       :value="value"
-      @input="$emit('updateValue', $event)"
+      @input="$emit('update-value', $event)"
     />
 
     <transition name="shake">
@@ -88,7 +88,7 @@ export default {
   &__text {
     display: inline-block;
     padding: 5px 20px;
-    color: $error-color;
+    color: $white;
     opacity: .8;
     font-size: 13px;
     background-color: $error-color;

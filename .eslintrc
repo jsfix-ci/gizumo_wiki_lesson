@@ -1,8 +1,5 @@
 {
   "parser": "vue-eslint-parser",
-  "parserOptions": {
-    "parser": "babel-eslint"
-  },
   "env": {
     "browser": true,
     "node": true
@@ -16,11 +13,12 @@
     "import/resolver": {
       "alias": {
         "map": [
+          ["@Components", "./src/components"],
           ["@Helpers", "./src/js/_helpers"],
-          ["@Components", "./src/js/components"],
-          ["@Pages", "./src/js/pages"]
+          ["@Pages", "./src/components/pages"],
+          ["@Styles", "./src/styles"]
         ],
-        "extensions": [".vue", ".js", ".json", ".css"]
+        "extensions": [".js", ".json", ".css"]
       }
     }
   },
@@ -29,8 +27,9 @@
     "MY_SESSION_STORAGE_KEY": true
   },
   "rules": {
+    "arrow-parens": ["error", "as-needed"],
     "no-new": "off",
-    "no-console": "warn",
+    "no-console": "error",
     "no-control-regex": "off",
     "max-len": ["error", {
       "code": 90,
@@ -64,6 +63,8 @@
           "max": 1
         }
       }
-    ]
+    ],
+    "vue/custom-event-name-casing": ["error", "kebab-case"],
+    "vue/multi-word-component-names": "off"
   }
 }

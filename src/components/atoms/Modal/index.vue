@@ -20,7 +20,7 @@ export default {
     };
   },
   beforeMount() {
-    this.$root.$on('toggleModal', this.handleToggleModal);
+    this.$root.$on('toggle-modal', this.handleToggleModal);
   },
   methods: {
     handleToggleModal() {

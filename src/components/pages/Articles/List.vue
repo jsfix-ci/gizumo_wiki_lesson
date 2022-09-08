@@ -6,8 +6,8 @@
       :done-message="doneMessage"
       :access="access"
       border-gray
-      @openModal="openModal"
-      @handleClick="handleClick"
+      @open-modal="openModal"
+      @handle-click="handleClick"
     />
   </div>
 </template>

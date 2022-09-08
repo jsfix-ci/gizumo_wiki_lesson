@@ -9,7 +9,7 @@
       data-vv-as="カテゴリー名"
       :error-messages="errors.collect('category')"
       :value="category"
-      @updateValue="$emit('udpateValue', $event)"
+      @update-value="$emit('update-value', $event)"
     />
     <app-button
       class="category-management-post__submit"
@@ -72,9 +72,9 @@ export default {
   methods: {
     addCategory() {
       if (!this.access.create) return;
-      this.$emit('clearMessage');
-      this.$validator.validate().then((valid) => {
-        if (valid) this.$emit('handleSubmit');
+      this.$emit('clear-message');
+      this.$validator.validate().then(valid => {
+        if (valid) this.$emit('handle-submit');
       });
     },
   },

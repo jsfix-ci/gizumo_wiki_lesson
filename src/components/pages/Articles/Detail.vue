@@ -4,9 +4,9 @@
     :markdown-indexes="markdownIndexes"
     :markdown-content="markdownContent"
     :access="access"
-    @parsedMarkdown="initIndex"
-    @openModal="openModal"
-    @handleClick="handleClick"
+    @parsed-markdown="initIndex"
+    @open-modal="openModal"
+    @handle-click="handleClick"
   />
 </template>
 
@@ -47,7 +47,7 @@ export default {
        * 実行する必要があり、下記のsetTimeOutの処理だとパースした後を完全に保証しているわけではなく不完全なので、
        * 要修正
        */
-      return new Promise((resolve) => {
+      return new Promise(resolve => {
         setTimeout(() => {
           this.createMarkdownIndexesAnchorInfo();
           resolve();

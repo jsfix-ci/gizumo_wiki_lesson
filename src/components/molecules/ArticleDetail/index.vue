@@ -27,7 +27,7 @@
           white-bg
           :markdown-content="markdownContent"
           :markdown-indexes="markdownIndexes"
-          @parsedMarkdown="parsedMarkdown"
+          @parsed-markdown="parsedMarkdown"
         />
         <app-markdown-index
           class="article-detail__markdown__index"
@@ -43,7 +43,7 @@
       </app-text>
       <app-button
         bg-danger
-        @click="$emit('handleClick')"
+        @click="$emit('handle-click')"
       >
         削除
       </app-button>
@@ -90,11 +90,11 @@ export default {
   },
   methods: {
     parsedMarkdown() {
-      this.$emit('parsedMarkdown');
+      this.$emit('parsed-markdown');
     },
     openModal() {
       if (!this.access.delete) return;
-      this.$emit('openModal', this.articleId);
+      this.$emit('open-modal', this.articleId);
     },
   },
 };

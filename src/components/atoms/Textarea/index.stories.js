@@ -12,7 +12,7 @@ storiesOf('ATOMS|Textarea', module)
                   required
                   rows="8"
                   :value="value"
-                  @updateValue="updateValue"
+                  @update-value="updateValue"
                 >
                 </app-textarea>`,
       props: {
@@ -60,7 +60,7 @@ storiesOf('ATOMS|Textarea', module)
                   rows="8"
                   white-bg
                   :value="value"
-                  @updateValue="updateValue"
+                  @update-value="updateValue"
                 >
                 </app-textarea>`,
       props: {

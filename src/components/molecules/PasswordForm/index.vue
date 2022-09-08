@@ -12,7 +12,7 @@
           data-vv-as="現在のパスワード"
           :error-messages="errors.collect('password')"
           :value="password"
-          @updateValue="updateValue"
+          @update-value="updateValue"
         />
       </div>
 
@@ -25,7 +25,7 @@
           data-vv-as="新しく設定するパスワード"
           :error-messages="errors.collect('newPassword')"
           :value="newPassword"
-          @updateValue="updateValue"
+          @update-value="updateValue"
         />
       </div>
 
@@ -38,7 +38,7 @@
           data-vv-as="新しく設定するパスワードの確認"
           :error-messages="errors.collect('confirmNewPassword')"
           :value="confirmNewPassword"
-          @updateValue="updateValue"
+          @update-value="updateValue"
         />
       </div>
 
@@ -109,10 +109,10 @@ export default {
       this[$event.target.name] = $event.target.value;
     },
     handleSubmit() {
-      this.$emit('clearMessage');
-      this.$validator.validate().then((valid) => {
+      this.$emit('clear-message');
+      this.$validator.validate().then(valid => {
         if (valid) {
-          this.$emit('handleSubmit', {
+          this.$emit('handle-submit', {
             password: this.password,
             new_password: this.newPassword,
             new_password_confirm: this.confirmNewPassword,

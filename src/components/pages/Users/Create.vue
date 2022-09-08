@@ -7,9 +7,9 @@
     :password="password"
     :disabled="loading ? true : false"
     :access="access"
-    @clearMessage="clearMessage"
-    @updateValue="updateValue"
-    @createUser="createUser"
+    @clear-message="clearMessage"
+    @update-value="updateValue"
+    @create-user="createUser"
   />
 </template>
 

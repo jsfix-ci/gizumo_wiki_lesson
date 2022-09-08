@@ -8,10 +8,10 @@
     :access="access"
     :error-message="errorMessage"
     :value="categoryName"
-    @selectedArticleCategory="selectedArticleCategory"
-    @editedTitle="editedTitle"
-    @editedContent="editedContent"
-    @handleSubmit="handleSubmit"
+    @selected-article-category="selectedArticleCategory"
+    @edited-title="editedTitle"
+    @edited-content="editedContent"
+    @handle-submit="handleSubmit"
   />
 </template>
 

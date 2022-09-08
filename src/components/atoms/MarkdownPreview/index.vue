@@ -1,9 +1,11 @@
 <template>
   <div :class="wrapperClasses">
+    <!-- eslint-disable vue/no-v-html -->
     <div
       :class="classes"
       v-html="marked"
     />
+    <!-- eslint-enable -->
   </div>
 </template>
 
@@ -68,7 +70,7 @@ export default {
     },
   },
   mounted() {
-    this.$emit('parsedMarkdown');
+    this.$emit('parsed-markdown');
   },
   methods: {
     handleScroll(scrollToY, duration = 500) {
