@@ -4,7 +4,7 @@ import legacy from '@vitejs/plugin-legacy';
 import checker from 'vite-plugin-checker';
 
 export default (({ mode }) => {
-  const env = loadEnv(mode, process.cwd(), '');
+  const env = loadEnv(mode, `${process.cwd()}/env`, '');
 
   return defineConfig({
     root: 'src',
