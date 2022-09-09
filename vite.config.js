@@ -4,7 +4,8 @@ import legacy from '@vitejs/plugin-legacy';
 import checker from 'vite-plugin-checker';
 
 export default (({ mode }) => {
-  const env = loadEnv(mode, `${process.cwd()}/env`, '');
+  const rootDirPath = process.cwd();
+  const env = loadEnv(mode, `${rootDirPath}/env`, '');
 
   return defineConfig({
     root: 'src',
@@ -20,7 +21,7 @@ export default (({ mode }) => {
       }),
       checker({
         eslint: {
-          lintCommand: 'eslint "{js,components}/**/*.{js,vue}" --ignore-path ../.eslintignore'
+          lintCommand: `eslint "${rootDirPath}/src/{js,components}/**/*.{js,vue}" --ignore-path ${rootDirPath}/.eslintignore`,
         },
       }),
     ],
