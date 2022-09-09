@@ -68,7 +68,8 @@ export default {
       }
     },
     fetchArticles() {
-      if (this.$route.query.category) {
+      // console.log(this);
+      if (this.$route.query.category) { // queryパラメーターここにcategoryパラメーターが含まれてるかどうか
         const { category } = this.$route.query;
         this.title = category;
         this.$store.dispatch('articles/filteredArticles', category)
