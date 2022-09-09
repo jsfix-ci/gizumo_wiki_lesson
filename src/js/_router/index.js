@@ -27,6 +27,9 @@ import UserCreate from '@Pages/Users/Create';
 import PasswordInit from '@Pages/Password/init';
 import PasswordUpdate from '@Pages/Password/update';
 
+//カテゴリー
+import Categories from '@Pages/Categories';
+
 import Store from '../_store';
 
 Vue.use(VueRouter);
@@ -135,6 +138,11 @@ const router = new VueRouter({
       meta: {
         isPublic: true,
       },
+    },
+    {
+      name: 'categories',
+      path: '/categories',
+      component: Categories,
     },
   ],
 });
