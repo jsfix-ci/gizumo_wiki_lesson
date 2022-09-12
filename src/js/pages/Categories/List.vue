@@ -3,7 +3,7 @@
     <app-category-Post
       class="categories__post"
       :access="access"
-      :error-messages="errorMessage"
+      :error-message="errorMessage"
       :category="categoryName"
       :done-message="doneMessage"
       :disabled="loading"
