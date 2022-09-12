@@ -12,6 +12,7 @@
       class="category-list__child"
       :theads="theadName"
       :categories="categoriesList"
+      :access="access"
     />
   </section>
 </template>
@@ -35,6 +36,7 @@ export default {
       doneMessage: '',
       access: {
         create: true,
+        delete: true,
       },
     };
   },

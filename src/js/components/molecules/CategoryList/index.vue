@@ -109,9 +109,7 @@ export default {
   },
   computed: {
     descendingCategoriesById() {
-      return this.categories.reverse().sort(function({ id }) {
-        // console.log(id);
-      });
+      return this.categories.slice().reverse();
     },
   },
   methods: {
