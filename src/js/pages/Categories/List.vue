@@ -88,7 +88,6 @@ export default {
     },
     deleteCategory() {
       this.toggleModal();
-      console.log('削除しました');
       this.$store.dispatch('categories/deleteCategory').then(() => {
         this.$store.dispatch('categories/getCategoriesList');
       });
