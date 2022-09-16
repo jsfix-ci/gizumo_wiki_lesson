@@ -5,24 +5,27 @@
       :target-array="articlesList"
       :done-message="doneMessage"
       :access="access"
-      :is-prev-disabled="isPrevDisabled"
-      :is-next-disabled="isNextDisabled"
       border-gray
       @openModal="openModal"
       @handleClick="handleClick"
-      @prevPage="prevPage"
-      @nextPage="nextPage"
+    />
+    <app-page-nation
+      :last-page="lastPage"
+      :current-page="currentPage"
+      :page-nation="pageNation"
+      @handle-page-button-click="handlePageButtonClick"
     />
   </div>
 </template>
 
 <script>
-import { ArticleList } from '@Components/molecules';
+import { ArticleList, PageNation } from '@Components/molecules';
 import Mixins from '@Helpers/mixins';
 
 export default {
   components: {
     appArticleList: ArticleList,
+    appPageNation: PageNation,
   },
   mixins: [Mixins],
   beforeRouteUpdate(to, from, next) {
@@ -44,11 +47,19 @@ export default {
     access() {
       return this.$store.getters['auth/access'];
     },
-    isPrevDisabled() {
-      return (Number(this.$route.query.page) || 1) === 1;
+    lastPage() {
+      return this.$store.state.articles.lastPage;
     },
-    isNextDisabled() {
-      return Number(this.$route.query.page) === this.$store.state.articles.lastPage;
+    currentPage() {
+      return this.$store.state.articles.currentPage;
+    },
+    pageNation() {
+      const pageArray = [...Array(this.lastPage)].map((_, i) => i + 1);
+      if (this.currentPage < 3) return pageArray.slice(0, 5);
+      if (this.currentPage > this.lastPage - 2) {
+        return pageArray.slice(this.lastPage - 5, this.lastPage);
+      }
+      return pageArray.slice(this.currentPage - 3, this.currentPage + 2);
     },
   },
   created() {
@@ -74,7 +85,7 @@ export default {
             // console.log(err);
           });
       } else {
-        this.$store.dispatch('articles/getAllArticles');
+        this.$store.dispatch('articles/getPageArticles');
       }
     },
     fetchArticles(pageNum) {
@@ -90,23 +101,13 @@ export default {
             // console.log(err);
           });
       } else {
-        this.$store.dispatch('articles/getAllArticles', pageNum);
+        this.$store.dispatch('articles/getPageArticles', pageNum);
       }
     },
-    prevPage() {
-      if (this.isPrevDisabled) return;
-      const pageId = Number(this.$route.query.page) - 1;
+    handlePageButtonClick(pageNum) {
       this.$router.push({
         path: '/articles',
-        query: { page: pageId },
-      });
-    },
-    nextPage() {
-      if (this.isNextDisabled) return;
-      const pageId = this.$route.query.page ? Number(this.$route.query.page) + 1 : 2;
-      this.$router.push({
-        path: '/articles',
-        query: { page: pageId },
+        query: { page: pageNum },
       });
     },
   },

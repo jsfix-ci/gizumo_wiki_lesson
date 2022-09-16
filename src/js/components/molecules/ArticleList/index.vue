@@ -93,21 +93,6 @@
         削除
       </app-button>
     </app-modal>
-    <div class="article-list__pager">
-      <app-button
-        :disabled="isPrevDisabled"
-        @click="$emit('prevPage')"
-      >
-        前へ
-      </app-button>
-      <app-button
-        class="article-list__pager-next"
-        :disabled="isNextDisabled"
-        @click="$emit('nextPage')"
-      >
-        次へ
-      </app-button>
-    </div>
   </div>
 </template>
 
@@ -152,14 +137,6 @@ export default {
     access: {
       type: Object,
       default: () => ({}),
-    },
-    isPrevDisabled: {
-      type: Boolean,
-      require: true,
-    },
-    isNextDisabled: {
-      type: Boolean,
-      require: true,
     },
   },
   computed: {
@@ -206,13 +183,6 @@ export default {
     }
     &__notice--create {
       margin-bottom: 16px;
-    }
-    &__pager {
-      text-align: center;
-      margin-top: 30px;
-      &-next {
-        margin-left: 20px;
-      }
     }
   }
 </style>
