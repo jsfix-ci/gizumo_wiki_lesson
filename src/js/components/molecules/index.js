@@ -16,6 +16,7 @@ import ArticlePost from './ArticlePost';
 import ArticleDetail from './ArticleDetail';
 import ArticleTrashed from './ArticleTrashed';
 import ArticleTable from './ArticleTable';
+import PageNation from './PageNation';
 import DeleteModal from './Modal';
 import Notice from './Notice';
 
@@ -38,6 +39,7 @@ export {
   ArticleDetail,
   ArticleTrashed,
   ArticleTable,
+  PageNation,
   DeleteModal,
   Notice,
 };
