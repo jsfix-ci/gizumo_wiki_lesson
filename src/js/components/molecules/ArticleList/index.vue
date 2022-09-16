@@ -81,6 +81,9 @@
         削除
       </app-button>
     </app-modal>
+    <app-page-nation
+      @movePage="movePage"
+    />
   </div>
 </template>
 
@@ -92,6 +95,7 @@ import {
   Button,
   Text,
 } from '@Components/atoms';
+import PageNation from '@Components/molecules/PageNation';
 
 export default {
   components: {
@@ -100,6 +104,7 @@ export default {
     appRouterLink: RouterLink,
     appButton: Button,
     appText: Text,
+    appPageNation: PageNation,
   },
   props: {
     className: {
@@ -139,6 +144,13 @@ export default {
     openModal(articleId) {
       if (!this.access.delete) return;
       this.$emit('openModal', articleId);
+    },
+    movePage(id) {
+      this.$router.push({
+        path: '/articles',
+        query: { page: id },
+      });
+      this.$store.dispatch('articles/getAllArticles', this.$route.query.page);
     },
   },
 };

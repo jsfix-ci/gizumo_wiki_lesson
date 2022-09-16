@@ -28,6 +28,10 @@ export default {
     loading: false,
     doneMessage: '',
     errorMessage: '',
+    pageData: {
+      currentPage: '',
+      lastPage: '',
+    },
   },
   getters: {
     transformedArticles(state) {
@@ -119,19 +123,26 @@ export default {
     displayDoneMessage(state, payload = { message: '成功しました' }) {
       state.doneMessage = payload.message;
     },
+    getPageNumber(state, { currentPage, lastPage }) {
+      state.pageData.currentPage = currentPage;
+      state.pageData.lastPage = lastPage;
+    },
   },
   actions: {
     initPostArticle({ commit }) {
       commit('initPostArticle');
     },
-    getAllArticles({ commit, rootGetters }) {
+    getAllArticles({ commit, rootGetters }, pageNumber) {
       axios(rootGetters['auth/token'])({
         method: 'GET',
-        url: '/article',
+        url: `/article?page=${pageNumber}`,
       }).then((res) => {
         const payload = {
           articles: res.data.articles,
+          currentPage: res.data.meta.current_page,
+          lastPage: res.data.meta.last_page,
         };
+        commit('getPageNumber', payload);
         commit('doneGetAllArticles', payload);
       }).catch((err) => {
         commit('failRequest', { message: err.message });

@@ -22,7 +22,7 @@ export default {
   },
   mixins: [Mixins],
   beforeRouteUpdate(to, from, next) {
-    this.fetchArticles();
+    this.fetchArticles(to.query.page);
     next();
   },
   data() {
@@ -80,7 +80,7 @@ export default {
             // console.log(err);
           });
       } else {
-        this.$store.dispatch('articles/getAllArticles');
+        this.$store.dispatch('articles/getAllArticles', this.$route.query.page);
       }
     },
   },
