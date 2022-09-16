@@ -61,15 +61,13 @@ export default {
               this.$router.push({ path: '/notfound' });
             }
           }).catch(() => {
-            // console.log(err);
           });
       } else {
         this.$store.dispatch('articles/getAllArticles');
       }
     },
     fetchArticles() {
-      // console.log(this);
-      if (this.$route.query.category) { // queryパラメーターここにcategoryパラメーターが含まれてるかどうか
+      if (this.$route.query.category) {
         const { category } = this.$route.query;
         this.title = category;
         this.$store.dispatch('articles/filteredArticles', category)
@@ -78,7 +76,6 @@ export default {
               this.$router.push({ path: '/notfound' });
             }
           }).catch(() => {
-            // console.log(err);
           });
       } else {
         this.$store.dispatch('articles/getAllArticles');
