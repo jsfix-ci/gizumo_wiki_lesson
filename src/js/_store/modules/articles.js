@@ -302,7 +302,7 @@ export default {
         const payload = {
           articles: res.data.articles,
         };
-        commit('doneGetAllArticles', payload);
+        commit('doneGetPageArticles', payload);
       }).catch((err) => {
         commit('failRequest', { message: err.message });
       });
