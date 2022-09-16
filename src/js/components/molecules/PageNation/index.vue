@@ -50,20 +50,15 @@ export default {
   props: {
     lastPage: {
       type: Number,
-      require: true,
       default: null,
     },
     currentPage: {
       type: Number,
-      require: true,
       default: null,
     },
     pageNation: {
       type: Array,
-      require: true,
-      default() {
-        return [];
-      },
+      required: true,
     },
   },
 };
