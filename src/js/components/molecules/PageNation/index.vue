@@ -1,6 +1,6 @@
 <template>
   <div class="page-nation">
-    <div v-show="currentPage > 3" class="page-nation__first">
+    <div v-if="currentPage > 3" class="page-nation__first">
       <app-button
         :disabled="1 === currentPage"
         @click="$emit('getPage', 1)"
@@ -22,7 +22,7 @@
     >
       {{ page }}
     </app-button>
-    <div v-show="currentPage < lastPage - 2" class="page-nation__last">
+    <div v-if="currentPage < lastPage - 2" class="page-nation__last">
       <app-text
         class="page-nation__text"
       >
