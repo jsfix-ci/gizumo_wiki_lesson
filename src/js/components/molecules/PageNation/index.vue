@@ -1,6 +1,6 @@
 <template>
-  <div class="page-nation">
-    <div v-if="currentPage > 3" class="page-nation__first">
+  <ul class="page-nation">
+    <li v-if="currentPage > 3" class="page-nation__first">
       <app-button
         :disabled="1 === currentPage"
         @click="$emit('getPage', 1)"
@@ -12,17 +12,20 @@
       >
         ...
       </app-text>
-    </div>
-    <app-button
+    </li>
+    <li
       v-for="(page, index) in pageNation"
       :key="index"
       class="page-nation__button"
-      :disabled="page === currentPage"
-      @click="$emit('getPage', page)"
     >
-      {{ page }}
-    </app-button>
-    <div v-if="currentPage < lastPage - 2" class="page-nation__last">
+      <app-button
+        :disabled="page === currentPage"
+        @click="$emit('getPage', page)"
+      >
+        {{ page }}
+      </app-button>
+    </li>
+    <li v-if="currentPage < lastPage - 2" class="page-nation__last">
       <app-text
         class="page-nation__text"
       >
@@ -35,8 +38,8 @@
       >
         {{ lastPage }}
       </app-button>
-    </div>
-  </div>
+    </li>
+  </ul>
 </template>
 
 <script>
