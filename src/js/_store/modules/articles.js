@@ -129,7 +129,6 @@ export default {
         method: 'GET',
         url: '/article',
       }).then((res) => {
-        // console.log(res);
         const payload = {
           articles: res.data.articles,
         };
@@ -179,7 +178,6 @@ export default {
       });
     },
     filteredArticles({ commit, rootGetters }, category) {
-      console.log(category);
       return new Promise((resolve, reject) => {
         axios(rootGetters['auth/token'])({
           method: 'GET',

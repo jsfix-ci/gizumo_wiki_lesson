@@ -3,7 +3,10 @@
     <table class="category-list__table">
       <thead class="category-list__table__head">
         <tr>
-          <th v-for="(thead, index) in theads" :key="index">
+          <th
+            v-for="(thead, index) in theads"
+            :key="index"
+          >
             <app-text tag="span" theme-color bold>
               {{ thead }}
             </app-text>

@@ -3,16 +3,8 @@ import axios from '@Helpers/axiosDefault';
 export default {
   namespaced: true,
   state: {
-    targetCategory: {
-      id: null,
-      category: {
-        id: null,
-        name: '',
-      },
-    },
     categoryList: [],
     errorMessage: '',
-    theadName: ['カテゴリー名'],
   },
   mutations: {
     doneGetAllCategories(state, payload) {

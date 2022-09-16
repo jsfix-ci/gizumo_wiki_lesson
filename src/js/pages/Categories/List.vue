@@ -5,7 +5,6 @@
         :access="access"
         :error-message="errorMessage"
         :done-message="doneMessage"
-        :disabled="false"
       />
     </div>
     <app-category-list
@@ -20,11 +19,6 @@
 <script>
 import { CategoryPost, CategoryList } from '@Components/molecules';
 
-// @Components/moleculesはmolecules配下のindex.jsを指してる
-// {}でインポートするのは名前付きインポートのため、
-// v-bindは:~~~ = ""で~~~の部分が子コンポーネントに渡される
-// categoriesListはcomputed内のcategoriesList
-
 export default {
   components: {
     appCategoryPost: CategoryPost,
@@ -32,30 +26,23 @@ export default {
   },
   data() {
     return {
-      disabled: '',
       doneMessage: '',
-      access: {
-        create: true,
-        delete: true,
-      },
+      theadName: ['カテゴリー名'],
     };
   },
   computed: {
     categoriesList() {
       return this.$store.state.categories.categoryList;
-      // ここのcategoriesは_storeのindex.jsのモジュールで指定してる= category.js
     },
     errorMessage() {
       return this.$store.state.categories.errorMessage;
     },
-    theadName() {
-      return this.$store.state.categories.theadName;
+    access() {
+      return this.$store.getters['auth/access'];
     },
   },
   created() {
     this.$store.dispatch('categories/getAllCategories');
-    // ('categoriesはcategories.jsのこと、getAllCategoriesはactionの中')
-    // createdは非同期でDOMが生成されたあとに表示される
   },
 };
 </script>
