@@ -3,7 +3,7 @@
     <li v-if="currentPage > 3" class="page-nation__first">
       <app-button
         :disabled="1 === currentPage"
-        @click="$emit('getPage', 1)"
+        @click="$emit('handle-page-button-click', 1)"
       >
         1
       </app-button>
@@ -20,7 +20,7 @@
     >
       <app-button
         :disabled="page === currentPage"
-        @click="$emit('getPage', page)"
+        @click="$emit('handle-page-button-click', page)"
       >
         {{ page }}
       </app-button>
@@ -34,7 +34,7 @@
       <app-button
         class="page-nation__next"
         :disabled="lastPage === currentPage"
-        @click="$emit('getPage', lastPage)"
+        @click="$emit('handle-page-button-click', lastPage)"
       >
         {{ lastPage }}
       </app-button>

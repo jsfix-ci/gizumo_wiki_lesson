@@ -13,7 +13,7 @@
       :last-page="lastPage"
       :current-page="currentPage"
       :page-nation="pageNation"
-      @getPage="getPage"
+      @handle-page-button-click="handlePageButtonClick"
     />
   </div>
 </template>
@@ -104,7 +104,7 @@ export default {
         this.$store.dispatch('articles/getPageArticles', pageNum);
       }
     },
-    getPage(pageNum) {
+    handlePageButtonClick(pageNum) {
       this.$router.push({
         path: '/articles',
         query: { page: pageNum },
