@@ -82,7 +82,7 @@
       </app-button>
     </app-modal>
     <app-page-nation
-      @movePage="movePage"
+      @handle-page-button-click="movePage"
     />
   </div>
 </template>
@@ -150,7 +150,7 @@ export default {
         path: '/articles',
         query: { page: id },
       });
-      this.$store.dispatch('articles/getAllArticles', this.$route.query.page);
+      this.$store.dispatch('articles/getArticlesData', this.$route.query.page);
     },
   },
 };

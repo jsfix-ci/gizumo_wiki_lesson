@@ -1,49 +1,49 @@
 <template>
   <ul class="page-nation">
     <li
-      v-if="first"
+      v-if="isShowFirstPageNation"
       class="page-nation-button"
     >
       <app-button
         hover-opacity
-        @click="$emit('movePage', 1)"
+        @click="$emit('handle-page-button-click', 1)"
       >
-        {{ 1 }}
+        1
       </app-button>
     </li>
     <li
-      v-if="first"
+      v-if="isShowFirstPageNation"
       class="page-nation-dots"
     >
       …
     </li>
     <li
-      v-for="page in range"
+      v-for="page in pageRange"
       :key="page"
       class="page-nation-button"
     >
       <app-button
         hover-opacity
-        :disabled="isCurrentPage(page)"
-        @click="$emit('movePage', page)"
+        :disabled="currentPage === page"
+        @click="$emit('handle-page-button-click', page)"
       >
         {{ page }}
       </app-button>
     </li>
     <li
-      v-if="last"
+      v-if="isShowLastPageNation"
       class="page-nation-dots"
     >
       …
     </li>
     <li
-      v-if="last"
+      v-if="isShowLastPageNation"
       class="page-nation-button"
     >
       <app-button
         class="page-nation-button"
         hover-opacity
-        @click="$emit('movePage', lastPage)"
+        @click="$emit('handle-page-button-click', lastPage)"
       >
         {{ lastPage }}
       </app-button>
@@ -65,39 +65,37 @@ export default {
     lastPage() {
       return this.$store.state.articles.pageData.lastPage;
     },
-    range() {
-      const range = [...Array(this.lastPage).keys()].map(i => i += 1);
+    pageRange() {
+      const pageRange = [...Array(this.lastPage).keys()].map(i => i + 1);
       if (this.currentPage <= 3) {
-        const animals = range.slice(0, 5);
-        return animals;
-      } else if (this.currentPage >= this.lastPage - 2) {
-        const animals = range.slice(this.lastPage - 5, this.lastPage + 1);
-        return animals;
-      } else {
-        const animals = range.slice(this.currentPage - 3, this.currentPage + 2);
-        return animals;
+        const slicedPageRange = pageRange.slice(0, 5);
+        return slicedPageRange;
+      } if (this.currentPage >= this.lastPage - 2) {
+        const slicedPageRange = pageRange.slice(this.lastPage - 5, this.lastPage + 1);
+        return slicedPageRange;
       }
+      const slicedPageRange = pageRange.slice(
+        this.currentPage - 3, this.currentPage + 2,
+      );
+      return slicedPageRange;
     },
-    first() {
-      let first;
+    isShowFirstPageNation() {
+      let firstPageNation;
       if (this.currentPage <= 3) {
-        first = false;
+        firstPageNation = false;
       } else {
-        first = true;
+        firstPageNation = true;
       }
-      return first;
+      return firstPageNation;
     },
-    last() {
-      let last;
+    isShowLastPageNation() {
+      let lastPageNation;
       if (this.currentPage >= this.lastPage - 2) {
-        last = false;
+        lastPageNation = false;
       } else {
-        last = true;
+        lastPageNation = true;
       }
-      return last;
-    },
-     isCurrentPage() {
-      return page => this.currentPage === page;
+      return lastPageNation;
     },
   },
 };

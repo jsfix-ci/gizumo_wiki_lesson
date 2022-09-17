@@ -29,8 +29,8 @@ export default {
     doneMessage: '',
     errorMessage: '',
     pageData: {
-      currentPage: '',
-      lastPage: '',
+      currentPage: null,
+      lastPage: null,
     },
   },
   getters: {
@@ -91,7 +91,7 @@ export default {
       );
       state.articleList = [...filteredArticles];
     },
-    doneGetAllArticles(state, payload) {
+    doneGetArticlesData(state, payload) {
       state.articleList = [...payload.articles];
     },
     failRequest(state, { message }) {
@@ -132,7 +132,7 @@ export default {
     initPostArticle({ commit }) {
       commit('initPostArticle');
     },
-    getAllArticles({ commit, rootGetters }, pageNumber) {
+    getArticlesData({ commit, rootGetters }, pageNumber = 1) {
       axios(rootGetters['auth/token'])({
         method: 'GET',
         url: `/article?page=${pageNumber}`,
@@ -143,7 +143,7 @@ export default {
           lastPage: res.data.meta.last_page,
         };
         commit('getPageNumber', payload);
-        commit('doneGetAllArticles', payload);
+        commit('doneGetArticlesData', payload);
       }).catch((err) => {
         commit('failRequest', { message: err.message });
       });

@@ -64,7 +64,7 @@ export default {
             // console.log(err);
           });
       } else {
-        this.$store.dispatch('articles/getAllArticles');
+        this.$store.dispatch('articles/getArticlesData');
       }
     },
     fetchArticles() {
@@ -80,7 +80,7 @@ export default {
             // console.log(err);
           });
       } else {
-        this.$store.dispatch('articles/getAllArticles', this.$route.query.page);
+        this.$store.dispatch('articles/getArticlesData', this.$route.query.page);
       }
     },
   },
