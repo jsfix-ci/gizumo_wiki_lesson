@@ -82,7 +82,7 @@
       </app-button>
     </app-modal>
     <app-page-nation
-      @handle-page-button-click="movePage"
+      @handle-page-button-click="pushPageId"
     />
   </div>
 </template>
@@ -145,12 +145,11 @@ export default {
       if (!this.access.delete) return;
       this.$emit('openModal', articleId);
     },
-    movePage(id) {
+    pushPageId(id) {
       this.$router.push({
         path: '/articles',
         query: { page: id },
       });
-      this.$store.dispatch('articles/getArticlesData', this.$route.query.page);
     },
   },
 };

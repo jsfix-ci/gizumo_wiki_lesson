@@ -1,22 +1,22 @@
 <template>
   <ul class="page-nation">
-    <li
-      v-if="isShowFirstPageNation"
-      class="page-nation-button"
-    >
-      <app-button
-        hover-opacity
-        @click="$emit('handle-page-button-click', 1)"
+    <template v-if="currentPage > 3 ? true : false">
+      <li
+        class="page-nation-button"
       >
-        1
-      </app-button>
-    </li>
-    <li
-      v-if="isShowFirstPageNation"
-      class="page-nation-dots"
-    >
-      …
-    </li>
+        <app-button
+          hover-opacity
+          @click="$emit('handle-page-button-click', 1)"
+        >
+          1
+        </app-button>
+      </li>
+      <li
+        class="page-nation-dots"
+      >
+        …
+      </li>
+    </template>
     <li
       v-for="page in pageRange"
       :key="page"
@@ -30,24 +30,24 @@
         {{ page }}
       </app-button>
     </li>
-    <li
-      v-if="isShowLastPageNation"
-      class="page-nation-dots"
-    >
-      …
-    </li>
-    <li
-      v-if="isShowLastPageNation"
-      class="page-nation-button"
-    >
-      <app-button
-        class="page-nation-button"
-        hover-opacity
-        @click="$emit('handle-page-button-click', lastPage)"
+    <template v-if="currentPage < lastPage - 2">
+      <li
+        class="page-nation-dots"
       >
-        {{ lastPage }}
-      </app-button>
-    </li>
+        …
+      </li>
+      <li
+        class="page-nation-button"
+      >
+        <app-button
+          class="page-nation-button"
+          hover-opacity
+          @click="$emit('handle-page-button-click', lastPage)"
+        >
+          {{ lastPage }}
+        </app-button>
+      </li>
+    </template>
   </ul>
 </template>
 
@@ -78,24 +78,6 @@ export default {
         this.currentPage - 3, this.currentPage + 2,
       );
       return slicedPageRange;
-    },
-    isShowFirstPageNation() {
-      let firstPageNation;
-      if (this.currentPage <= 3) {
-        firstPageNation = false;
-      } else {
-        firstPageNation = true;
-      }
-      return firstPageNation;
-    },
-    isShowLastPageNation() {
-      let lastPageNation;
-      if (this.currentPage >= this.lastPage - 2) {
-        lastPageNation = false;
-      } else {
-        lastPageNation = true;
-      }
-      return lastPageNation;
     },
   },
 };

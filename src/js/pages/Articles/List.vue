@@ -42,7 +42,7 @@ export default {
     },
   },
   created() {
-    this.fetchArticles();
+    this.fetchArticles(this.$route.query.page);
   },
   methods: {
     openModal(articleId) {
@@ -67,20 +67,11 @@ export default {
         this.$store.dispatch('articles/getArticlesData');
       }
     },
-    fetchArticles() {
-      if (this.$route.query.category) {
-        const { category } = this.$route.query;
-        this.title = category;
-        this.$store.dispatch('articles/filteredArticles', category)
-          .then(() => {
-            if (this.$store.state.articles.articleList.length === 0) {
-              this.$router.push({ path: '/notfound' });
-            }
-          }).catch(() => {
-            // console.log(err);
-          });
+    fetchArticles(pageNumber) {
+      if (!pageNumber) {
+        this.$store.dispatch('articles/getArticlesData', 1);
       } else {
-        this.$store.dispatch('articles/getArticlesData', this.$route.query.page);
+        this.$store.dispatch('articles/getArticlesData', pageNumber);
       }
     },
   },
