@@ -68,11 +68,7 @@ export default {
       }
     },
     fetchArticles(pageNumber) {
-      if (!pageNumber) {
-        this.$store.dispatch('articles/getArticlesData', 1);
-      } else {
-        this.$store.dispatch('articles/getArticlesData', pageNumber);
-      }
+      this.$store.dispatch('articles/getArticlesData', pageNumber);
     },
   },
 };

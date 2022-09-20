@@ -1,6 +1,6 @@
 <template>
   <ul class="page-nation">
-    <template v-if="currentPage > 3 ? true : false">
+    <template v-if="currentPage > 3">
       <li
         class="page-nation-button"
       >
