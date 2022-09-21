@@ -3,7 +3,6 @@
     <app-article-deleted-list />
     <app-article-deleted-table
       :deleted-list="deletedList"
-      :theads="theads"
     />
   </div>
 </template>
@@ -15,11 +14,6 @@ export default {
   components: {
     appArticleDeletedList: ArticleDeletedList,
     appArticleDeletedTable: ArticleDeletedTable,
-  },
-  data() {
-    return {
-      theads: ['タイトル', '本文', '作成日'],
-    };
   },
   computed: {
     deletedList() {

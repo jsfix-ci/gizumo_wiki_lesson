@@ -2,7 +2,7 @@
   <table class="deleted-table">
     <thead class="deleted-table__head">
       <tr>
-        <th v-for="(thead, index) in theads" :key="index">
+        <th v-for="(thead, index) in $options.theads" :key="index">
           <app-text tag="span" theme-color bold>
             {{ thead }}
           </app-text>
@@ -29,22 +29,19 @@
 import { Text } from '@Components/atoms';
 
 export default {
+  theads: ['タイトル', '本文', '作成日'],
   components: {
     appText: Text,
   },
   props: {
     deletedList: {
       type: Array,
-      default: () => [],
-    },
-    theads: {
-      type: Array,
-      default: () => [],
+      required: true,
     },
   },
   computed: {
     formatText() {
-      return text => (text.length >= 30 ? `${text.slice(0, 30)}...` : text);
+      return text => (text.length > 30 ? `${text.slice(0, 30)}...` : text);
     },
     formatDate() {
       return date => date.slice(0, 10);

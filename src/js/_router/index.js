@@ -119,7 +119,7 @@ const router = new VueRouter({
         },
         {
           name: 'articleDeleted',
-          path: 'deleted',
+          path: 'trashed',
           component: ArticleDeleted,
         },
         {
