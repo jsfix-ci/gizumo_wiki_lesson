@@ -1,5 +1,5 @@
 <template lang="html">
-  <form @submit.prevent="addCategory">
+  <form @submit.prevent="postCategory">
     <app-heading :level="1">カテゴリー管理</app-heading>
     <app-input
       v-validate="'required'"
@@ -8,8 +8,8 @@
       placeholder="追加するカテゴリー名を入力してください"
       data-vv-as="カテゴリー名"
       :error-messages="errors.collect('category')"
-      :value="category"
-      @updateValue="$emit('udpateValue', $event)"
+      :value="category.name"
+      @updateValue="$emit('updateValue', $event.target)"
     />
     <app-button
       class="category-management-post__submit"
@@ -62,6 +62,10 @@ export default {
       type: Object,
       default: () => ({}),
     },
+    postCategory: {
+      type: Function,
+      default: () => ({}),
+    },
   },
   computed: {
     buttonText() {
@@ -70,13 +74,6 @@ export default {
     },
   },
   methods: {
-    addCategory() {
-      if (!this.access.create) return;
-      this.$emit('clearMessage');
-      this.$validator.validate().then((valid) => {
-        if (valid) this.$emit('handleSubmit');
-      });
-    },
   },
 };
 </script>

@@ -30,7 +30,7 @@ storiesOf('GLOBALS|Sidebar', module)
   .addDecorator(storyRouter())
   .add('default', () => {
     return {
-      template: `<app-sidebar 
+      template: `<app-sidebar
                   :target-array="routeLinksArray"
                 />`,
       computed: {
