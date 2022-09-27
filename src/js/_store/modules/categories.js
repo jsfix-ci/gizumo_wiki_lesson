@@ -1,7 +1,4 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-console */
 import axios from '@Helpers/axiosDefault';
-// import Cookies from 'js-cookie';
 
 export default {
   namespaced: true,
@@ -18,12 +15,10 @@ export default {
 
   mutations: {
     setCategoryList(state, payload) {
-      state.categoryList = payload;
-      state.categoryList.reverse();
+      state.categoryList = payload.reverse();
     },
     addCategoryList(state, payload) {
-      console.log(payload);
-      state.categoryList.push(payload);
+      state.categoryList.unshift(payload);
     },
     initPostCategory(state) {
       state.targeCategory = Object.assign({}, {
@@ -33,7 +28,6 @@ export default {
     },
     updateValue(state, { name, value }) {
       state.targetCategory = Object.assign({}, state.targetCategory, { [name]: value });
-      console.log(state.targetCategory);
     },
   },
 
@@ -59,7 +53,6 @@ export default {
           name: rootGetters['categories/targetCategory'].category,
         },
       }).then((res) => {
-        console.log(res);
         commit('addCategoryList', res.data.category);
       }).catch((err) => {
         commit('failRequest', { message: err.message });
