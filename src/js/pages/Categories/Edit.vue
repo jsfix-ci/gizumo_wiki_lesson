@@ -49,7 +49,9 @@ export default {
       if (this.loading) {
         return;
       }
-      this.$store.dispatch('categories/editCategoryName');
+      this.$store.dispatch('categories/editCategoryName').then(() => {
+        this.$store.dispatch('categories/getCategoriesList');
+      });
     },
     clearMessage() {
       this.$store.dispatch('categories/clearMessage');

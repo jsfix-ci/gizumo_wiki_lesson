@@ -113,18 +113,6 @@ export default {
     confirmDeleteCategory({ commit }, { categoryId, categoryName }) {
       commit('confirmDeleteCategory', { categoryId, categoryName });
     },
-    // editCategoryName({ commit, rootGetters }) {
-    //   axios(rootGetters['auth/token'])({
-    //     method: 'PUT',
-    //     // url: `/category/${id}`,
-    //   }).then((data) => {
-    //     console.log(data);
-    //     commit('doneEditCategory');
-    //   }).catch((err) => {
-    //     const errTxt = err.message;
-    //     commit('failRequest', errTxt);
-    //   });
-    // },
     getCategoryDetail({ commit, rootGetters }, categoryId) {
       axios(rootGetters['auth/token'])({
         method: 'GET',
@@ -138,21 +126,24 @@ export default {
       });
     },
     editCategoryName({ commit, rootGetters, state }) {
-      commit('clearMessage');
-      commit('toggleLoading');
-      const data = new URLSearchParams();
-      data.append('name', state.editCategory.name);
-      axios(rootGetters['auth/token'])({
-        method: 'PUT',
-        url: `/category/${state.editCategory.id}`,
-        data,
-      }).then(() => {
+      return new Promise((resolve) => {
+        commit('clearMessage');
         commit('toggleLoading');
-        commit('displayDoneMessage', { message: 'カテゴリー名を更新しました' });
-      }).catch((err) => {
-        commit('toggleLoading');
-        const errTxt = err.message;
-        commit('failRequest', errTxt);
+        const data = new URLSearchParams();
+        data.append('name', state.editCategory.name);
+        axios(rootGetters['auth/token'])({
+          method: 'PUT',
+          url: `/category/${state.editCategory.id}`,
+          data,
+        }).then(() => {
+          resolve();
+          commit('toggleLoading');
+          commit('displayDoneMessage', { message: 'カテゴリー名を更新しました' });
+        }).catch((err) => {
+          commit('toggleLoading');
+          const errTxt = err.message;
+          commit('failRequest', errTxt);
+        });
       });
     },
     updateEditValue({ commit }, inputText) {
