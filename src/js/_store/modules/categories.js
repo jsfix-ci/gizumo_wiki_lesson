@@ -53,6 +53,11 @@ export default {
     updateEditValue(state, payload) {
       state.editCategory.name = payload;
     },
+    updateCategoriesList(state, { category }) {
+      state.categoriesList = state.categoriesList.map((item) => {
+        item.id === category.id ? { ...item, name: category.name } : item;
+      });
+    },
   },
   actions: {
     getCategoriesList({ commit, rootGetters }) {
@@ -126,24 +131,22 @@ export default {
       });
     },
     editCategoryName({ commit, rootGetters, state }) {
-      return new Promise((resolve) => {
-        commit('clearMessage');
+      commit('clearMessage');
+      commit('toggleLoading');
+      const data = new URLSearchParams();
+      data.append('name', state.editCategory.name);
+      axios(rootGetters['auth/token'])({
+        method: 'PUT',
+        url: `/category/${state.editCategory.id}`,
+        data,
+      }).then((res) => {
+        commit('updateCategoriesList', res.data);
         commit('toggleLoading');
-        const data = new URLSearchParams();
-        data.append('name', state.editCategory.name);
-        axios(rootGetters['auth/token'])({
-          method: 'PUT',
-          url: `/category/${state.editCategory.id}`,
-          data,
-        }).then(() => {
-          resolve();
-          commit('toggleLoading');
-          commit('displayDoneMessage', { message: 'カテゴリー名を更新しました' });
-        }).catch((err) => {
-          commit('toggleLoading');
-          const errTxt = err.message;
-          commit('failRequest', errTxt);
-        });
+        commit('displayDoneMessage', { message: 'カテゴリー名を更新しました' });
+      }).catch((err) => {
+        commit('toggleLoading');
+        const errTxt = err.message;
+        commit('failRequest', errTxt);
       });
     },
     updateEditValue({ commit }, inputText) {
