@@ -62,20 +62,20 @@ export default {
 };
 </script>
 
-<style>
-  .category {
-    display: flex;
-    height: 100vh;
-  }
+<style lang="postcss" scoped>
+.category {
+  display: flex;
+  height: 100vh;
 
-  .category__content {
+  &__content {
     width: 40%;
     border-right: 1px solid #333;
     padding-right: 20px;
     margin-right: 20px;
   }
 
-  .category__article {
-    width:60%;
+  &__article {
+    width: 60%;
   }
+}
 </style>
