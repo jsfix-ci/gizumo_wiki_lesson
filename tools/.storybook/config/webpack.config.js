@@ -34,7 +34,7 @@ module.exports = async({config, mode}) => {
             })
           ]
         }
-      }
+      },
       {
         loader: 'sass-loader',
         options: {
