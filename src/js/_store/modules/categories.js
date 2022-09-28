@@ -10,6 +10,10 @@ export default {
     loading: false,
     deleteCategoryId: null,
     deleteCategoryName: '',
+    editCategory: {
+      id: null,
+      name: '',
+    },
   },
   mutations: {
     resetTargetCategory(state) {
@@ -41,6 +45,21 @@ export default {
     doneDeleteCategory(state) {
       state.deleteCategoryId = null;
       state.deleteCategoryName = '';
+    },
+    setCategoryDetail(state, { categoryId, categoryName }) {
+      state.editCategory.id = categoryId;
+      state.editCategory.name = categoryName;
+    },
+    updateEditValue(state, payload) {
+      state.editCategory.name = payload;
+    },
+    updateCategoriesList(state, { category }) {
+      state.categoriesList = state.categoriesList.map((item) => {
+        if (item.id === category.id) {
+          return { ...item, name: category.name };
+        }
+        return item;
+      });
     },
   },
   actions: {
@@ -101,6 +120,40 @@ export default {
     },
     confirmDeleteCategory({ commit }, { categoryId, categoryName }) {
       commit('confirmDeleteCategory', { categoryId, categoryName });
+    },
+    getCategoryDetail({ commit, rootGetters }, categoryId) {
+      axios(rootGetters['auth/token'])({
+        method: 'GET',
+        url: `/category/${categoryId}`,
+      }).then(({ data }) => {
+        const categoryName = data.category.name;
+        commit('setCategoryDetail', { categoryId, categoryName });
+      }).catch((err) => {
+        const errTxt = err.message;
+        commit('failRequest', errTxt);
+      });
+    },
+    editCategoryName({ commit, rootGetters, state }) {
+      commit('clearMessage');
+      commit('toggleLoading');
+      const data = new URLSearchParams();
+      data.append('name', state.editCategory.name);
+      axios(rootGetters['auth/token'])({
+        method: 'PUT',
+        url: `/category/${state.editCategory.id}`,
+        data,
+      }).then((res) => {
+        commit('updateCategoriesList', res.data);
+        commit('toggleLoading');
+        commit('displayDoneMessage', { message: 'カテゴリー名を更新しました' });
+      }).catch((err) => {
+        commit('toggleLoading');
+        const errTxt = err.message;
+        commit('failRequest', errTxt);
+      });
+    },
+    updateEditValue({ commit }, inputText) {
+      commit('updateEditValue', inputText);
     },
   },
 };
