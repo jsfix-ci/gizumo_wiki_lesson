@@ -55,7 +55,10 @@ export default {
     },
     updateCategoriesList(state, { category }) {
       state.categoriesList = state.categoriesList.map((item) => {
-        item.id === category.id ? { ...item, name: category.name } : item;
+        if (item.id === category.id) {
+          return { ...item, name: category.name };
+        }
+        return item;
       });
     },
   },
