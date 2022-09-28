@@ -26,16 +26,16 @@ const config = {
       '@Components': path.resolve(__dirname, './src/js/components'),
       '@Helpers': path.resolve(__dirname, './src/js/_helpers'),
       '@Pages': path.resolve(__dirname, './src/js/pages'),
-    },
+    }
   },
   plugins: [
     new VueLoaderPlugin(),
     new MiniCssExtractPlugin({
-      filename: 'css/[name].css',
+      filename: 'css/[name].css'
     }),
     new WebpackNotifierPlugin({
       excludeWarnings: true,
-      title: 'Gizumo Wiki',
+      title: 'Gizumo Wiki'
     }),
   ],
   devServer: {
@@ -63,7 +63,7 @@ const config = {
         enforce: 'pre',
         exclude: /node_modules/,
         loader: 'eslint-loader',
-        options: { failOnError: false },
+        options: { failOnError: false }
       },
       {
         test: /\.js$/,
@@ -80,7 +80,7 @@ const config = {
         use: [
           {
             loader: MiniCssExtractPlugin.loader,
-            options: { hmr: isDev },
+            options: { hmr: isDev }
           },
           {
             loader: 'css-loader',
@@ -93,14 +93,14 @@ const config = {
               plugins: () => [
                 require('postcss-import')(),
                 require('postcss-mixins')({
-                  mixinsFiles: 'src/css/_helpers/_mixins.css',
+                  mixinsFiles: 'src/css/_helpers/_mixins.css'
                 }),
                 require('postcss-custom-media')({
-                  importFrom: 'src/css/_helpers/_media.css',
+                  importFrom: 'src/css/_helpers/_media.css'
                 }),
                 require('postcss-custom-properties')({
                   preserve: false,
-                  importFrom: 'src/css/_helpers/_variables.css',
+                  importFrom: 'src/css/_helpers/_variables.css'
                 }),
                 require('postcss-color-function')(),
                 require('postcss-nested')(),
@@ -108,11 +108,11 @@ const config = {
               ],
             },
           },
-        ],
-      },
-    ],
-  },
-};
+        ]
+      }
+    ]
+  }
+}
 
 if (isDev) {
   config.plugins.push(
