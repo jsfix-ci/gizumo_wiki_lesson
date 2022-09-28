@@ -4,30 +4,43 @@
 
 ```
 .
-├── package-lock.json
-├── package.json
-├── public
+├── .vscode
+├── docs
+├── env
 ├── src
-│   ├── js
-│   │   ├── _helpers/
-│   │   ├── _router/
-│   │   ├── _store/
-│   │   ├── app.js
-│   │   ├── components/
-│   │   │   ├── atoms/
-│   │   │   │   ├── ...
-│   │   │   │   └── Button.vue
-│   │   │   ├── globals/
-│   │   │   │   ├── ...
-│   │   │   │   └── Header.vue
-│   │   │   └── molecules/
+│   ├── components/
+│   │   ├── atoms/
+│   │   │   ├── ...
+│   │   │   └── Button.vue
+│   │   ├── globals/
+│   │   │   ├── ...
+│   │   │   └── Header.vue
+│   │   └── molecules/
 │   │   │       ├── ...
 │   │   │       └── ListSidebar.vue
 │   │   └── pages/
 │   │       ├── ...
 │   │       └── index.vue
-│   └── scss/
-└── webpack.config.babel.js
+│   ├── js
+│   │   ├── _helpers/
+│   │   ├── _router/
+│   │   ├── _store/
+│   │   ├── stories/
+│   │   └── app.js
+│   ├── styles/
+│   │   ├── fonts/
+│   │   └── scss/
+│   └── index.html
+├── tools/
+├── .enslintignore
+├── .eslintrc
+├── .gitattributes
+├── .gitignore
+├── jest.config.js
+├── package-lock.json
+├── package.json
+├── README.md
+└── vite.config.js
 ```
 
 ### 「JS」フォルダの中
@@ -37,7 +50,7 @@
 
 ### コンポーネント管理
 
-`components`配下で管理し、Atomic Designを使用しています。
+`components`フォルダでコンポーネントをまとめています。
 - 「atoms」は使い回すための最小単位のコンポーネント
 - 「globals」はどのページでも使うコンポーネント
 - 「molecules」は「atoms」で構成されたコンポーネント（使い回せなくてもいい）
@@ -87,30 +100,8 @@ npm install
 npm run dev
 ```
 
-## 本番公開
-
-公開は、下記のコマンドでソースコードをビルドします。
-
-```
-npm run build
-```
-
-環境にアップしたら、下記のコマンドでNodeのサーバーを立ち上げます。
-
-```
-npm run publish
-```
-
 ## 技術的なもの
 
-- Node.js (v14.18.1): <a href="https://nodejs.org/ja/" target="_blank">https://nodejs.org/ja/</a>
-- Babel (v7.x): <a href="https://babeljs.io/" target="_blank">https://babeljs.io/</a>
-- ESlint: <a href="https://eslint.org/" target="_blank">https://eslint.org/</a>
-- webpack (v4.29.0): <a href="https://webpack.js.org" target="_blank">https://webpack.js.org</a>
-- Vue.js (v2.6.6): <a href="https://jp.vuejs.org/index.html" target="_blank">https://jp.vuejs.org/index.html</a>
-- Vue Router: <a href="https://router.vuejs.org/ja/" target="_blank">https://router.vuejs.org/ja/</a>
-- Vuex: <a href="https://vuex.vuejs.org/ja/" target="_blank">https://vuex.vuejs.org/ja/</a>
-- Express (v4.16.4): <a href="https://expressjs.com/ja/" target="_blank">https://expressjs.com/ja/</a>
-- PM2 (v3.5.0): <a href="http://pm2.keymetrics.io/" target="_blank">http://pm2.keymetrics.io/</a>
-- Storybook (v5.x) コンポーネントガイド: <a href="https://storybook.js.org/" target="_blank">https://storybook.js.org/</a>
-- テスト
+| [Vue](https://github.com/vuejs/vue) | [Vue Router](https://github.com/vuejs/vue-router) | [Vuex](https://github.com/vuejs/vuex) | [Storybook](https://storybook.js.org/) | [Jest](https://jestjs.io/ja/) | [ESlint](https://eslint.org/) | [Vite](https://ja.vitejs.dev/) | [node](https://nodejs.org/ja/) | [npm](https://www.npmjs.com/) |
+| :----: | :-----: | :--------: | :----: | :-----: | :-----: | :-----: | :-----: | :-----: |
+| 2.7.8 | 3.6.4 | 3.6.2 | 5.x.x | 24.7.x | 8.23.0 | 3.0.8  | 16.17.0 | 6.14.17 |

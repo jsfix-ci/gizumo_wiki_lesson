@@ -1,7 +1,7 @@
 export default {
   methods: {
     toggleModal() {
-      this.$root.$emit('toggleModal');
+      this.$root.$emit('toggle-modal');
     },
   },
 };

@@ -1,0 +1,29 @@
+/* --- z-index --- ※ コンポーネント内でのみの重なりはVueファイルに記述 */
+$z-content: 1;
+$z-sidebar: 2;
+$z-header: 3;
+
+/* --- 色 --- */
+$theme-color: #17abe6; /* テーマカラー（ヘッダー） */
+$sub-theme-color: #337480; /* サブテーマカラー（サイドバー） */
+$text-link-color: #36f; /* テキストリンクに使う */
+$create-color: #59994d; /* 新規系に使う（作成） */
+$error-color: #e61717; /* エラー系に使う（削除） */
+$caution-color: #e6c72e; /* 注意系に使う（編集） */
+$disabled-color: #c0c6c9; /* ボタンの無効時に使ってる */
+$separator-color: #eaeaea; /* ボーダーや区切り線に使う */
+$white: #fff; /* 白に使用 */
+
+/* --- 幅 --- */
+$pc-content-width: 1100px; /* PCのコンテンツ幅 */
+$mobile-content-width: 95%; /* PC以外のコンテンツ幅 */
+$sidebar-width: 200px; /* sidebarの幅。変わったらこの値も変更 */
+
+/* --- 高さ --- */
+$header-height: 54px; /* headerの高さ。変わったらこの値も変更 */
+
+
+/* --- フォントの大きさ --- */
+$normal: 400;
+$bold: 700;
+$black: 900;
