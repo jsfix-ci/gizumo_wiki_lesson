@@ -11,6 +11,7 @@ module.exports = async({config, mode}) => {
     enforce: 'pre',
   });
 
+
   config.module.rules.push({
     test: /\.(css|sass|scss)$/,
     use: [
@@ -28,11 +29,12 @@ module.exports = async({config, mode}) => {
               grid: true,
               browsers: [
                 'IE >= 9',
-                'last 2 versions'],
-            }),
-          ],
-        },
-      },
+                'last 2 versions'
+              ]
+            })
+          ]
+        }
+      }
       {
         loader: 'sass-loader',
         options: {
@@ -50,11 +52,10 @@ module.exports = async({config, mode}) => {
     '@Helpers': path.resolve(__dirname, '../../../src/js/_helpers'),
     '@Pages': path.resolve(__dirname, '../../../../src/js/pages'),
     '@Scss': path.resolve(__dirname, '../../../src/scss'),
-  };
+  }
 
-  config.resolve.alias = { ...config.resolve.alias, ...alias };
+  config.resolve.alias = {...config.resolve.alias, ...alias};
   config.resolve.extensions.push('.scss');
 
   return config;
 }
-
