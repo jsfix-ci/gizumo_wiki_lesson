@@ -26,7 +26,7 @@ export default {
       state.doneMessage = '';
     },
     updateValue(state, { name, value }) {
-      state.user = Object.assign({}, state.user, { [name]: value });
+      state.user = { ...state.user, [name]: value };
     },
     applyRequest(state) {
       state.loading = true;
@@ -36,7 +36,7 @@ export default {
       state.loading = false;
     },
     doneGetUser(state, { user, roleList }) {
-      state.user = Object.assign({}, state.user, user);
+      state.user = { ...state.user, ...user };
       state.roleList = roleList;
       state.loading = false;
     },
@@ -45,7 +45,7 @@ export default {
       state.doneMessage = '新規ユーザーの追加が完了しました。';
     },
     doneEditUser(state, { user }) {
-      state.user = Object.assign({}, state.user, user);
+      state.user = { ...state.user, ...user };
       state.loading = false;
       state.doneMessage = 'ユーザーの更新が完了しました。';
     },
@@ -74,7 +74,7 @@ export default {
       axios(rootGetters['auth/token'])({
         method: 'GET',
         url: '/user',
-      }).then((response) => {
+      }).then(response => {
         // NOTE: エラー時はresponse.data.codeが0で返ってくる。
         if (response.data.code === 0) throw new Error(response.data.message);
 
@@ -86,7 +86,7 @@ export default {
           role: data.role,
         }));
         commit('doneGetAllUsers', { users });
-      }).catch((err) => {
+      }).catch(err => {
         commit('failRequest', { message: err.message });
       });
     },
@@ -96,20 +96,20 @@ export default {
       axios(rootGetters['auth/token'])({
         method: 'GET',
         url: `/user/${id}`,
-      }).then((response) => {
+      }).then(response => {
         // NOTE: エラー時はresponse.data.codeが0で返ってくる。
         if (response.data.code === 0) throw new Error(response.data.message);
 
         const data = response.data.user;
-        const user = Object.assign({}, {
+        const user = {
           id: data.id,
           fullName: data.full_name,
           accountName: data.account_name,
           email: data.email,
           role: data.role.value,
-        });
+        };
         commit('doneGetUser', { user, roleList: response.data.role });
-      }).catch((err) => {
+      }).catch(err => {
         commit('failRequest', { message: err.message });
       });
     },
@@ -118,18 +118,18 @@ export default {
     createUser({ commit, rootGetters }, user) {
       commit('applyRequest');
 
-      return new Promise((resolve) => {
+      return new Promise(resolve => {
         axios(rootGetters['auth/token'])({
           method: 'POST',
           url: '/user',
           data: user,
-        }).then((response) => {
+        }).then(response => {
           // NOTE: エラー時はresponse.data.codeが0で返ってくる。
           if (response.data.code === 0) throw new Error(response.data.message);
 
           commit('doneCreateUser');
           resolve();
-        }).catch((err) => {
+        }).catch(err => {
           commit('failRequest', { message: err.response.data.message });
         });
       });
@@ -143,20 +143,20 @@ export default {
         method: 'PUT',
         url: `/user/${user.id}`,
         data: user,
-      }).then((response) => {
+      }).then(response => {
         // NOTE: エラー時はresponse.data.codeが0で返ってくる。
         if (response.data.code === 0) throw new Error(response.data.message);
 
-        const editedUser = Object.assign({}, {
+        const editedUser = {
           id: response.data.user.id,
           fullName: response.data.user.full_name,
           accountName: response.data.user.account_name,
           email: response.data.user.email,
           role: response.data.user.role,
-        });
+        };
 
         commit('doneEditUser', { editedUser });
-      }).catch((err) => {
+      }).catch(err => {
         commit('failRequest', { message: err.message });
       });
     },
@@ -169,17 +169,17 @@ export default {
     deleteUser({ commit, rootGetters }, { id }) {
       commit('applyRequest');
 
-      return new Promise((resolve) => {
+      return new Promise(resolve => {
         axios(rootGetters['auth/token'])({
           method: 'DELETE',
           url: `/user/${id}`,
-        }).then((response) => {
+        }).then(response => {
           // NOTE: エラー時はresponse.data.codeが0で返ってくる。
           if (response.data.code === 0) throw new Error(response.data.message);
 
           commit('doneDeleteUser');
           resolve();
-        }).catch((err) => {
+        }).catch(err => {
           commit('failRequest', { message: err.message });
         });
       });
