@@ -5,13 +5,12 @@
         :access="access"
       />
     </article>
-    <div class="category__article">
-      <app-category-list
-        :access="access"
-        :theads="theads"
-        :categories="categoryList"
-      />
-    </div>
+    <app-category-list
+      class="category__article"
+      :access="access"
+      :theads="theads"
+      :categories="categoryList"
+    />
   </div>
 </template>
 
