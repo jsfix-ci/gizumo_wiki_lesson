@@ -29,7 +29,6 @@
     "MY_SESSION_STORAGE_KEY": true
   },
   "rules": {
-    "linebreak-style": ["error", "windows"],
     "no-new": "off",
     "no-console": "warn",
     "no-control-regex": "off",
