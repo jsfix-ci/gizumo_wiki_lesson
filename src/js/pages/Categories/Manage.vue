@@ -1,17 +1,15 @@
 <template>
   <div class="category">
-    <div class="category_post">
-      <app-category-post
-        :access="access"
-      />
-    </div>
-    <div class="category_list">
-      <app-category-list
-        :access="access"
-        :theads="theads"
-        :categories="categoryList"
-      />
-    </div>
+    <app-category-post
+      :access="access"
+      class="category_post"
+    />
+    <app-category-list
+      :access="access"
+      :theads="theads"
+      :categories="categoryList"
+      class="category_list"
+    />
   </div>
 </template>
 <script>
