@@ -5,9 +5,9 @@
         :access="access"
       />
     </article>
-    <div class="vertical-line" />
     <div class="category__article">
       <app-category-list
+        class="vertical-line"
         :access="access"
         :theads="theads"
         :categories="categoryList"
@@ -48,7 +48,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
   .category {
     display: flex;
   }
@@ -62,8 +62,8 @@ export default {
   }
 
   .vertical-line {
-    margin: 0 2rem;
-    width: 2px;
-    background-color: rgb(220, 220, 220);
+    border-left: 1px solid rgb(220,220,220);
+    padding-left: 20px;
+    margin-left: 20px;
   }
 </style>
