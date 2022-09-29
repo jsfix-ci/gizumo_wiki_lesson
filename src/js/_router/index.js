@@ -7,6 +7,10 @@ import Signout from '@Pages/Signout';
 import NotFound from '@Pages/NotFound';
 import Home from '@Pages/Home';
 
+// カテゴリー
+import Categories from '@Pages/Categories';
+import CategoryManagement from '@Pages/Categories/CategoryManagement';
+
 // 記事
 import Articles from '@Pages/Articles';
 import ArticleList from '@Pages/Articles/List';
@@ -51,6 +55,17 @@ const router = new VueRouter({
       name: 'home',
       path: '/',
       component: Home,
+    },
+    {
+      path: '/categories',
+      component: Categories,
+      children: [
+        {
+          name: 'CategoryManagement',
+          path: '',
+          component: CategoryManagement,
+        },
+      ],
     },
     {
       name: 'passwordInit',
