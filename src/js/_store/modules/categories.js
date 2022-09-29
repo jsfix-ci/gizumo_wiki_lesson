@@ -6,8 +6,6 @@ export default {
     categoryList: [],
     errorMessage: '',
   },
-  getters: {
-  },
 
   mutations: {
     setCategoryList(state, payload) {
