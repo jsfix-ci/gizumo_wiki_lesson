@@ -19,7 +19,6 @@ export default {
         method: 'GET',
         url: '/category',
       }).then((response) => {
-        console.log(rootGetters);
         commit('setAllCategories', response.data.categories);
       }).catch((err) => {
         commit('failRequest', { message: err.message });
