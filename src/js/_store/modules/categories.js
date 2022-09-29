@@ -15,7 +15,6 @@ export default {
   actions: {
     getAllCategories({ commit, rootGetters }) {
       axios(rootGetters['auth/token'])({
-        withCredentials: true,
         method: 'GET',
         url: '/category',
       }).then((response) => {
