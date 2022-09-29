@@ -1,4 +1,3 @@
-<!-- eslint-disable linebreak-style -->
 <template>
   <div class="category">
     <div class="category_post">
@@ -15,7 +14,6 @@
     </div>
   </div>
 </template>
-<!-- eslint-disable linebreak-style -->
 <script>
 import { CategoryPost, CategoryList } from '@Components/molecules';
 import Mixins from '@Helpers/mixins';
@@ -49,10 +47,13 @@ export default {
   .category {
     display: flex;
     &_post {
+      padding-right: 10px;
       width: 40%;
+      border-right: 1px solid rgb(180, 180, 180);
     }
     &_list {
       width: 60%;
+      margin-left: 10px;
     }
   }
 </style>
