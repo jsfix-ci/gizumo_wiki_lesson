@@ -3,6 +3,10 @@ import axios from '@Helpers/axiosDefault';
 export default {
   namespaced: true,
   state: {
+    targetCategory: {
+      id: 'null',
+      category: '',
+    },
     categoryList: [],
   },
   getters: {
@@ -13,9 +17,15 @@ export default {
     setCategoryList(state, payload) {
       state.categoryList = payload.reverse();
     },
+    updateValue(state, { name, value }) {
+      state.targetCategory = Object.assign({}, state.targetCategory, { [name]: value });
+    },
   },
 
   actions: {
+    updateValue({ commit }, target) {
+      commit('updateValue', target);
+    },
     getAllCategories({ commit, rootGetters }) {
       axios(rootGetters['auth/token'])({
         method: 'GET',

@@ -3,6 +3,7 @@
     <article class="category__content">
       <app-category-post
         :access="access"
+        @updateValue="updateValue"
       />
     </article>
     <app-category-list
@@ -44,6 +45,9 @@ export default {
   methods: {
     fetchCategories() {
       this.$store.dispatch('categories/getAllCategories');
+    },
+    updateValue(target) {
+      this.$store.dispatch('categories/updateValue', target);
     },
   },
 };

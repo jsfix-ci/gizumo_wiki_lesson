@@ -8,8 +8,8 @@
       placeholder="追加するカテゴリー名を入力してください"
       data-vv-as="カテゴリー名"
       :error-messages="errors.collect('category')"
-      :value="category"
-      @updateValue="$emit('updateValue', $event)"
+      :value="category.name"
+      @updateValue="$emit('updateValue', $event.target)"
     />
     <app-button
       class="category-management-post__submit"
