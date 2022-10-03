@@ -2,6 +2,7 @@
   <div class="category">
     <app-category-post
       :access="access"
+      @updateValue="updateValue"
       class="category_post"
     />
     <app-category-list
@@ -35,10 +36,14 @@ export default {
       return this.$store.getters['auth/access'];
     },
   },
-
   created() {
     this.$store.dispatch('categories/getAllCategories');
   },
+  methods: {
+    updateValue(target) {
+      this.$store.dispatch('categories/updateValue', target);
+    },
+  }
 };
 </script>
 <style lang='postcss' scoped>
