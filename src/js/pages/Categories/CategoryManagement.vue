@@ -3,7 +3,12 @@
     <article class="category__content">
       <app-category-post
         :access="access"
+        :category="getTargetCategory"
+        :done-message="doneMessage"
+        :error-message="errorMessage"
         @updateValue="updateValue"
+        @handleSubmit="handleSubmit"
+        @clearMessage="clearMessage"
       />
     </article>
     <app-category-list
@@ -38,16 +43,30 @@ export default {
     access() {
       return this.$store.getters['auth/access'];
     },
+    getTargetCategory() {
+      return this.$store.state.categories.targetCategory;
+    },
+    doneMessage() {
+      return this.$store.state.categories.doneMessage;
+    },
+    errorMessage() {
+      return this.$store.state.categories.errorMessage;
+    },
   },
   created() {
-    this.fetchCategories();
+    this.$store.dispatch('categories/getAllCategories');
   },
   methods: {
-    fetchCategories() {
-      this.$store.dispatch('categories/getAllCategories');
-    },
     updateValue(target) {
       this.$store.dispatch('categories/updateValue', target);
+    },
+    handleSubmit() {
+      this.$store.dispatch('categories/postCategory').then(() => {
+        this.$store.dispatch('categories/getAllCategories');
+      });
+    },
+    clearMessage() {
+      this.$store.dispatch('categories/clearMessage');
     },
   },
 };

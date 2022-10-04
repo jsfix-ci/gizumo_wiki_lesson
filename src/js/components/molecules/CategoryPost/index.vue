@@ -8,8 +8,8 @@
       placeholder="追加するカテゴリー名を入力してください"
       data-vv-as="カテゴリー名"
       :error-messages="errors.collect('category')"
-      :value="category.name"
-      @updateValue="$emit('updateValue', $event.target)"
+      :value="category"
+      @updateValue="$emit('updateValue', $event)"
     />
     <app-button
       class="category-management-post__submit"
@@ -19,7 +19,6 @@
     >
       {{ buttonText }}
     </app-button>
-
     <div v-if="errorMessage" class="category-management-post__notice">
       <app-text bg-error>{{ errorMessage }}</app-text>
     </div>

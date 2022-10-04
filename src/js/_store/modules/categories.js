@@ -3,11 +3,10 @@ import axios from '@Helpers/axiosDefault';
 export default {
   namespaced: true,
   state: {
-    targetCategory: {
-      id: 'null',
-      category: '',
-    },
+    targetCategory: '',
     categoryList: [],
+    errorMessage: '',
+    doneMessage: '',
   },
   getters: {
     targetCategory: state => state.targetCategory,
@@ -17,8 +16,21 @@ export default {
     setCategoryList(state, payload) {
       state.categoryList = payload.reverse();
     },
-    updateValue(state, { name, value }) {
-      state.targetCategory = Object.assign({}, state.targetCategory, { [name]: value });
+    updateValue(state, target) {
+      state.targetCategory = target.target.value;
+    },
+    initCategory(state) {
+      state.targetCategory = '';
+    },
+    doneMessage(state) {
+      state.doneMessage = 'カテゴリーを追加しました';
+    },
+    failRequest(state, { message }) {
+      state.errorMessage = message;
+    },
+    clearMessage(state) {
+      state.doneMessage = '';
+      state.errorMessage = '';
     },
   },
 
@@ -35,6 +47,27 @@ export default {
       }).catch((err) => {
         commit('failRequest', { message: err.message });
       });
+    },
+    postCategory({ commit, rootGetters }) {
+      return new Promise((resolve, reject) => {
+        axios(rootGetters['auth/token'])({
+          method: 'POST',
+          url: '/category',
+          data: {
+            name: rootGetters['categories/targetCategory'],
+          },
+        }).then(() => {
+          resolve();
+          commit('doneMessage');
+        }).catch((err) => {
+          commit('failRequest', { message: err.message });
+          reject();
+        });
+        commit('initCategory');
+      });
+    },
+    clearMessage({ commit }) {
+      commit('clearMessage');
     },
   },
 };
