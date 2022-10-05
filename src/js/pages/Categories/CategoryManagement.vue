@@ -6,6 +6,7 @@
         :category="targetCategory"
         :done-message="doneMessage"
         :error-message="errorMessage"
+        :disabled="disabled"
         @updateValue="updateValue"
         @handleSubmit="handleSubmit"
         @clearMessage="clearMessage"
@@ -47,6 +48,9 @@ export default {
     doneMessage() {
       return this.$store.state.categories.doneMessage;
     },
+    disabled() {
+      return this.$store.state.categories.disabled;
+    },
     errorMessage() {
       return this.$store.state.categories.errorMessage;
     },
@@ -59,6 +63,7 @@ export default {
       this.targetCategory = current.target.value;
     },
     handleSubmit() {
+      if (this.disabled) return;
       this.$store.dispatch('categories/postCategory', this.targetCategory).then(() => {
         this.targetCategory = '';
         this.$store.dispatch('categories/getAllCategories');

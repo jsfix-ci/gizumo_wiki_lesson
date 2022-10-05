@@ -6,6 +6,7 @@ export default {
     categoryList: [],
     errorMessage: '',
     doneMessage: '',
+    disabled: false,
   },
 
   mutations: {
@@ -22,6 +23,9 @@ export default {
       state.doneMessage = '';
       state.errorMessage = '';
     },
+    toggleLoading(state) {
+      state.disabled = !state.disabled;
+    },
   },
 
   actions: {
@@ -37,6 +41,7 @@ export default {
     },
     postCategory({ commit, rootGetters }, targetCategory) {
       return new Promise((resolve) => {
+        commit('toggleLoading');
         axios(rootGetters['auth/token'])({
           method: 'POST',
           url: '/category',
@@ -44,9 +49,11 @@ export default {
             name: targetCategory,
           },
         }).then(() => {
+          commit('toggleLoading');
           resolve();
           commit('doneMessage');
         }).catch((err) => {
+          commit('toggleLoading');
           commit('failRequest', { message: err.message });
         });
       });
