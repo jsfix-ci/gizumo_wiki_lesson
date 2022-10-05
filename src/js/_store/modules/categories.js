@@ -49,7 +49,7 @@ export default {
       });
     },
     postCategory({ commit, rootGetters }) {
-      return new Promise((resolve, reject) => {
+      return new Promise((resolve) => {
         axios(rootGetters['auth/token'])({
           method: 'POST',
           url: '/category',
@@ -61,7 +61,6 @@ export default {
           commit('doneMessage');
         }).catch((err) => {
           commit('failRequest', { message: err.message });
-          reject();
         });
         commit('initCategory');
       });
