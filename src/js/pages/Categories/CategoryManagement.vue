@@ -3,7 +3,7 @@
     <article class="category__content">
       <app-category-post
         :access="access"
-        :category="getTargetCategory"
+        :category="targetCategory"
         :done-message="doneMessage"
         :error-message="errorMessage"
         @updateValue="updateValue"
@@ -34,6 +34,7 @@ export default {
   data() {
     return {
       theads: ['カテゴリー名'],
+      targetCategory: '',
     };
   },
   computed: {
@@ -42,9 +43,6 @@ export default {
     },
     access() {
       return this.$store.getters['auth/access'];
-    },
-    getTargetCategory() {
-      return this.$store.state.categories.targetCategory;
     },
     doneMessage() {
       return this.$store.state.categories.doneMessage;
@@ -57,11 +55,12 @@ export default {
     this.$store.dispatch('categories/getAllCategories');
   },
   methods: {
-    updateValue(target) {
-      this.$store.dispatch('categories/updateValue', target);
+    updateValue(current) {
+      this.targetCategory = current.target.value;
     },
     handleSubmit() {
-      this.$store.dispatch('categories/postCategory').then(() => {
+      this.$store.dispatch('categories/postCategory', this.targetCategory).then(() => {
+        this.targetCategory = '';
         this.$store.dispatch('categories/getAllCategories');
       });
     },
