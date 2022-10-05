@@ -3,6 +3,13 @@
     <article class="category__content">
       <app-category-post
         :access="access"
+        :category="category"
+        :error-message="errorMessage"
+        :done-message="doneMessage"
+        :disabled="isLoading"
+        @update-value="updateValue"
+        @clear-message="clearMessage"
+        @handle-submit="handleSubmit"
       />
     </article>
     <div class="category__article">
@@ -27,6 +34,7 @@ export default {
   data() {
     return {
       theads: ['カテゴリー名'],
+      category: '',
     };
   },
   computed: {
@@ -36,6 +44,15 @@ export default {
     access() {
       return this.$store.getters['auth/access'];
     },
+    errorMessage() {
+      return this.$store.state.categories.errorMessage;
+    },
+    doneMessage() {
+      return this.$store.state.categories.doneMessage;
+    },
+    isLoading() {
+      return this.$store.state.categories.loading;
+    },
   },
   created() {
     this.fetchCategories();
@@ -43,6 +60,22 @@ export default {
   methods: {
     fetchCategories() {
       this.$store.dispatch('categories/getAllCategories');
+    },
+    updateValue($event) {
+      this.category = $event.target.value;
+    },
+    clearMessage() {
+      this.$store.dispatch('categories/clearMessage');
+    },
+    handleSubmit() {
+      if (this.disabled) {
+        return;
+      }
+      this.$store.dispatch('categories/postCategory', this.category)
+        .then(() => {
+          this.$store.dispatch('categories/getAllCategories');
+          this.category = '';
+        });
     },
   },
 };

@@ -5,6 +5,8 @@ export default {
   state: {
     categoryList: [],
     errorMessage: '',
+    doneMessage: '',
+    loading: false,
   },
 
   mutations: {
@@ -13,6 +15,16 @@ export default {
     },
     failRequest(state, { message }) {
       state.errorMessage = message;
+    },
+    donePostCategory(state) {
+      state.doneMessage = 'カテゴリーを追加しました。';
+    },
+    clearMessage(state) {
+      state.errorMessage = '';
+      state.doneMessage = '';
+    },
+    toggleLoading(state) {
+      state.loading = !state.loading;
     },
   },
 
@@ -26,6 +38,28 @@ export default {
       }).catch(err => {
         commit('failRequest', { message: err.message });
       });
+    },
+    postCategory({ commit, rootGetters }, category) {
+      commit('toggleLoading');
+      return new Promise(resolve => {
+        const params = new URLSearchParams();
+        params.append('name', category);
+        axios(rootGetters['auth/token'])({
+          method: 'POST',
+          url: '/category',
+          params,
+        }).then(() => {
+          commit('toggleLoading');
+          commit('donePostCategory');
+          resolve();
+        }).catch(err => {
+          commit('failRequest', { message: err.message });
+          commit('toggleLoading');
+        });
+      });
+    },
+    clearMessage({ commit }) {
+      commit('clearMessage');
     },
   },
 };
