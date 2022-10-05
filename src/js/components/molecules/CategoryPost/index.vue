@@ -9,7 +9,11 @@
       data-vv-as="カテゴリー名"
       :error-messages="errors.collect('category')"
       :value="category"
+<<<<<<< HEAD
       @updateValue="$emit('udpateValue', $event)"
+=======
+      @updateValue="$emit('updateValue', $event)"
+>>>>>>> 8e92b8b (カテゴリー新規作成機能実装)
     />
     <app-button
       class="category-management-post__submit"
