@@ -18,6 +18,9 @@
         :access="access"
         :theads="theads"
         :categories="categoryList"
+        :delete-category-name="deleteCategoryName"
+        @open-modal="openModal"
+        @handle-click="deleteCategory"
       />
     </div>
   </div>
@@ -25,12 +28,14 @@
 
 <script>
 import { CategoryPost, CategoryList } from '@Components/molecules';
+import Mixins from '@Helpers/mixins';
 
 export default {
   components: {
     appCategoryPost: CategoryPost,
     appCategoryList: CategoryList,
   },
+  mixins: [Mixins],
   data() {
     return {
       theads: ['カテゴリー名'],
@@ -52,6 +57,12 @@ export default {
     },
     isLoading() {
       return this.$store.state.categories.loading;
+    },
+    deleteCategoryName() {
+      return this.$store.state.categories.deleteCategoryName;
+    },
+    deleteCategoryId() {
+      return this.$store.state.categories.deleteCategoryId;
     },
   },
   created() {
@@ -75,6 +86,21 @@ export default {
         .then(() => {
           this.fetchCategories();
           this.category = '';
+        });
+    },
+    openModal(categoryId, categoryName) {
+      this.clearMessage();
+      this.toggleModal();
+      this.$store.dispatch('categories/confirmDeleteCategory', {
+        categoryId,
+        categoryName,
+      });
+    },
+    deleteCategory() {
+      this.$store.dispatch('categories/deleteCategory', this.deleteCategoryId)
+        .then(() => {
+          this.fetchCategories();
+          this.toggleModal();
         });
     },
   },
