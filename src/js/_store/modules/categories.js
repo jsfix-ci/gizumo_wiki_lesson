@@ -6,17 +6,26 @@ export default {
   namespaced: true,
   state: {
     categoryList: [],
-    targetCategory: [],
-    postCategory: [],
+    errorMessage: '',
+    doneMessage: '',
+    disabled: false,
   },
   mutations: {
     setAllCategories(state, payload) {
       state.categoryList = payload.reverse();
     },
-    updateValue(state, { name, value }) {
-      cousole.log(name);
-      console.log(value);
-      state.targetCategory = Object.assign({}, state.targetCategory, { [name]: value });
+    clearMessage(state) {
+      state.doneMessage = '';
+      state.errorMessage = '';
+    },
+    failRequest(state, { message }) {
+      state.errorMessage = message;
+    },
+    displayDoneMessage(state, payload = { message: '成功しました' }) {
+      state.doneMessage = payload.message;
+    },
+    toggleLoading(state) {
+      state.disabled = !state.disabled;
     },
   },
   actions: {
@@ -30,8 +39,27 @@ export default {
         commit('failRequest', { message: err.message });
       });
     },
-    updateValue({ commit }, target) {
-      commit('updateValue', target);
+    postCategory({ commit, rootGetters }, targetCategory) {
+      return new Promise((resolve) => {
+        commit('toggleLoading');
+        axios(rootGetters['auth/token'])({
+          method: 'POST',
+          url: '/category',
+          data: {
+            name: targetCategory,
+          },
+        }).then(() => {
+          commit('toggleLoading');
+          commit('displayDoneMessage', { message: 'カテゴリーを追加しました。' });
+          resolve();
+        }).catch((err) => {
+          commit('toggleLoading');
+          commit('failRequest', { message: err.message });
+        });
+      });
+    },
+    clearMessage({ commit }) {
+      commit('clearMessage');
     },
   },
 };
