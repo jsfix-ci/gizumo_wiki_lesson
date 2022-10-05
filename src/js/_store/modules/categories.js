@@ -6,7 +6,6 @@ export default {
     categoryList: [],
     errorMessage: '',
     doneMessage: '',
-    clearMessage: '',
     loading: false,
   },
 
