@@ -73,7 +73,7 @@ export default {
       }
       this.$store.dispatch('categories/postCategory', this.category)
         .then(() => {
-          this.$store.dispatch('categories/getAllCategories');
+          this.fetchCategories();
           this.category = '';
         });
     },
