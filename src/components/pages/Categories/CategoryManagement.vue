@@ -6,7 +6,7 @@
         :category="category"
         :error-message="errorMessage"
         :done-message="doneMessage"
-        :disabled="disabled"
+        :disabled="isLoading"
         @update-value="updateValue"
         @clear-message="clearMessage"
         @handle-submit="handleSubmit"
@@ -50,7 +50,7 @@ export default {
     doneMessage() {
       return this.$store.state.categories.doneMessage;
     },
-    disabled() {
+    isLoading() {
       return this.$store.state.categories.loading;
     },
   },
