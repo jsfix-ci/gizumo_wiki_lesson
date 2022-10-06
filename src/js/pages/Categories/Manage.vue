@@ -6,7 +6,7 @@
       :done-message="doneMessage"
       :error-message="errorMessage"
       :access="access"
-      :disabled="toggleLoading"
+      :disabled="toggleDisabled"
       @updateValue="updateValue"
       @handleSubmit="handleSubmit"
       @clearMessage="clearMessage"

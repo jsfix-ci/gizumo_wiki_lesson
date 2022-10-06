@@ -24,7 +24,7 @@ export default {
     displayDoneMessage(state, payload = { message: '成功しました' }) {
       state.doneMessage = payload.message;
     },
-    toggleLoading(state) {
+    toggleDisabled(state) {
       state.disabled = !state.disabled;
     },
   },
@@ -41,7 +41,7 @@ export default {
     },
     postCategory({ commit, rootGetters }, targetCategory) {
       return new Promise((resolve) => {
-        commit('toggleLoading');
+        commit('toggleDisabled');
         axios(rootGetters['auth/token'])({
           method: 'POST',
           url: '/category',
@@ -49,11 +49,11 @@ export default {
             name: targetCategory,
           },
         }).then(() => {
-          commit('toggleLoading');
+          commit('toggleDisabled');
           commit('displayDoneMessage', { message: 'カテゴリーを追加しました。' });
           resolve();
         }).catch((err) => {
-          commit('toggleLoading');
+          commit('toggleDisabled');
           commit('failRequest', { message: err.message });
         });
       });
