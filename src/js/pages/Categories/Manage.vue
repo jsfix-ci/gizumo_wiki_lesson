@@ -1,8 +1,15 @@
 <template>
   <div class="category">
     <app-category-post
-      :access="access"
       class="category_post"
+      :category="targetCategory"
+      :done-message="doneMessage"
+      :error-message="errorMessage"
+      :access="access"
+      :disabled="toggleDisabled"
+      @updateValue="updateValue"
+      @handleSubmit="handleSubmit"
+      @clearMessage="clearMessage"
     />
     <app-category-list
       :access="access"
@@ -25,6 +32,7 @@ export default {
   data() {
     return {
       theads: ['カテゴリー名'],
+      targetCategory: '',
     };
   },
   computed: {
@@ -34,10 +42,33 @@ export default {
     access() {
       return this.$store.getters['auth/access'];
     },
+    doneMessage() {
+      return this.$store.state.categories.doneMessage;
+    },
+    errorMessage() {
+      return this.$store.state.categories.errorMessage;
+    },
+    toggleLoading() {
+      return this.$store.state.categories.disabled;
+    },
   },
-
   created() {
     this.$store.dispatch('categories/getAllCategories');
+  },
+  methods: {
+    updateValue($event) {
+      this.targetCategory = $event.target.value;
+    },
+    handleSubmit() {
+      this.$store.dispatch('categories/postCategory', this.targetCategory)
+        .then(() => {
+          this.$store.dispatch('categories/getAllCategories');
+          this.targetCategory = '';
+        });
+    },
+    clearMessage() {
+      this.$store.dispatch('categories/clearMessage');
+    },
   },
 };
 </script>
