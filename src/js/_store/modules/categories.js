@@ -21,8 +21,8 @@ export default {
     failRequest(state, { message }) {
       state.errorMessage = message;
     },
-    displayDoneMessage(state, payload = { message: '成功しました' }) {
-      state.doneMessage = payload.message;
+    displayDoneMessage(state, { message }) {
+      state.doneMessage = message;
     },
     toggleDisabled(state) {
       state.disabled = !state.disabled;
