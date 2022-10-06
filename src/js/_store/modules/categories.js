@@ -83,6 +83,8 @@ export default {
           url: `/category/${rootGetters['categories/deleteCategoryId']}`,
         }).then(() => {
           commit('deleteDoneMessage');
+          this.state.deleteCategoryName = '';
+          this.state.deleteCategoryId = null;
           resolve();
         }).catch((err) => {
           commit('failRequest', { message: err.message });

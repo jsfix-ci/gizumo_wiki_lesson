@@ -18,7 +18,7 @@
       :theads="theads"
       :delete-category-name="deleteCategoryName"
       :categories="categoryList"
-      @handleClick="handleClick"
+      @handleClick="clickDeleteButton"
       @openModal="openModal"
     />
   </div>
@@ -83,7 +83,7 @@ export default {
         { categoryId, categoryName });
       this.toggleModal();
     },
-    handleClick(categoryId) {
+    clickDeleteButton(categoryId) {
       if (!this.access.delete) return;
       this.$store.dispatch('categories/deleteCategory', categoryId).then(() => {
         this.toggleModal();
