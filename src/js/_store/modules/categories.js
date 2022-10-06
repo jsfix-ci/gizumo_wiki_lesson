@@ -35,6 +35,8 @@ export default {
     },
     deleteDoneMessage(state) {
       state.doneMessage = 'カテゴリーを削除しました。';
+      this.state.deleteCategoryName = '';
+      this.state.deleteCategoryId = null;
     },
   },
 
@@ -80,8 +82,6 @@ export default {
           url: `/category/${deleteCategoryId}`,
         }).then(() => {
           commit('deleteDoneMessage');
-          this.state.deleteCategoryName = '';
-          this.state.deleteCategoryId = null;
           resolve();
         }).catch((err) => {
           commit('failRequest', { message: err.message });
