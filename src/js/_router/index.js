@@ -14,6 +14,10 @@ import ArticleDetail from '@Pages/Articles/Detail';
 import ArticleEdit from '@Pages/Articles/Edit';
 import ArticlePost from '@Pages/Articles/Post';
 
+// カテゴリー
+import Categories from '@Pages/Categories';
+import CategoriesList from '@Pages/Categories/Management';
+
 // 自分のアカウントページ
 import Profile from '@Pages/Profile';
 
@@ -26,9 +30,6 @@ import UserCreate from '@Pages/Users/Create';
 // パスワード
 import PasswordInit from '@Pages/Password/init';
 import PasswordUpdate from '@Pages/Password/update';
-
-//カテゴリー
-import Categories from '@Pages/Categories';
 
 import Store from '../_store';
 
@@ -69,6 +70,17 @@ const router = new VueRouter({
       name: 'profile',
       path: '/profile',
       component: Profile,
+    },
+    {
+      path: '/categories',
+      component: Categories,
+      children: [
+        {
+          name: 'categories',
+          path: '',
+          component: CategoriesList,
+        },
+      ],
     },
     {
       path: '/articles',
@@ -138,11 +150,6 @@ const router = new VueRouter({
       meta: {
         isPublic: true,
       },
-    },
-    {
-      name: 'categories',
-      path: '/categories',
-      component: Categories,
     },
   ],
 });
