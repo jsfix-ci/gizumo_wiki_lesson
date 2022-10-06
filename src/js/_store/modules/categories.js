@@ -11,9 +11,6 @@ export default {
     deleteCategoryId: null,
   },
 
-  getters: {
-    deleteCategoryId: state => state.deleteCategoryId,
-  },
 
   mutations: {
     setCategoryList(state, payload) {
@@ -75,12 +72,12 @@ export default {
     confirmTargetCategory({ commit }, { categoryId, categoryName }) {
       commit('confirmTargetCategory', { categoryId, categoryName });
     },
-    deleteCategory({ commit, rootGetters }) {
+    deleteCategory({ commit, rootGetters }, deleteCategoryId) {
       commit('clearMessage');
       return new Promise((resolve) => {
         axios(rootGetters['auth/token'])({
           method: 'DELETE',
-          url: `/category/${rootGetters['categories/deleteCategoryId']}`,
+          url: `/category/${deleteCategoryId}`,
         }).then(() => {
           commit('deleteDoneMessage');
           this.state.deleteCategoryName = '';

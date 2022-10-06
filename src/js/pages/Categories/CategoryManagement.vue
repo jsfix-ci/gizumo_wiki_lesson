@@ -18,7 +18,7 @@
       :theads="theads"
       :delete-category-name="deleteCategoryName"
       :categories="categoryList"
-      @handleClick="clickDeleteButton"
+      @handleClick="deleteTargetCategory"
       @openModal="openModal"
     />
   </div>
@@ -60,6 +60,9 @@ export default {
     deleteCategoryName() {
       return this.$store.state.categories.deleteCategoryName;
     },
+    deleteCategoryId() {
+      return this.$store.state.categories.deleteCategoryId;
+    },
   },
   created() {
     this.$store.dispatch('categories/getAllCategories');
@@ -83,12 +86,13 @@ export default {
         { categoryId, categoryName });
       this.toggleModal();
     },
-    clickDeleteButton(categoryId) {
+    deleteTargetCategory() {
       if (!this.access.delete) return;
-      this.$store.dispatch('categories/deleteCategory', categoryId).then(() => {
-        this.toggleModal();
-        this.$store.dispatch('categories/getAllCategories');
-      });
+      this.$store.dispatch('categories/deleteCategory', this.deleteCategoryId)
+        .then(() => {
+          this.toggleModal();
+          this.$store.dispatch('categories/getAllCategories');
+        });
     },
   },
 };
