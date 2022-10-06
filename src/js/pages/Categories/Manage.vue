@@ -57,7 +57,6 @@ export default {
   },
   methods: {
     updateValue($event) {
-      console.log($event);
       this.targetCategory = $event.target.value;
     },
     handleSubmit() {
