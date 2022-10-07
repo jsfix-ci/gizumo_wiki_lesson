@@ -12,10 +12,13 @@
       @clearMessage="clearMessage"
     />
     <app-category-list
+      class="category_list"
       :access="access"
       :theads="theads"
       :categories="categoryList"
-      class="category_list"
+      :delete-category-name="deleteCategoryName"
+      @openModal="openModal"
+      @handleClick="handleClick"
     />
   </div>
 </template>
@@ -48,8 +51,14 @@ export default {
     errorMessage() {
       return this.$store.state.categories.errorMessage;
     },
-    toggleLoading() {
+    toggleDisabled() {
       return this.$store.state.categories.disabled;
+    },
+    deleteCategoryName() {
+      return this.$store.state.categories.deleteCategoryName;
+    },
+    deleteCategoryId() {
+      return this.$store.state.categories.deleteCategoryId;
     },
   },
   created() {
@@ -68,6 +77,20 @@ export default {
     },
     clearMessage() {
       this.$store.dispatch('categories/clearMessage');
+    },
+    openModal(categoryId, categoryName) {
+      this.$store.dispatch('categories/confirmDeleteCategory', {
+        categoryId,
+        categoryName,
+      });
+      this.toggleModal();
+    },
+    handleClick() {
+      this.$store.dispatch('categories/deleteCategory', this.deleteCategoryId)
+        .then(() => {
+          this.$store.dispatch('categories/getAllCategories');
+          this.toggleModal();
+        });
     },
   },
 };
