@@ -81,7 +81,7 @@ export default {
           method: 'DELETE',
           url: `/category/${deleteCrticleId}`,
         }).then(() => {
-          commit('doneDeleteCategory')
+          commit('doneDeleteCategory');
           commit('displayDoneMessage', { message: 'ドキュメントを削除しました' });
           resolve();
         }).catch((err) => {
