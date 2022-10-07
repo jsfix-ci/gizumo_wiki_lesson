@@ -22,8 +22,8 @@ export default {
     failRequest(state, { message }) {
       state.errorMessage = message;
     },
-    donePostCategory(state) {
-      state.doneMessage = 'カテゴリーを追加しました。';
+    displayDoneMessage(state, { message }) {
+      state.doneMessage = message;
     },
     clearMessage(state) {
       state.errorMessage = '';
@@ -39,7 +39,6 @@ export default {
     doneDeleteCategory(state) {
       state.deleteCategoryId = null;
       state.deleteCategoryName = '';
-      state.doneMessage = 'カテゴリーを削除しました';
     },
     setCategoryDetail(state, { categoryId, categoryName }) {
       state.editCategory.id = categoryId;
@@ -51,7 +50,6 @@ export default {
     doneUpdateCategory(state) {
       state.editCategory.id = null;
       state.editCategory.name = '';
-      state.doneMessage = 'カテゴリーを更新しました。';
     },
   },
 
@@ -77,7 +75,7 @@ export default {
           params,
         }).then(() => {
           commit('toggleLoading');
-          commit('donePostCategory');
+          commit('displayDoneMessage', { message: 'カテゴリーを追加しました。' });
           resolve();
         }).catch(err => {
           commit('failRequest', { message: err.message });
@@ -98,6 +96,7 @@ export default {
           url: `/category/${categoryId}`,
         }).then(() => {
           commit('doneDeleteCategory');
+          commit('displayDoneMessage', { message: 'カテゴリーを削除しました。' });
           resolve();
         }).catch(err => {
           commit('failRequest', { message: err.message });
@@ -130,7 +129,7 @@ export default {
           params,
         }).then(() => {
           commit('toggleLoading');
-          commit('doneUpdateCategory');
+          commit('displayDoneMessage', { message: 'カテゴリーを更新しました。' });
           resolve();
         }).catch(err => {
           commit('failRequest', { message: err.message });
