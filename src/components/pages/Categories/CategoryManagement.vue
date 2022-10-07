@@ -67,6 +67,7 @@ export default {
   },
   created() {
     this.fetchCategories();
+    this.clearMessage();
   },
   methods: {
     fetchCategories() {

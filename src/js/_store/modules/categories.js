@@ -9,6 +9,10 @@ export default {
     loading: false,
     deleteCategoryId: null,
     deleteCategoryName: '',
+    editCategory: {
+      id: null,
+      name: '',
+    },
   },
 
   mutations: {
@@ -36,6 +40,18 @@ export default {
       state.deleteCategoryId = null;
       state.deleteCategoryName = '';
       state.doneMessage = 'カテゴリーを削除しました';
+    },
+    setCategoryDetail(state, { categoryId, categoryName }) {
+      state.editCategory.id = categoryId;
+      state.editCategory.name = categoryName;
+    },
+    updateEditValue(state, payload) {
+      state.editCategory.name = payload;
+    },
+    doneUpdateCategory(state) {
+      state.editCategory.id = null;
+      state.editCategory.name = '';
+      state.doneMessage = 'カテゴリーを更新しました。';
     },
   },
 
@@ -82,6 +98,39 @@ export default {
           url: `/category/${categoryId}`,
         }).then(() => {
           commit('doneDeleteCategory');
+          resolve();
+        }).catch(err => {
+          commit('failRequest', { message: err.message });
+        });
+      });
+    },
+    getCategoryDetail({ commit, rootGetters }, categoryId) {
+      axios(rootGetters['auth/token'])({
+        methods: 'GET',
+        url: `/category/${categoryId}`,
+      }).then(({ data }) => {
+        const categoryName = data.category.name;
+        commit('setCategoryDetail', { categoryId, categoryName });
+      }).catch(err => {
+        commit('failRequest', { message: err.message });
+      });
+    },
+    updateEditValue({ commit }, editCategoryName) {
+      commit('updateEditValue', editCategoryName);
+    },
+    updateCategory({ commit, rootGetters, state }) {
+      commit('clearMessage');
+      commit('toggleLoading');
+      const params = new URLSearchParams();
+      params.append('name', state.editCategory.name);
+      return new Promise(resolve => {
+        axios(rootGetters['auth/token'])({
+          method: 'PUT',
+          url: `/category/${state.editCategory.id}`,
+          params,
+        }).then(() => {
+          commit('toggleLoading');
+          commit('doneUpdateCategory');
           resolve();
         }).catch(err => {
           commit('failRequest', { message: err.message });
