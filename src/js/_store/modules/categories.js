@@ -122,18 +122,15 @@ export default {
       commit('toggleLoading');
       const params = new URLSearchParams();
       params.append('name', state.editCategory.name);
-      return new Promise(resolve => {
-        axios(rootGetters['auth/token'])({
-          method: 'PUT',
-          url: `/category/${state.editCategory.id}`,
-          params,
-        }).then(() => {
-          commit('toggleLoading');
-          commit('displayDoneMessage', { message: 'カテゴリーを更新しました。' });
-          resolve();
-        }).catch(err => {
-          commit('failRequest', { message: err.message });
-        });
+      axios(rootGetters['auth/token'])({
+        method: 'PUT',
+        url: `/category/${state.editCategory.id}`,
+        params,
+      }).then(() => {
+        commit('toggleLoading');
+        commit('displayDoneMessage', { message: 'カテゴリーを更新しました。' });
+      }).catch(err => {
+        commit('failRequest', { message: err.message });
       });
     },
   },
