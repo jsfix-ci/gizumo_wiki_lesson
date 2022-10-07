@@ -9,6 +9,8 @@ export default {
     errorMessage: '',
     doneMessage: '',
     disabled: false,
+    deleteCategoryId: null,
+    deleteCategoryName: '',
   },
   mutations: {
     setAllCategories(state, payload) {
@@ -26,6 +28,13 @@ export default {
     },
     toggleDisabled(state) {
       state.disabled = !state.disabled;
+    },
+    confirmDeleteCategory(state, { categoryId, categoryName }) {
+      state.deleteCategoryId = categoryId;
+      state.deleteCategoryName = categoryName;
+    },
+    doneDeleteCategory(state) {
+      state.deleteCategoryId = null;
     },
   },
   actions: {
@@ -60,6 +69,23 @@ export default {
     },
     clearMessage({ commit }) {
       commit('clearMessage');
+    },
+    confirmDeleteCategory({ commit }, { categoryId, categoryName }) {
+      commit('confirmDeleteCategory', { categoryId, categoryName });
+    },
+    deleteCategory({ commit, rootGetters }, deleteCrticleId) {
+      return new Promise((resolve) => {
+        commit('clearMessage');
+        axios(rootGetters['auth/token'])({
+          method: 'DELETE',
+          url: `/category/${deleteCrticleId}`,
+        }).then(() => {
+          commit('displayDoneMessage', { message: 'ドキュメントを削除しました' });
+          resolve();
+        }).catch((err) => {
+          commit('failRequest', { message: err.message });
+        });
+      });
     },
   },
 };
