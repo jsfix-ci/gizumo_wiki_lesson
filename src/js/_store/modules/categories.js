@@ -35,6 +35,7 @@ export default {
     },
     doneDeleteCategory(state) {
       state.deleteCategoryId = null;
+      state.deleteCategoryName = '';
     },
   },
   actions: {
@@ -80,6 +81,7 @@ export default {
           method: 'DELETE',
           url: `/category/${deleteCrticleId}`,
         }).then(() => {
+          commit('doneDeleteCategory')
           commit('displayDoneMessage', { message: 'ドキュメントを削除しました' });
           resolve();
         }).catch((err) => {
