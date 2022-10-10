@@ -15,6 +15,7 @@ import ArticlePost from './ArticlePost';
 import ArticleDetail from './ArticleDetail';
 import DeleteModal from './Modal';
 import Notice from './Notice';
+import CategoryEdit from './CategoryEdit';
 
 export {
   SigninForm,
@@ -29,6 +30,7 @@ export {
   UserList,
   CategoryPost,
   CategoryList,
+  CategoryEdit,
   ArticleEdit,
   ArticlePost,
   ArticleDetail,
