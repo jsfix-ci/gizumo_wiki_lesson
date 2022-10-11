@@ -7,7 +7,6 @@
       small
       hover-opacity
       to="/categories"
-      :value="targetCategory"
     >
       カテゴリー一覧へ戻る
     </app-router-link>
