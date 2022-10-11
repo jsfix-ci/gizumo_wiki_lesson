@@ -22,8 +22,8 @@ export default {
     setCategoryList(state, payload) {
       state.categoryList = payload.reverse();
     },
-    doneMessage(state) {
-      state.doneMessage = 'カテゴリーを追加しました';
+    doneMessage(state, payload = { message: '成功しました' }) {
+      state.doneMessage = payload.message;
     },
     failRequest(state, { message }) {
       state.errorMessage = message;
@@ -39,16 +39,8 @@ export default {
       state.deleteCategoryName = categoryName;
       state.deleteCategoryId = categoryId;
     },
-    deleteDoneMessage(state) {
-      state.doneMessage = 'カテゴリーを削除しました。';
-      this.state.deleteCategoryName = '';
-      this.state.deleteCategoryId = null;
-    },
     updateValue(state, payload) {
       state.editCategoryName = payload;
-    },
-    editDoneMessage(state) {
-      state.doneMessage = '更新に成功しました';
     },
   },
 
@@ -96,7 +88,7 @@ export default {
           method: 'DELETE',
           url: `/category/${deleteCategoryId}`,
         }).then(() => {
-          commit('deleteDoneMessage');
+          commit('doneMessage', { message: 'カテゴリーを削除しました' });
           resolve();
         }).catch((err) => {
           commit('failRequest', { message: err.message });
@@ -125,7 +117,7 @@ export default {
         },
       }).then(() => {
         commit('toggleLoading');
-        commit('editDoneMessage');
+        commit('doneMessage', { message: 'カテゴリーを更新しました' });
       }).catch((err) => {
         commit('toggleLoading');
         commit('failRequest', { message: err.message });
