@@ -10,7 +10,6 @@
       カテゴリー一覧へ戻る
     </app-router-link>
     <app-input
-      v-validate="'required'"
       class="category-edit__input"
       name="category"
       type="text"
