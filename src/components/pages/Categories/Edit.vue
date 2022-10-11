@@ -1,16 +1,14 @@
 <template>
-  <div>
-    <app-category-edit
-      :access="access"
-      :disabled="isLoading"
-      :error-message="errorMessage"
-      :done-message="doneMessage"
-      :edit-category-name="editCategoryName"
-      @update-value="updateValue"
-      @clear-message="clearMessage"
-      @handle-submit="updateCategory"
-    />
-  </div>
+  <app-category-edit
+    :access="access"
+    :disabled="isLoading"
+    :error-message="errorMessage"
+    :done-message="doneMessage"
+    :edit-category-name="editCategoryName"
+    @update-value="updateValue"
+    @clear-message="clearMessage"
+    @handle-submit="updateCategory"
+  />
 </template>
 
 <script>
