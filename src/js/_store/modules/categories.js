@@ -45,6 +45,10 @@ export default {
     updateValue(state, payload) {
       state.editCategoryName = payload;
     },
+    clearDeleteCategory(state) {
+      state.deleteCategoryName = '';
+      state.deleteCategoryId = null;
+    },
   },
 
   actions: {
@@ -91,6 +95,7 @@ export default {
           method: 'DELETE',
           url: `/category/${deleteCategoryId}`,
         }).then(() => {
+          commit('clearDeleteCategory');
           commit('doneMessage', { message: 'カテゴリーを削除しました' });
           resolve();
         }).catch((err) => {
