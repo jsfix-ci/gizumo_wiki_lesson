@@ -47,7 +47,7 @@ export default {
     updateEditValue(state, payload) {
       state.editCategory.name = payload;
     },
-    doneUpdateCategory(state) {
+    clearEditCategory(state) {
       state.editCategory.id = null;
       state.editCategory.name = '';
     },
@@ -133,6 +133,9 @@ export default {
       }).finally(() => {
         commit('toggleLoading');
       });
+    },
+    clearEditCategory({ commit }) {
+      commit('clearEditCategory');
     },
   },
 };

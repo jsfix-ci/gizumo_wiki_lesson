@@ -37,6 +37,7 @@ export default {
   },
   created() {
     this.clearMessage();
+    this.clearEditCategory();
     const { id } = this.$route.params;
     this.$store.dispatch('categories/getCategoryDetail', id);
   },
@@ -50,6 +51,9 @@ export default {
     updateCategory() {
       if (this.isLoading) return;
       this.$store.dispatch('categories/updateCategory');
+    },
+    clearEditCategory() {
+      this.$store.dispatch('categories/clearEditCategory');
     },
   },
 };
