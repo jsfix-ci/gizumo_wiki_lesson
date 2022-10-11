@@ -127,10 +127,11 @@ export default {
         url: `/category/${state.editCategory.id}`,
         params,
       }).then(() => {
-        commit('toggleLoading');
         commit('displayDoneMessage', { message: 'カテゴリーを更新しました。' });
       }).catch(err => {
         commit('failRequest', { message: err.message });
+      }).finally(() => {
+        commit('toggleLoading');
       });
     },
   },
