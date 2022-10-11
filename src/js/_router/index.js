@@ -10,6 +10,7 @@ import Home from '@Pages/Home';
 // カテゴリー
 import Categories from '@Pages/Categories';
 import CategoryManagement from '@Pages/Categories/CategoryManagement';
+import CategoryEdit from '@Pages/Categories/Edit';
 
 // 記事
 import Articles from '@Pages/Articles';
@@ -64,6 +65,11 @@ const router = new VueRouter({
           name: 'CategoryManagement',
           path: '',
           component: CategoryManagement,
+        },
+        {
+          name: 'CategoryEdit',
+          path: ':id',
+          component: CategoryEdit,
         },
       ],
     },
