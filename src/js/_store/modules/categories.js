@@ -15,6 +15,9 @@ export default {
 
 
   mutations: {
+    clearOldCategory(state) {
+      state.editCategoryName = '';
+    },
     editCategory(state, payload) {
       state.editCategoryName = payload.name;
       state.editCategoryId = payload.id;
@@ -125,6 +128,9 @@ export default {
     },
     clearMessage({ commit }) {
       commit('clearMessage');
+    },
+    clearOldCategory({ commit }) {
+      commit('clearOldCategory');
     },
   },
 };

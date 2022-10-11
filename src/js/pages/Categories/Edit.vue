@@ -37,6 +37,7 @@ export default {
     },
   },
   created() {
+    this.$store.dispatch('categories/clearOldCategory');
     const { id } = this.$route.params;
     this.$store.dispatch('categories/getCategoryDetail', id);
   },
