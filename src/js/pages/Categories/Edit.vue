@@ -19,10 +19,6 @@ export default {
   components: {
     appCategoryEdit: CategoryEdit,
   },
-  data() {
-    return {
-    };
-  },
   computed: {
     disabled() {
       return this.$store.state.categories.disabled;
@@ -45,8 +41,8 @@ export default {
     this.$store.dispatch('categories/getCategoryDetail', id);
   },
   methods: {
-    updateValue(current) {
-      this.$store.dispatch('categories/updateValue', current.target.value);
+    updateValue(event) {
+      this.$store.dispatch('categories/updateValue', event.target.value);
     },
     handleSubmit() {
       if (this.disabled) return;
