@@ -39,8 +39,8 @@ export default {
       state.deleteCategoryId = null;
       state.deleteCategoryName = '';
     },
-    updateValue(state, $event) {
-      state.editCategoryName = $event.target.value;
+    updateValue(state, event) {
+      state.editCategoryName = event.target.value;
     },
     confirmEditCategory(state, payload) {
       state.editCategoryName = payload.data.category.name;
