@@ -7,7 +7,6 @@
     :category="editCategoryName"
     @updateValue="updateValue"
     @editCategory="editCategory"
-    @clearCategory="clearCategory"
   />
 </template>
 
