@@ -11,6 +11,8 @@ export default {
     disabled: false,
     deleteCategoryId: null,
     deleteCategoryName: '',
+    editCategoryName: '',
+    editCategoryId: null,
   },
   mutations: {
     setAllCategories(state, payload) {
@@ -36,6 +38,13 @@ export default {
     doneDeleteCategory(state) {
       state.deleteCategoryId = null;
       state.deleteCategoryName = '';
+    },
+    updateValue(state, $event) {
+      state.editCategoryName = $event.target.value;
+    },
+    confirmEditCategory(state, payload) {
+      state.editCategoryName = payload.data.category.name;
+      state.editCategoryId = payload.data.category.id;
     },
   },
   actions: {
@@ -83,6 +92,34 @@ export default {
         }).then(() => {
           commit('doneDeleteCategory');
           commit('displayDoneMessage', { message: 'ドキュメントを削除しました' });
+          resolve();
+        }).catch((err) => {
+          commit('failRequest', { message: err.message });
+        });
+      });
+    },
+    updateValue({ commit }, $event) {
+      commit('updateValue', $event);
+    },
+    setEditCategoryName({ commit, rootGetters }, id) {
+      commit('clearMessage');
+      axios(rootGetters['auth/token'])({
+        method: 'GET',
+        url: `/category/${id}`,
+      }).then((response) => {
+        commit('confirmEditCategory', response);
+      });
+    },
+    editCategory({ commit, rootGetters, state }) {
+      return new Promise((resolve) => {
+        axios(rootGetters['auth/token'])({
+          method: 'PUT',
+          url: `/category/${state.editCategoryId}`,
+          data: {
+            name: state.editCategoryName,
+          },
+        }).then(() => {
+          commit('displayDoneMessage', { message: 'カテゴリーを更新しました' });
           resolve();
         }).catch((err) => {
           commit('failRequest', { message: err.message });

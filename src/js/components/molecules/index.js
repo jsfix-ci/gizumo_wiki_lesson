@@ -8,6 +8,7 @@ import UserCreate from './UserCreate';
 import UserTable from './UserTable';
 import UserDetail from './UserDetail';
 import UserList from './UserList';
+import CategoryEdit from './CategoryEdit';
 import CategoryPost from './CategoryPost';
 import CategoryList from './CategoryList';
 import ArticleEdit from './ArticleEdit';
@@ -27,6 +28,7 @@ export {
   UserTable,
   UserDetail,
   UserList,
+  CategoryEdit,
   CategoryPost,
   CategoryList,
   ArticleEdit,
