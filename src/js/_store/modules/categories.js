@@ -46,6 +46,10 @@ export default {
       state.editCategoryName = payload.data.category.name;
       state.editCategoryId = payload.data.category.id;
     },
+    clearCategory(state) {
+      state.editCategoryName = '';
+      state.editCategoryId = null;
+    },
   },
   actions: {
     getAllCategories({ commit, rootGetters }) {
@@ -125,6 +129,9 @@ export default {
           commit('failRequest', { message: err.message });
         });
       });
+    },
+    clearCategory({ commit }) {
+      commit('clearCategory');
     },
   },
 };

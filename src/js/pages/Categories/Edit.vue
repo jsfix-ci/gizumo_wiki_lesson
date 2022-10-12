@@ -7,6 +7,7 @@
     :category="editCategoryName"
     @updateValue="updateValue"
     @editCategory="editCategory"
+    @clearCategory="clearCategory"
   />
 </template>
 
@@ -37,6 +38,7 @@ export default {
   created() {
     const { id } = this.$route.params;
     this.$store.dispatch('categories/setEditCategoryName', id);
+    this.$store.dispatch('categories/clearCategory');
   },
   methods: {
     updateValue($event) {
