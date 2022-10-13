@@ -3,13 +3,20 @@
     <app-category-post
       class="category-post"
       :access="access"
+      :error-message="errorMessage"
+      :done-message="doneMessage"
+      :disabled="disabled"
+      :category="targetCategory"
+      @handleSubmit="handleSubmit"
+      @updateValue="uptargetCategory"
+      @clearMessage="clearMessage"
     />
     <app-category-list
       class="category-list"
       :categories="CategoriesList"
       :access="access"
-    />
-  </div>
+      />
+    </div>
 </template>
 
 <script>
@@ -20,6 +27,11 @@ export default {
     appCategoryList: CategoryList,
     appCategoryPost: CategoryPost,
   },
+  data() {
+    return {
+      targetCategory: '',
+    };
+  },
   computed: {
     CategoriesList() {
       return this.$store.state.categories.categoryList;
@@ -27,9 +39,35 @@ export default {
     access() {
       return this.$store.getters['auth/access'];
     },
+    doneMessage() {
+      return this.$store.state.categories.doneMessage;
+    },
+    disabled() {
+      return this.$store.state.categories.disabled;
+    },
+    errorMessage() {
+      return this.$store.state.categories.errorMessage;
+    },
+    category() {
+      return this.$store.state.categories.targetCategory;
+    },
   },
   created() {
     this.$store.dispatch('categories/getAllCategories');
+  },
+  methods: {
+    handleSubmit() {
+      if (this.loading) return;
+      this.$store.dispatch('categories/postCategories', this.targetCategory).then(() => {
+        this.$store.dispatch('categories/getAllCategories');
+      });
+    },
+    clearMessage() {
+      this.$store.dispatch('categories/clearMessage');
+    },
+    uptargetCategory(event) {
+      this.targetCategory = event.target.value;
+    },
   },
 };
 </script>
