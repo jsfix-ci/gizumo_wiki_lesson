@@ -15,8 +15,8 @@
       class="category-list"
       :categories="CategoriesList"
       :access="access"
-      />
-    </div>
+    />
+  </div>
 </template>
 
 <script>
