@@ -11,9 +11,6 @@ export default {
     doneMessage: '',
     loading: false,
   },
-  getters: {
-    categoryListLength: state => state.categoryList.length,
-  },
   mutations: {
     doneGetAllCategories(state, { categories }) {
       state.categoryList = categories.reverse();
