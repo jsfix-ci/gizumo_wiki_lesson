@@ -48,7 +48,7 @@ export default {
     },
   },
   created() {
-    this.$store.dispatch('getAllCategories');
+    this.$store.dispatch('categories/getAllCategories');
   },
 };
 </script>

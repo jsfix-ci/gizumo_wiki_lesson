@@ -1,6 +1,7 @@
 import axios from '@Helpers/axiosDefault';
 
 export default {
+  namespaced: true,
   state: {
     category: {
       id: null,
@@ -15,8 +16,8 @@ export default {
     doneGetAllCategories(state, categories) {
       state.categoryList = categories.reverse();
     },
-    failRequest(state, { message }) {
-      state.errorMessage = message;
+    failRequest(state, payload) {
+      state.errorMessage = payload.message;
     },
   },
   actions: {
