@@ -1,12 +1,14 @@
 <template>
   <div class="categories">
     <app-category-post
+      class="category-post"
       :category="category"
       :error-message="errorMessage"
       :done-message="doneMessage"
       :access="access"
     />
     <app-category-list
+      class="category-list"
       :theads="theads"
       :categories="categories"
       :access="access"
@@ -50,8 +52,15 @@ export default {
   },
 };
 </script>
-<style lang="postcss" scoped>
+<style lang="scss" scoped>
   .categories {
     display: flex;
+  }
+  .category-post {
+    width: 40%;
+    padding-right: 30px;
+  }
+  .category-list {
+    border-left: 5px solid $separator-color;
   }
 </style>
