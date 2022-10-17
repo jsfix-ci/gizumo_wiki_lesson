@@ -12,12 +12,11 @@ export default {
     loading: false,
   },
   mutations: {
-    doneGetAllCategories(state, { categories }) {
+    doneGetAllCategories(state, categories) {
       state.categoryList = categories.reverse();
     },
     failRequest(state, { message }) {
       state.errorMessage = message;
-      state.loading = false;
     },
   },
   actions: {
@@ -26,11 +25,7 @@ export default {
         method: 'GET',
         url: '/category',
       }).then(res => {
-        const categories = res.data.categories.map(data => ({
-          id: data.id,
-          name: data.name,
-        }));
-        commit('doneGetAllCategories', { categories });
+        commit('doneGetAllCategories', res.data.categories);
       }).catch(err => {
         commit('failRequest', { message: err.message });
       });
