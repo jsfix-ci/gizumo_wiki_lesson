@@ -2,10 +2,13 @@
   <div class="categories">
     <app-category-post
       class="category-post"
-      :category="category"
+      :category="targetName"
       :error-message="errorMessage"
       :done-message="doneMessage"
       :access="access"
+      @clear-message="clearMessage"
+      @update-value="updateValue"
+      @handle-submit="handleSubmit"
     />
     <app-category-list
       class="category-list"
@@ -28,12 +31,10 @@ export default {
   data() {
     return {
       theads: ['カテゴリー名'],
+      targetName: '',
     };
   },
   computed: {
-    category() {
-      return this.$store.state.category;
-    },
     errorMessage() {
       return this.$store.state.errorMessage;
     },
@@ -49,6 +50,17 @@ export default {
   },
   created() {
     this.$store.dispatch('categories/getAllCategories');
+  },
+  methods: {
+    clearMessage() {
+      this.$store.dispatch('categories/clearMessage');
+    },
+    updateValue(event) {
+      this.targetName = event.target.value;
+    },
+    handleSubmit() {
+      this.$store.dispatch('categories/createCategory', this.targetName);
+    },
   },
 };
 </script>
