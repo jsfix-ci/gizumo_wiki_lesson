@@ -32,6 +32,9 @@ export default {
     doneCreateCategory(state, category) {
       state.categoryList.unshift(category);
     },
+    displayDoneMessage(state, payload) {
+      state.doneMessage = payload.message;
+    },
   },
   actions: {
     clearMessage({ commit }) {
@@ -64,6 +67,7 @@ export default {
           // NOTE: エラー時はresponse.data.codeが0で返ってくる。
           if (response.data.code === 0) throw new Error(response.data.message);
           commit('doneCreateCategory', response.data.category);
+          commit('displayDoneMessage', { message: 'カテゴリーを作成しました' }); 
           resolve();
         }).catch(err => {
           commit('failRequest', { message: err.response.data.message });

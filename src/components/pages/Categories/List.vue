@@ -36,10 +36,10 @@ export default {
   },
   computed: {
     errorMessage() {
-      return this.$store.state.errorMessage;
+      return this.$store.state.categories.errorMessage;
     },
     doneMessage() {
-      return this.$store.state.doneMessage;
+      return this.$store.state.categories.doneMessage;
     },
     categories() {
       return this.$store.state.categories.categoryList;
