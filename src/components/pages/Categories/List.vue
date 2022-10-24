@@ -74,6 +74,7 @@ export default {
     padding-right: 30px;
   }
   .category-list {
+    width: 100%;
     border-left: 5px solid $separator-color;
   }
 </style>
