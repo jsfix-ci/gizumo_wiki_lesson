@@ -60,7 +60,7 @@ export default {
         }).then(response => {
           if (response.data.code === 0) throw new Error(response.data.message);
           commit('doneCreateCategory', response.data.category);
-          commit('displayDoneMessage', { message: 'カテゴリーを作成しました' }); 
+          commit('displayDoneMessage', { message: 'カテゴリーを作成しました' });
           resolve();
         }).catch(err => {
           commit('failRequest', { message: err.response.data.message });
