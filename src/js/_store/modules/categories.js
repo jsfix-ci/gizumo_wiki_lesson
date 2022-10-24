@@ -20,9 +20,6 @@ export default {
     applyRequest(state) {
       state.loading = true;
     },
-    updateValue(state, { name, value }) {
-      state.category = { ...state.category, [name]: value };
-    },
     doneGetAllCategories(state, categories) {
       state.categoryList = categories.reverse();
     },
@@ -39,9 +36,6 @@ export default {
   actions: {
     clearMessage({ commit }) {
       commit('clearMessage');
-    },
-    updateValue({ commit }) {
-      commit('updateValue');
     },
     getAllCategories({ commit, rootGetters }) {
       axios(rootGetters['auth/token'])({
