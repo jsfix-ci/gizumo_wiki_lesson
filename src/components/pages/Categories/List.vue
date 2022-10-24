@@ -63,8 +63,9 @@ export default {
       this.targetName = event.target.value;
     },
     handleSubmit() {
-      this.$store.dispatch('categories/createCategory', this.targetName);
-      this.$store.dispatch('categories/getAllCategories');
+      this.$store.dispatch('categories/createCategory', this.targetName).then(() => {
+        this.$store.dispatch('categories/getAllCategories');
+      });
     },
   },
 };
