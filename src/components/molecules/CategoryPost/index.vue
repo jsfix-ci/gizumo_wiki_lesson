@@ -70,6 +70,9 @@ export default {
     },
   },
   methods: {
+    updateValue($event) {
+      this.$emit('update-value', $event.target);
+    },
     addCategory() {
       if (!this.access.create) return;
       this.$emit('clear-message');

@@ -2,10 +2,14 @@
   <div class="categories">
     <app-category-post
       class="category-post"
-      :category="category"
+      :category="targetName"
       :error-message="errorMessage"
       :done-message="doneMessage"
       :access="access"
+      :disabled="disabled"
+      @clear-message="clearMessage"
+      @update-value="updateValue"
+      @handle-submit="handleSubmit"
     />
     <app-category-list
       class="category-list"
@@ -28,17 +32,15 @@ export default {
   data() {
     return {
       theads: ['カテゴリー名'],
+      targetName: '',
     };
   },
   computed: {
-    category() {
-      return this.$store.state.category;
-    },
     errorMessage() {
-      return this.$store.state.errorMessage;
+      return this.$store.state.categories.errorMessage;
     },
     doneMessage() {
-      return this.$store.state.doneMessage;
+      return this.$store.state.categories.doneMessage;
     },
     categories() {
       return this.$store.state.categories.categoryList;
@@ -46,9 +48,25 @@ export default {
     access() {
       return this.$store.getters['auth/access'];
     },
+    disabled() {
+      return this.$store.state.categories.loading;
+    },
   },
   created() {
     this.$store.dispatch('categories/getAllCategories');
+  },
+  methods: {
+    clearMessage() {
+      this.$store.dispatch('categories/clearMessage');
+    },
+    updateValue(event) {
+      this.targetName = event.target.value;
+    },
+    handleSubmit() {
+      this.$store.dispatch('categories/createCategory', this.targetName).then(() => {
+        this.$store.dispatch('categories/getAllCategories');
+      });
+    },
   },
 };
 </script>
@@ -61,6 +79,7 @@ export default {
     padding-right: 30px;
   }
   .category-list {
+    width: 100%;
     border-left: 5px solid $separator-color;
   }
 </style>
