@@ -60,6 +60,7 @@ export default {
     },
     handleSubmit() {
       this.$store.dispatch('categories/createCategory', this.targetName);
+      this.$store.dispatch('categories/getAllCategories');
     },
   },
 };

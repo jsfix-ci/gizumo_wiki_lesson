@@ -26,9 +26,6 @@ export default {
     failRequest(state, payload) {
       state.errorMessage = payload.message;
     },
-    doneCreateCategory(state, category) {
-      state.categoryList.unshift(category);
-    },
     displayDoneMessage(state, payload) {
       state.doneMessage = payload.message;
     },
@@ -59,7 +56,6 @@ export default {
           data,
         }).then(response => {
           if (response.data.code === 0) throw new Error(response.data.message);
-          commit('doneCreateCategory', response.data.category);
           commit('displayDoneMessage', { message: 'カテゴリーを作成しました' });
           resolve();
         }).catch(err => {
