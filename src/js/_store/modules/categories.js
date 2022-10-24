@@ -17,9 +17,6 @@ export default {
       state.errorMessage = '';
       state.doneMessage = '';
     },
-    applyRequest(state) {
-      state.loading = true;
-    },
     doneGetAllCategories(state, categories) {
       state.categoryList = categories.reverse();
     },
@@ -28,6 +25,9 @@ export default {
     },
     displayDoneMessage(state, payload) {
       state.doneMessage = payload.message;
+    },
+    toggleLoading(state) {
+      state.loading = !state.loading;
     },
   },
   actions: {
@@ -45,7 +45,7 @@ export default {
       });
     },
     createCategory({ commit, rootGetters }, category) {
-      commit('applyRequest');
+      commit('toggleLoading');
 
       return new Promise(resolve => {
         const data = new URLSearchParams();
@@ -56,9 +56,11 @@ export default {
           data,
         }).then(response => {
           if (response.data.code === 0) throw new Error(response.data.message);
+          commit('toggleLoading');
           commit('displayDoneMessage', { message: 'カテゴリーを作成しました' });
           resolve();
         }).catch(err => {
+          commit('toggleLoading');
           commit('failRequest', { message: err.response.data.message });
         });
       });

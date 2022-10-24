@@ -6,6 +6,7 @@
       :error-message="errorMessage"
       :done-message="doneMessage"
       :access="access"
+      :disabled="disabled"
       @clear-message="clearMessage"
       @update-value="updateValue"
       @handle-submit="handleSubmit"
@@ -46,6 +47,9 @@ export default {
     },
     access() {
       return this.$store.getters['auth/access'];
+    },
+    disabled() {
+      return this.$store.state.categories.loading;
     },
   },
   created() {
