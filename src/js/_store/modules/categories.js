@@ -20,7 +20,7 @@ export default {
     applyRequest(state) {
       state.loading = true;
     },
-    updateValue(state, { name, value }){
+    updateValue(state, { name, value }) {
       state.category = { ...state.category, [name]: value };
     },
     doneGetAllCategories(state, categories) {
@@ -64,7 +64,6 @@ export default {
           url: '/category',
           data,
         }).then(response => {
-          // NOTE: エラー時はresponse.data.codeが0で返ってくる。
           if (response.data.code === 0) throw new Error(response.data.message);
           commit('doneCreateCategory', response.data.category);
           commit('displayDoneMessage', { message: 'カテゴリーを作成しました' }); 
