@@ -17,6 +17,7 @@
       :categories="categories"
       :access="access"
       @open-modal="openModal"
+      @handle-click="handleClick"
     />
   </div>
 </template>
@@ -71,6 +72,10 @@ export default {
       this.$store.dispatch('categories/createCategory', this.targetName).then(() => {
         this.$store.dispatch('categories/getAllCategories');
       });
+    },
+    handleClick() {
+      this.$store.dispatch('categories/deleteCategory');
+      this.toggleModal();
     },
   },
 };
