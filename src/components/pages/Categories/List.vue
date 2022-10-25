@@ -16,6 +16,7 @@
       :theads="theads"
       :categories="categories"
       :access="access"
+      @open-modal="openModal"
     />
   </div>
 </template>
@@ -56,6 +57,10 @@ export default {
     this.$store.dispatch('categories/getAllCategories');
   },
   methods: {
+    openModal(categoryId) {
+      this.$store.dispatch('categories/confirmDeleteCategory', categoryId);
+      this.toggleModal();
+    },
     clearMessage() {
       this.$store.dispatch('categories/clearMessage');
     },

@@ -7,6 +7,7 @@ export default {
       id: null,
       name: '',
     },
+    deleteCategoryId: '',
     categoryList: [],
     errorMessage: '',
     doneMessage: '',
@@ -28,6 +29,9 @@ export default {
     },
     toggleLoading(state) {
       state.loading = !state.loading;
+    },
+    confirmDeleteCategory(state, { categoryId }) {
+      state.deleteCategoryId = categoryId;
     },
   },
   actions: {
@@ -64,6 +68,9 @@ export default {
           commit('failRequest', { message: err.response.data.message });
         });
       });
+    },
+    confirmDeleteCategory({ commit }, categoryId) {
+      commit('confirmDeleteCategory', { categoryId });
     },
   },
 };
