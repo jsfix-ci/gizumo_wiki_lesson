@@ -7,7 +7,7 @@ export default {
       id: null,
       name: '',
     },
-    deleteCategoryId: '',
+    deleteCategoryId: null,
     deleteCategoryName: '',
     categoryList: [],
     errorMessage: '',
@@ -40,7 +40,7 @@ export default {
       state.deleteCategoryName = categoryName;
     },
     doneDeleteCategory(state) {
-      state.deleteCategoryId = '';
+      state.deleteCategoryId = null;
     },
   },
   actions: {
