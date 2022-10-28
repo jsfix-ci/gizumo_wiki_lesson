@@ -1,6 +1,9 @@
 <template>
   <div class="category-list">
-    <table class="category-list__table">
+    <table
+      v-if="categories.length"
+      class="category-list__table"
+    >
       <thead class="category-list__table__head">
         <tr>
           <th
@@ -54,6 +57,12 @@
         </tr>
       </transition-group>
     </table>
+    <p
+      v-else
+      class="category-list-none"
+    >
+      カテゴリーがありません
+    </p>
     <app-modal>
       <div class="category-list__modal">
         <app-text
@@ -163,8 +172,14 @@ export default {
       }
     }
   }
+  &-none {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 25px;
+    height: 100vh;
+  }
 }
-
 .category-list__modal {
   text-align: center;
   &__name {
