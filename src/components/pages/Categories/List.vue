@@ -6,7 +6,7 @@
     />
     <app-category-list
       class="category-list"
-      :categories="CategoriesList"
+      :categories="categoriesList"
       :access="access"
     />
   </div>
@@ -21,7 +21,7 @@ export default {
     appCategoryPost: CategoryPost,
   },
   computed: {
-    CategoriesList() {
+    categoriesList() {
       return this.$store.state.categories.categoryList;
     },
     access() {
