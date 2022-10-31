@@ -41,6 +41,7 @@ export default {
     },
     doneDeleteCategory(state) {
       state.deleteCategoryId = null;
+      state.deleteCategoryName = '';
     },
   },
   actions: {
