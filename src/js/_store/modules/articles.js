@@ -28,6 +28,10 @@ export default {
     loading: false,
     doneMessage: '',
     errorMessage: '',
+    pageData: {
+      currentPage: null,
+      totalPages: null,
+    },
   },
   getters: {
     transformedArticles(state) {
@@ -83,15 +87,14 @@ export default {
       );
       state.articleList = [...filteredArticles];
     },
-    doneGetAllArticles(state, payload) {
-      state.articleList = [...payload.articles];
+    doneGetArticlesData(state, payload) {
+      state.articleList = payload;
     },
     failRequest(state, { message }) {
       state.errorMessage = message;
     },
     selectedArticleCategory(state, payload) {
       state.targetArticle.category = {
-
         ...state.targetArticle.category,
         ...payload.category,
       };
@@ -115,20 +118,22 @@ export default {
     displayDoneMessage(state, payload = { message: '成功しました' }) {
       state.doneMessage = payload.message;
     },
+    getPageNumber(state, { current_page: currentPage, last_page: totalPages }) {
+      state.pageData.currentPage = currentPage;
+      state.pageData.totalPages = totalPages;
+    },
   },
   actions: {
     initPostArticle({ commit }) {
       commit('initPostArticle');
     },
-    getAllArticles({ commit, rootGetters }) {
+    getArticlesData({ commit, rootGetters }, pageId) {
       axios(rootGetters['auth/token'])({
         method: 'GET',
-        url: '/article',
-      }).then(res => {
-        const payload = {
-          articles: res.data.articles,
-        };
-        commit('doneGetAllArticles', payload);
+        url: `/article?page=${pageId}`,
+      }).then(({ data }) => {
+        commit('getPageNumber', data.meta);
+        commit('doneGetArticlesData', data.articles);
       }).catch(err => {
         commit('failRequest', { message: err.message });
       });
