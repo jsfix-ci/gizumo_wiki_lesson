@@ -81,6 +81,9 @@
         削除
       </app-button>
     </app-modal>
+    <app-page-nation
+      @handle-page-button-click="pushPageId"
+    />
   </div>
 </template>
 
@@ -92,6 +95,7 @@ import {
   Button,
   Text,
 } from '@Components/atoms';
+import PageNation from '@Components/molecules/PageNation/index.vue';
 
 export default {
   components: {
@@ -100,6 +104,7 @@ export default {
     appRouterLink: RouterLink,
     appButton: Button,
     appText: Text,
+    appPageNation: PageNation,
   },
   props: {
     className: {
@@ -139,6 +144,12 @@ export default {
     openModal(articleId) {
       if (!this.access.delete) return;
       this.$emit('open-modal', articleId);
+    },
+    pushPageId(pageId) {
+      this.$router.push({
+        path: '/articles',
+        query: { page: pageId },
+      }, () => {});
     },
   },
 };
