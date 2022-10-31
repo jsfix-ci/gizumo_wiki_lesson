@@ -7,10 +7,16 @@ export default {
       id: null,
       name: '',
     },
+    deleteCategoryId: null,
+    deleteCategoryName: '',
     categoryList: [],
     errorMessage: '',
     doneMessage: '',
     loading: false,
+  },
+  getters: {
+    deleteCategoryId: state => state.deleteCategoryId,
+    deleteCategoryName: state => state.deleteCategoryName,
   },
   mutations: {
     clearMessage(state) {
@@ -28,6 +34,14 @@ export default {
     },
     toggleLoading(state) {
       state.loading = !state.loading;
+    },
+    openDeleteModal(state, { categoryId, categoryName }) {
+      state.deleteCategoryId = categoryId;
+      state.deleteCategoryName = categoryName;
+    },
+    doneDeleteCategory(state) {
+      state.deleteCategoryId = null;
+      state.deleteCategoryName = '';
     },
   },
   actions: {
@@ -62,6 +76,28 @@ export default {
         }).catch(err => {
           commit('toggleLoading');
           commit('failRequest', { message: err.response.data.message });
+        });
+      });
+    },
+    openDeleteModal({ commit }, { categoryId, categoryName }) {
+      commit('openDeleteModal', { categoryId, categoryName });
+    },
+    deleteCategory({ commit, rootGetters, state }) {
+      commit('clearMessage');
+      return new Promise(resolve => {
+        const data = new URLSearchParams();
+        data.append('id', state.deleteCategoryId);
+        axios(rootGetters['auth/token'])({
+          method: 'DELETE',
+          url: `/category/${state.deleteCategoryId}`,
+          data,
+        }).then(response => {
+          if (response.data.code === 0) throw new Error(response.data.message);
+          commit('doneDeleteCategory');
+          commit('displayDoneMessage', { message: 'カテゴリーを削除しました' });
+          resolve();
+        }).catch(err => {
+          commit('failRequest', { message: err.message });
         });
       });
     },
