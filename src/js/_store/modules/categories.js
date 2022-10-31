@@ -82,14 +82,14 @@ export default {
     openDeleteModal({ commit }, { categoryId, categoryName }) {
       commit('openDeleteModal', { categoryId, categoryName });
     },
-    deleteCategory({ commit, rootGetters }) {
+    deleteCategory({ commit, rootGetters, state }) {
       commit('clearMessage');
       return new Promise(resolve => {
         const data = new URLSearchParams();
-        data.append('id', rootGetters['categories/deleteCategoryId']);
+        data.append('id', state.deleteCategoryId);
         axios(rootGetters['auth/token'])({
           method: 'DELETE',
-          url: `/category/${rootGetters['categories/deleteCategoryId']}`,
+          url: `/category/${state.deleteCategoryId}`,
           data,
         }).then(response => {
           if (response.data.code === 0) throw new Error(response.data.message);
