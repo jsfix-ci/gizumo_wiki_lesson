@@ -132,7 +132,7 @@ export default {
         method: 'GET',
         url: `/article?page=${pageId}`,
       }).then(({ data }) => {
-        commit('getPageNumber', data.meta);
+        commit('setPageNumber', data.meta);
         commit('doneGetArticlesData', data.articles);
       }).catch(err => {
         commit('failRequest', { message: err.message });
