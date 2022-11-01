@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "eslint": "eslint --fix 'src/{js,components}/**/*.{js,vue}' --ignore-path .eslintignore",
+    "eslint": "eslint --fix 'src/{js,components}/**/*.{js,vue}'",
     "test:watch": "NODE_ENV=test jest --watchAll --coverage",
     "publish": "pm2 start --image-name dev_Gizumo_wiki",
     "stop": "pm2 stop dev_Gizumo_wiki",
@@ -38,7 +38,7 @@
     "@vitejs/plugin-legacy": "^2.0.1",
     "@vue/test-utils": "^1.0.0-beta.29",
     "autoprefixer": "^9.4.7",
-    "eslint": "^8.23.0",
+    "eslint": "^8.26.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-import-resolver-alias": "^1.1.2",
     "eslint-plugin-import": "^2.26.0",
