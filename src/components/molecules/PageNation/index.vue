@@ -46,10 +46,10 @@ export default {
       return this.$store.state.articles.pageData.totalPages;
     },
     pageRange() {
-      const range = [...Array(this.totalPages).keys()].map(i => i + 1);
       if (this.totalPages === null) {
         return false;
       }
+      const range = [...Array(this.totalPages).keys()].map(i => i + 1);
       if (this.currentPage <= 3) {
         const result = range.slice(0, 5);
         return result;
