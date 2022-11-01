@@ -51,15 +51,12 @@ export default {
       }
       const range = [...Array(this.totalPages).keys()].map(i => i + 1);
       if (this.currentPage <= 3) {
-        const result = range.slice(0, 5);
-        return result;
+        return range.slice(0, 5);
       }
       if (this.totalPages - 2 <= this.currentPage) {
-        const result = range.slice(-5);
-        return result;
+        return range.slice(-5);
       }
-      const result = range.slice(this.currentPage - 3, this.currentPage + 2);
-      return result;
+      return range.slice(this.currentPage - 3, this.currentPage + 2);
     },
   },
 };
