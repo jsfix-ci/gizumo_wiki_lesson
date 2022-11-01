@@ -118,7 +118,7 @@ export default {
     displayDoneMessage(state, payload = { message: '成功しました' }) {
       state.doneMessage = payload.message;
     },
-    getPageNumber(state, { current_page: currentPage, last_page: totalPages }) {
+    setPageNumber(state, { current_page: currentPage, last_page: totalPages }) {
       state.pageData.currentPage = currentPage;
       state.pageData.totalPages = totalPages;
     },
