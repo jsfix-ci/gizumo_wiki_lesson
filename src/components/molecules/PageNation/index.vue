@@ -55,7 +55,7 @@ export default {
         return result;
       }
       if (this.totalPages - 2 <= this.currentPage) {
-        const result = range.slice(this.totalPages - 5);
+        const result = range.slice(-5);
         return result;
       }
       const result = range.slice(this.currentPage - 3, this.currentPage + 2);
