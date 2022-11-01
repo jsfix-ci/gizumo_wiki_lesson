@@ -22,7 +22,7 @@ export default {
   },
   mixins: [Mixins],
   beforeRouteUpdate(to, from, next) {
-    this.fetchArticles(Number(to.query.page));
+    this.fetchArticles(to.query.page);
     next();
   },
   data() {
@@ -42,7 +42,7 @@ export default {
     },
   },
   created() {
-    this.fetchArticles(Number(this.$route.query.page));
+    this.fetchArticles(this.$route.query.page);
   },
   methods: {
     openModal(articleId) {

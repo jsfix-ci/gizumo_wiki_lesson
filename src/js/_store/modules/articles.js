@@ -127,7 +127,7 @@ export default {
     initPostArticle({ commit }) {
       commit('initPostArticle');
     },
-    getArticlesData({ commit, rootGetters }, pageId) {
+    getArticlesData({ commit, rootGetters }, pageId = 1) {
       axios(rootGetters['auth/token'])({
         method: 'GET',
         url: `/article?page=${pageId}`,
