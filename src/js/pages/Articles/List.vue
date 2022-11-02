@@ -9,7 +9,7 @@
       @openModal="openModal"
       @handleClick="handleClick"
     />
-    <app-article-pager
+    <app-page-nation
       :total-page="totalPage"
       :articles="articlesList"
       :current-page="currentPage"
@@ -20,13 +20,13 @@
 </template>
 
 <script>
-import { ArticleList, ArticlePager } from '@Components/molecules';
+import { ArticleList, PageNation } from '@Components/molecules';
 import Mixins from '@Helpers/mixins';
 
 export default {
   components: {
     appArticleList: ArticleList,
-    appArticlePager: ArticlePager,
+    appPageNation: PageNation,
   },
   mixins: [Mixins],
   beforeRouteUpdate(to, from, next) {

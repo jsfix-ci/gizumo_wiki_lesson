@@ -4,7 +4,7 @@ import Profile from './Profile';
 import SidebarList from './SidebarList';
 import HomeArticle from './HomeArticle';
 import ArticleList from './ArticleList';
-import ArticlePager from './ArticlePager';
+import PageNation from './PageNation';
 import UserCreate from './UserCreate';
 import UserTable from './UserTable';
 import UserDetail from './UserDetail';
@@ -35,7 +35,7 @@ export {
   ArticleEdit,
   ArticlePost,
   ArticleDetail,
-  ArticlePager,
+  PageNation,
   DeleteModal,
   Notice,
 };
