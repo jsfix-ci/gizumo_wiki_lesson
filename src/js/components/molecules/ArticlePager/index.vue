@@ -1,6 +1,6 @@
 <template lang="html">
-  <ul>
-    <li>
+  <ul class="pageNation__lists">
+    <li class="pageNation__list">
       <app-button
         :disabled="currentPage === 1"
         @click="$emit('handlePageClick', 1)"
@@ -8,18 +8,17 @@
         1
       </app-button>
     </li>
-    <li v-show="frontDot" class="dots">•••</li>
-    <li v-for="array in pageNation" v-cloak :key="array">
+    <li v-show="frontDot" class="dots pageNation__list">•••</li>
+    <li v-for="array in pageNation" :key="array" class="pageNation__list">
       <app-button
-        v-cloak
         :disabled="currentPage === array"
         @click="$emit('handlePageClick', array)"
       >
         {{ array }}
       </app-button>
     </li>
-    <li v-show="endDot" class="dots">•••</li>
-    <li>
+    <li v-show="endDot" class="dots pageNation__list">•••</li>
+    <li class="pageNation__list">
       <app-button
         :disabled="currentPage === totalPage"
         @click="$emit('handlePageClick', totalPage)"
@@ -96,19 +95,17 @@ export default {
       return sliceArray;
     },
   },
-  methods: {
-  },
 };
 </script>
 
 <style lang="postcss" scoped>
-ul {
+.pageNation__lists {
   display: flex;
   justify-content: center;
   margin-top: 30px;
 }
 
-li {
+.pageNation__list {
   margin-left: 20px;
 }
 
@@ -117,9 +114,5 @@ li {
   letter-spacing: 3px;
   line-height: 37px;
   color: gray;
-}
-
-[v-cloak] {
-  display: none;
 }
 </style>

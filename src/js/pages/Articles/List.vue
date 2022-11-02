@@ -87,8 +87,6 @@ export default {
           }).catch(() => {
             // console.log(err);
           });
-      } else {
-        // this.$store.dispatch('articles/pageMove');
       }
     },
     fetchArticles(pageId) {
