@@ -54,6 +54,7 @@ export default {
   },
   methods: {
     handleSubmit() {
+      if (this.disabled) return;
       this.$store.dispatch('categories/postCategories', this.targetCategory).then(() => {
         this.$store.dispatch('categories/getAllCategories');
       });
