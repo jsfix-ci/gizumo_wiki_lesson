@@ -2,7 +2,14 @@
   <div class="category">
     <app-category-post
       class="category-post"
+      :category="targetCategory"
+      :error-message="errorMessage"
+      :done-message="doneMessage"
+      :disabled="disabled"
       :access="access"
+      @handle-submit="handleSubmit"
+      @update-value="uptargetCategory"
+      @clear-message="clearMessage"
     />
     <app-category-list
       class="category-list"
@@ -20,9 +27,23 @@ export default {
     appCategoryList: CategoryList,
     appCategoryPost: CategoryPost,
   },
+  data() {
+    return {
+      targetCategory: '',
+    };
+  },
   computed: {
     categoriesList() {
       return this.$store.state.categories.categoryList;
+    },
+    disabled() {
+      return this.$store.state.categories.disabled;
+    },
+    errorMessage() {
+      return this.$store.state.categories.errorMessage;
+    },
+    doneMessage() {
+      return this.$store.state.categories.doneMessage;
     },
     access() {
       return this.$store.getters['auth/access'];
@@ -30,6 +51,20 @@ export default {
   },
   created() {
     this.$store.dispatch('categories/getAllCategories');
+  },
+  methods: {
+    handleSubmit() {
+      if (this.disabled) return;
+      this.$store.dispatch('categories/postCategories', this.targetCategory).then(() => {
+        this.$store.dispatch('categories/getAllCategories');
+      });
+    },
+    uptargetCategory(event) {
+      this.targetCategory = event.target.value;
+    },
+    clearMessage() {
+      this.$store.dispatch('categories/clearMessage');
+    },
   },
 };
 </script>
