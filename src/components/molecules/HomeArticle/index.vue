@@ -22,7 +22,7 @@
 
     <div class="home-article__button">
       <app-router-link
-        to="/articles"
+        to="/articles?page=1"
         round
         bg-theme-color
         white
