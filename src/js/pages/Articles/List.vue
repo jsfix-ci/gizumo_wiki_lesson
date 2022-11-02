@@ -92,7 +92,7 @@ export default {
       }
     },
     fetchArticles(pageId) {
-      this.$store.dispatch('articles/pageMove', pageId);
+      this.$store.dispatch('articles/getArticlesPageDetail', pageId);
     },
   },
 };

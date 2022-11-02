@@ -19,7 +19,7 @@ export default {
     },
   },
   created() {
-    this.$store.dispatch('articles/pageMove');
+    this.$store.dispatch('articles/getArticlesPageDetail');
   },
 };
 </script>
