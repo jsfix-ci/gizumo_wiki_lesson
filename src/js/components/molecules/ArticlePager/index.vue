@@ -8,7 +8,7 @@
         1
       </app-button>
     </li>
-    <li v-show="frontDot" class="dots pageNation__list">•••</li>
+    <li v-if="currentPage > 3" class="dots pageNation__list">•••</li>
     <li v-for="array in pageNation" :key="array" class="pageNation__list">
       <app-button
         :disabled="currentPage === array"
@@ -17,7 +17,7 @@
         {{ array }}
       </app-button>
     </li>
-    <li v-show="endDot" class="dots pageNation__list">•••</li>
+    <li v-if="currentPage < totalPage - 2" class="dots pageNation__list">•••</li>
     <li class="pageNation__list">
       <app-button
         :disabled="currentPage === totalPage"
@@ -61,20 +61,16 @@ export default {
       type: Boolean,
       default: false,
     },
+    currentPage: {
+      type: Number,
+      default: null,
+    },
+    totalPage: {
+      type: Number,
+      default: null,
+    },
   },
   computed: {
-    currentPage() {
-      return this.$store.state.articles.currentPage;
-    },
-    totalPage() {
-      return this.$store.state.articles.totalPage;
-    },
-    frontDot() {
-      return this.$store.state.articles.frontDot;
-    },
-    endDot() {
-      return this.$store.state.articles.endDot;
-    },
     pageNation() {
       let start = null;
       let end = null;

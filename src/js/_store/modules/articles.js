@@ -32,8 +32,6 @@ export default {
     perPage: 30,
     currentPage: null,
     totalPage: null,
-    frontDot: false,
-    endDot: false,
   },
   getters: {
     transformedArticles(state) {

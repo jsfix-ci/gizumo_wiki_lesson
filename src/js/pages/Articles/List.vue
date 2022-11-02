@@ -10,7 +10,9 @@
       @handleClick="handleClick"
     />
     <app-article-pager
+      :total-page="totalPage"
       :articles="articlesList"
+      :current-page="currentPage"
       :disabled="disabled"
       @handlePageClick="handlePageClick"
     />
@@ -37,6 +39,12 @@ export default {
     };
   },
   computed: {
+    totalPage() {
+      return this.$store.state.articles.totalPage;
+    },
+    currentPage() {
+      return this.$store.state.articles.currentPage;
+    },
     articlesList() {
       return this.$store.state.articles.articleList;
     },
@@ -49,14 +57,8 @@ export default {
     perPage() {
       return this.$store.state.articles.perPage;
     },
-    totalPage() {
-      return this.$store.state.articles.totalPage;
-    },
     disabled() {
       return this.$store.state.categories.disabled;
-    },
-    currentPage() {
-      return this.$store.state.categories.currentPage;
     },
   },
   created() {
