@@ -20,7 +20,8 @@
           name="categoryName"
           type="text"
           placeholder="カテゴリー名"
-          data-vv-as=""
+          data-vv-as="カテゴリー名"
+          :error-messages="errors.collect('categoryName')"
           :value="categoryName"
           @update-value="$emit('edited-name', $event)"
         />
