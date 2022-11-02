@@ -28,6 +28,12 @@ export default {
     loading: false,
     doneMessage: '',
     errorMessage: '',
+    page: 1,
+    perPage: 30,
+    currentPage: null,
+    totalPage: null,
+    frontDot: false,
+    endDot: false,
   },
   getters: {
     transformedArticles(state) {
@@ -47,6 +53,9 @@ export default {
     deleteArticleId: state => state.deleteArticleId,
   },
   mutations: {
+    currentPageDisplay(state, payload) {
+      state.articleList = payload;
+    },
     initPostArticle(state) {
       state.targetArticle = Object.assign({}, {
         id: null,
@@ -80,6 +89,22 @@ export default {
       state.targetArticle = Object.assign({}, { ...state.targetArticle }, {
         content: payload.content,
       });
+    },
+    currentPageWatch(state, pageId) {
+      state.currentPage = pageId.current_page;
+      state.totalPage = pageId.last_page;
+    },
+    changeBoolean(state, current) {
+      if (current.current_page <= 3) {
+        state.frontDot = false;
+        state.endDot = true;
+      } else if (current.current_page >= state.totalPage - 2) {
+        state.frontDot = true;
+        state.endDot = false;
+      } else {
+        state.frontDot = true;
+        state.endDot = true;
+      }
     },
     doneFilteredArticles(state, payload) {
       const filteredArticles = payload.articles.filter(
@@ -124,15 +149,16 @@ export default {
     initPostArticle({ commit }) {
       commit('initPostArticle');
     },
-    getAllArticles({ commit, rootGetters }) {
+    pageMove({ commit, rootGetters }, pageId = 1) {
       axios(rootGetters['auth/token'])({
         method: 'GET',
-        url: '/article',
+        url: `/article?page=${pageId}`,
       }).then((res) => {
-        const payload = {
-          articles: res.data.articles,
-        };
-        commit('doneGetAllArticles', payload);
+        const current = res.data.meta;
+        const payload = res.data.articles;
+        commit('currentPageWatch', current);
+        commit('currentPageDisplay', payload);
+        commit('changeBoolean', current);
       }).catch((err) => {
         commit('failRequest', { message: err.message });
       });
