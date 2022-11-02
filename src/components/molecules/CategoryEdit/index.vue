@@ -13,7 +13,7 @@
       </app-router-link>
     </div>
 
-    <form class="category-edit__form">
+    <form class="category-edit__form" @submit.prevent="updateCategory">
       <div class="category-edit__input">
         <app-input
           v-validate="'required'"
@@ -22,7 +22,7 @@
           placeholder="カテゴリー名"
           data-vv-as=""
           :value="categoryName"
-          @update-value="updateValue"
+          @update-value="$emit('edited-name', $event)"
         />
       </div>
 
@@ -43,7 +43,7 @@ import {
   Button,
   Heading,
   Input,
-  Text,
+  // Text,
   RouterLink,
 } from '@Components/atoms';
 
@@ -52,14 +52,45 @@ export default {
     appButton: Button,
     appHeading: Heading,
     appInput: Input,
-    appText: Text,
+    // appText: Text,
     appRouterLink: RouterLink,
   },
 
   props: {
+    category: {
+      type: Object,
+      default: () => ({}),
+    },
+    categoryId: {
+      type: String,
+      default: '',
+    },
     categoryName: {
       type: String,
       default: '',
+    },
+    access: {
+      type: Object,
+      default: () => ({}),
+    },
+  },
+  computed: {
+    buttonText() {
+      if (!this.access.edit) return '更新権限がありません';
+      return this.loading ? '更新中...' : '更新';
+    },
+    disabled() {
+      return this.access.edit && !this.loading;
+    },
+  },
+  methods: {
+    updateCategory() {
+      console.log('df');
+      // if (!this.access.edit) return;
+      this.$emit('clear-message');
+      this.$validator.validate().then(valid => {
+        if (valid) this.$emit('update-category');
+      });
     },
   },
 };
