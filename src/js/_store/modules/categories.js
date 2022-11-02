@@ -69,6 +69,7 @@ export default {
       });
     },
     getCategory({ commit, rootGetters }, categoryId) {
+      commit('clearMessage');
       axios(rootGetters['auth/token'])({
         method: 'GET',
         url: `/category/${categoryId}`,
@@ -78,6 +79,8 @@ export default {
           name: res.data.category.name,
         };
         commit('doneGetCategory', payload);
+      }).catch(err => {
+        commit('failRequest', { message: err.message });
       });
     },
     createCategory({ commit, rootGetters }, category) {
@@ -149,6 +152,7 @@ export default {
         commit('toggleLoading');
         commit('displayDoneMessage', { message: 'カテゴリーを更新しました' });
       }).catch(err => {
+        commit('toggleLoading');
         commit('failRequest', { message: err.message });
       });
     },

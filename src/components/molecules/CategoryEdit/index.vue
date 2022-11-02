@@ -30,6 +30,7 @@
         <app-button
           button-type="submit"
           block
+          :disabled="loading || !access.edit"
         >
           {{ buttonText }}
         </app-button>
@@ -88,19 +89,20 @@ export default {
       type: String,
       default: '',
     },
+    loading: {
+      type: Boolean,
+      default: false,
+    },
   },
   computed: {
     buttonText() {
       if (!this.access.edit) return '更新権限がありません';
       return this.loading ? '更新中...' : '更新';
     },
-    disabled() {
-      return this.access.edit && !this.loading;
-    },
   },
   methods: {
     updateCategory() {
-      // if (!this.access.edit) return;
+      if (!this.access.edit) return;
       this.$emit('clear-message');
       this.$validator.validate().then(valid => {
         if (valid) this.$emit('update-category');
