@@ -49,6 +49,10 @@ export default {
     editedName(state, payload) {
       state.category = { ...state.category, name: payload.name };
     },
+    doneGetCategory(state, payload) {
+      state.category.id = payload.id;
+      state.category.name = payload.name;
+    },
   },
   actions: {
     clearMessage({ commit }) {
@@ -62,6 +66,18 @@ export default {
         commit('doneGetAllCategories', res.data.categories);
       }).catch(err => {
         commit('failRequest', { message: err.message });
+      });
+    },
+    getCategory({ commit, rootGetters }, categoryId) {
+      axios(rootGetters['auth/token'])({
+        method: 'GET',
+        url: `/category/${categoryId}`,
+      }).then(res => {
+        const payload = {
+          id: res.data.category.id,
+          name: res.data.category.name,
+        };
+        commit('doneGetCategory', payload);
       });
     },
     createCategory({ commit, rootGetters }, category) {
@@ -123,7 +139,6 @@ export default {
         url: `/category/${state.category.id}`,
         data,
       }).then(res => {
-        console.log(res);
         const payload = {
           category: {
             id: res.data.category.id,
@@ -132,6 +147,9 @@ export default {
         };
         commit('updateCategory', payload);
         commit('toggleLoading');
+        commit('displayDoneMessage', { message: 'カテゴリーを更新しました' });
+      }).catch(err => {
+        commit('failRequest', { message: err.message });
       });
     },
 

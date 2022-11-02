@@ -34,6 +34,13 @@
           {{ buttonText }}
         </app-button>
       </div>
+
+      <div v-if="errorMessage" class="category-management-post__notice">
+        <app-text bg-error>{{ errorMessage }}</app-text>
+      </div>
+      <div v-if="doneMessage" class="category-edit__notice">
+        <app-text bg-success>{{ doneMessage }}</app-text>
+      </div>
     </form>
   </section>
 </template>
@@ -43,7 +50,7 @@ import {
   Button,
   Heading,
   Input,
-  // Text,
+  Text,
   RouterLink,
 } from '@Components/atoms';
 
@@ -52,7 +59,7 @@ export default {
     appButton: Button,
     appHeading: Heading,
     appInput: Input,
-    // appText: Text,
+    appText: Text,
     appRouterLink: RouterLink,
   },
 
@@ -73,6 +80,14 @@ export default {
       type: Object,
       default: () => ({}),
     },
+    doneMessage: {
+      type: String,
+      default: '',
+    },
+    errorMessage: {
+      type: String,
+      default: '',
+    },
   },
   computed: {
     buttonText() {
@@ -85,7 +100,6 @@ export default {
   },
   methods: {
     updateCategory() {
-      console.log('df');
       // if (!this.access.edit) return;
       this.$emit('clear-message');
       this.$validator.validate().then(valid => {
