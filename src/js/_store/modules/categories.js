@@ -133,6 +133,7 @@ export default {
       });
     },
     updateCategory({ commit, rootGetters, state }) {
+      commit('clearMessage');
       commit('toggleLoading');
       const data = new URLSearchParams();
       data.append('id', state.category.id);
