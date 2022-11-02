@@ -1,7 +1,7 @@
 <template>
   <section class="category-edit">
     <app-heading :level="1">カテゴリー管理</app-heading>
-    <div class="category-list__back">
+    <div class="category-edit__back">
       <app-router-link
         block
         underline
@@ -26,17 +26,17 @@
         />
       </div>
 
-      <div class="category-edit__button">
+      <div class="category-edit__submit">
         <app-button
           button-type="submit"
-          block
+          round
           :disabled="loading || !access.edit"
         >
           {{ buttonText }}
         </app-button>
       </div>
 
-      <div v-if="errorMessage" class="category-management-post__notice">
+      <div v-if="errorMessage" class="category-edit__notice">
         <app-text bg-error>{{ errorMessage }}</app-text>
       </div>
       <div v-if="doneMessage" class="category-edit__notice">
@@ -111,3 +111,20 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+.category-edit{
+  &__back {
+    margin-top: 16px;
+  }
+  &__input {
+    margin-top: 16px;
+  }
+  &__submit {
+    margin-top: 16px;
+  }
+  &__notice {
+    margin-top: 16px;
+  }
+}
+</style>
