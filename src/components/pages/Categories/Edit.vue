@@ -1,6 +1,5 @@
 <template>
   <app-category-edit
-    :category-id="categoryId"
     :category-name="categoryName"
     :loading="loading"
     :access="access"
@@ -18,17 +17,7 @@ export default {
   components: {
     appCategoryEdit: CategoryEdit,
   },
-  data() {
-    return {
-      id: '',
-      name: '',
-    };
-  },
   computed: {
-    categoryId() {
-      const { id } = this.$route.params;
-      return id;
-    },
     categoryName() {
       const { name } = this.$store.state.categories.category;
       return name;

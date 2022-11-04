@@ -70,10 +70,6 @@ export default {
       type: Object,
       default: () => ({}),
     },
-    categoryId: {
-      type: String,
-      default: '',
-    },
     categoryName: {
       type: String,
       default: '',
