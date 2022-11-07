@@ -13,6 +13,7 @@ import CategoryList from './CategoryList';
 import ArticleEdit from './ArticleEdit';
 import ArticlePost from './ArticlePost';
 import ArticleDetail from './ArticleDetail';
+import PageNation from './PageNation';
 import DeleteModal from './Modal';
 import Notice from './Notice';
 
@@ -32,6 +33,7 @@ export {
   ArticleEdit,
   ArticlePost,
   ArticleDetail,
+  PageNation,
   DeleteModal,
   Notice,
 };
