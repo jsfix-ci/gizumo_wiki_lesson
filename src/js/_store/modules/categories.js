@@ -136,7 +136,6 @@ export default {
       commit('clearMessage');
       commit('toggleLoading');
       const data = new URLSearchParams();
-      data.append('id', state.category.id);
       data.append('name', state.category.name);
       axios(rootGetters['auth/token'])({
         method: 'PUT',
