@@ -13,6 +13,7 @@
     >
       全ての記事一覧へ戻る
     </app-router-link>
+    <p v-if="!$options.titleArray.length" class="emptyMessage">削除済記事一覧はありません</p>
     <table class="trashed-table">
       <thead class="trashed-table__head">
         <tr>
@@ -117,5 +118,9 @@ export default {
   &__create {
     width: 8%;
   }
+}
+.emptyMessage {
+  text-align: center;
+  font-size: 16px;
 }
 </style>
