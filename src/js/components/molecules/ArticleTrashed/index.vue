@@ -16,9 +16,9 @@
     <table class="trashed-table">
       <thead class="trashed-table__head">
         <tr>
-          <th v-for="(thead, index) in theads" :key="index">
+          <th v-for="(array, index) in $options.titleArray" :key="index">
             <app-text tag="span" theme-color bold>
-              {{ thead }}
+              {{ array }}
             </app-text>
           </th>
         </tr>
@@ -48,23 +48,20 @@ import {
 } from '@Components/atoms';
 
 export default {
+  titleArray: ['タイトル', '本文', '作成日'],
   components: {
     appHeading: Heading,
     appRouterLink: RouterLink,
     appText: Text,
   },
   props: {
-    theads: {
-      type: Array,
-      default: () => [],
-    },
     access: {
       type: Object,
       default: () => ({}),
     },
     trashedArticles: {
       type: Array,
-      default: () => [],
+      required: true,
     },
   },
   computed: {

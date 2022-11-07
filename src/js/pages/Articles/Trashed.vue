@@ -1,6 +1,5 @@
 <template lang="html">
   <app-article-trashed
-    :theads="theads"
     :trashed-articles="trashedArticles"
   />
 </template>
@@ -11,11 +10,6 @@ import { ArticleTrashed } from '@Components/molecules';
 export default {
   components: {
     appArticleTrashed: ArticleTrashed,
-  },
-  data() {
-    return {
-      theads: ['タイトル', '本文', '作成日'],
-    };
   },
   computed: {
     trashedArticles() {
