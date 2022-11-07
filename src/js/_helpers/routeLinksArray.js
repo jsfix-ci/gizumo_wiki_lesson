@@ -7,7 +7,7 @@ export default [
   {
     id: 2,
     name: '記事',
-    path: '/all/articles',
+    path: '/articles',
   },
   {
     id: 3,

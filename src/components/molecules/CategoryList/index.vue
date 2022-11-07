@@ -16,26 +16,28 @@
       <transition-group name="fade" tag="tbody" class="category-list__table__body">
         <tr v-for="category in categories" :key="category.id">
           <td>
-            <app-text tag="span">
+            <app-text
+              class="article-list__title"
+            >
               {{ category.name }}
             </app-text>
           </td>
           <td>
             <app-router-link
+              :to="`/articles?category=${category.name}`"
               underline
               small
               hover-opacity
-              :to="`/articles?category=${category.name}`"
             >
               このカテゴリーの記事
             </app-router-link>
           </td>
           <td>
             <app-router-link
+              :to="`/categories/${category.id}`"
               theme-color
               underline
               hover-opacity
-              :to="`/categories/${category.id}`"
             >
               更新
             </app-router-link>
@@ -49,6 +51,7 @@
               @click="openModal(category.id, category.name)"
             >
               削除
+              {{ buttonText }}
             </app-button>
           </td>
         </tr>
@@ -74,7 +77,7 @@
           class="category-list__modal__button"
           bg-danger
           round
-          @click="handleClick"
+          @click="$emit('handle-click')"
         >
           削除する
         </app-button>
