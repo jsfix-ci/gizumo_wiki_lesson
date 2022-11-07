@@ -69,7 +69,7 @@ export default {
   },
   computed: {
     formatText() {
-      return text => (text.length >= 30 ? `${text.substring(0, 30)}...` : text);
+      return text => (text.length >= 31 ? `${text.substring(0, 30)}...` : text);
     },
     formatDate() {
       return date => date.substring(0, 10);
