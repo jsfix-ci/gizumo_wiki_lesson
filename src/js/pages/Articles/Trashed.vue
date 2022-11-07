@@ -1,10 +1,8 @@
 <template lang="html">
-  <section>
-    <app-article-trashed
-      :theads="theads"
-      :trashed-articles="trashedArticles"
-    />
-  </section>
+  <app-article-trashed
+    :theads="theads"
+    :trashed-articles="trashedArticles"
+  />
 </template>
 
 <script>

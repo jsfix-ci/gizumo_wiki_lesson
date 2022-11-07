@@ -1,8 +1,6 @@
 <template lang="html">
-  <div>
-    <section class="article-trashed">
-      <app-heading :level="1">削除済記事一覧</app-heading>
-    </section>
+  <div class="article-trashed">
+    <app-heading :level="1">削除済記事一覧</app-heading>
     <app-router-link
       to="/articles?page=1"
       key-color
