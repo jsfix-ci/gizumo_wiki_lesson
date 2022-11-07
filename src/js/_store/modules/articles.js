@@ -24,6 +24,7 @@ export default {
       },
     },
     articleList: [],
+    trashedList: [],
     deleteArticleId: null,
     loading: false,
     doneMessage: '',
@@ -121,6 +122,9 @@ export default {
     setPageNumber(state, { current_page: currentPage, last_page: totalPages }) {
       state.pageData.currentPage = currentPage;
       state.pageData.totalPages = totalPages;
+    },
+    doneGetTrashedArticles(state, payload) {
+      state.trashedList = payload;
     },
   },
   actions: {
@@ -288,6 +292,16 @@ export default {
     },
     clearMessage({ commit }) {
       commit('clearMessage');
+    },
+    getTrashedArticles({ commit, rootGetters }) {
+      axios(rootGetters['auth/token'])({
+        method: 'GET',
+        url: '/article/trashed',
+      }).then(({ data }) => {
+        commit('doneGetTrashedArticles', data.articles);
+      }).catch(err => {
+        commit('failRequest', { message: err.message });
+      });
     },
   },
 };
