@@ -32,6 +32,7 @@ export default {
     perPage: 30,
     currentPage: null,
     totalPage: null,
+    trashedArticles: [],
   },
   getters: {
     transformedArticles(state) {
@@ -51,6 +52,9 @@ export default {
     deleteArticleId: state => state.deleteArticleId,
   },
   mutations: {
+    setTrashedArticles(state, payload) {
+      state.trashedArticles = payload;
+    },
     currentPageDisplay(state, payload) {
       state.articleList = payload;
     },
@@ -311,6 +315,17 @@ export default {
     },
     clearMessage({ commit }) {
       commit('clearMessage');
+    },
+    getTrashedArticles({ commit, rootGetters }) {
+      axios(rootGetters['auth/token'])({
+        method: 'GET',
+        url: '/article/trashed',
+      }).then((res) => {
+        const payload = res.data.articles;
+        commit('setTrashedArticles', payload);
+      }).catch((err) => {
+        commit('failRequest', { message: err.message });
+      });
     },
   },
 };

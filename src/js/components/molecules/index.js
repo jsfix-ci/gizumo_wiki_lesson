@@ -14,6 +14,7 @@ import CategoryList from './CategoryList';
 import ArticleEdit from './ArticleEdit';
 import ArticlePost from './ArticlePost';
 import ArticleDetail from './ArticleDetail';
+import ArticleTrashed from './ArticleTrashed';
 import DeleteModal from './Modal';
 import Notice from './Notice';
 import CategoryEdit from './CategoryEdit';
@@ -38,4 +39,5 @@ export {
   PageNation,
   DeleteModal,
   Notice,
+  ArticleTrashed,
 };
