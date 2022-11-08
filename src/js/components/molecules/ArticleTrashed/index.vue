@@ -13,7 +13,9 @@
     >
       全ての記事一覧へ戻る
     </app-router-link>
-    <p v-if="!$options.titleArray.length" class="emptyMessage">削除済記事一覧はありません</p>
+    <p v-if="arrayLength === 0" class="emptyMessage">
+      削除済記事一覧はありません
+    </p>
     <table class="trashed-table">
       <thead class="trashed-table__head">
         <tr>
@@ -71,6 +73,9 @@ export default {
     },
     formatDate() {
       return date => date.substring(0, 10);
+    },
+    arrayLength() {
+      return this.trashedArticles.length;
     },
   },
 };
