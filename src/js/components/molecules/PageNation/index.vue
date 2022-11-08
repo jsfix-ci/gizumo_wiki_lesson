@@ -55,11 +55,11 @@ export default {
   props: {
     totalPage: {
       type: Number,
-      default: null,
+      required: true,
     },
     currentPage: {
       type: Number,
-      default: null,
+      required: true,
     },
     disabled: {
       type: Boolean,
@@ -69,19 +69,13 @@ export default {
   computed: {
     totalPageArray() {
       const totalPageArray = [...Array(this.totalPage).keys()].map(e => e + 1);
-      let start = null;
-      let end = null;
       if (this.currentPage < 4) {
-        start = 1;
-        end = 5;
-      } else if (this.currentPage > this.totalPage - 3) {
-        start = this.totalPage - 5;
-        end = this.totalPage - 1;
-      } else {
-        start = this.currentPage - 3;
-        end = this.currentPage + 2;
+        return totalPageArray.slice(1, 5);
       }
-      return totalPageArray.slice(start, end);
+      if (this.currentPage > this.totalPage - 3) {
+        return totalPageArray.slice(this.totalPage - 5, this.totalPage - 1);
+      }
+      return totalPageArray.slice(this.currentPage - 3, this.currentPage + 2);
     },
   },
 };
