@@ -1,3 +1,15 @@
 <template>
-  <router-view />
+  <app-category-post />
 </template>
+
+<script>
+import { CategoryPost } from '@Components/molecules';
+
+export default {
+  components: {
+    appCategoryPost: CategoryPost,
+  },
+  computed: {
+  },
+};
+</script>
