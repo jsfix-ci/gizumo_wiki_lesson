@@ -57,14 +57,14 @@ export default {
     confirmDeleteCategories({ commit }, { categoryId, categoryName }) {
       commit('confirmDeleteCategories', { categoryId, categoryName });
     },
-    deleteCategories({ commit, rootGetters }) {
+    deleteCategories({ commit, rootGetters, state }) {
       return new Promise(resolve => {
         commit('clearMessage');
         const data = new URLSearchParams();
-        data.append('id', rootGetters['categories/deleteCategoryId']);
+        data.append('id', state.deleteCategoryId);
         axios(rootGetters['auth/token'])({
           method: 'DELETE',
-          url: `/category/${rootGetters['categories/deleteCategoryId']}`,
+          url: `/category/${state.deleteCategoryId}`,
           data,
         }).then(() => {
           commit('doneDeleteCategory');
