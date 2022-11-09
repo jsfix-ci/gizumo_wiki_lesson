@@ -183,8 +183,8 @@ export default {
 .category-list__modal {
   text-align: center;
   &__name {
-    margin-top: 16px;
-    font-size: 16px;
+    margin-top: 25px;
+    font-size: 25px;
     color: $theme-color;
   }
   &__button {
