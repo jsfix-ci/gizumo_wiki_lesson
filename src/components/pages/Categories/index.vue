@@ -5,7 +5,7 @@
       :error-message="errorMessage"
     />
     <app-category-list
-      :categories="categories"
+      :categories="category"
       :theads="theads"
       :access="access"
     />
@@ -27,7 +27,8 @@ export default {
   },
   computed: {
     category() {
-      return this.$store.state.categories.categories;
+      console.log(this)
+      return this.$store.state.categories.category;
     },
     access() {
       return this.$store.getters['auth/access'];

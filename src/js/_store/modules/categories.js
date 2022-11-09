@@ -3,10 +3,7 @@ import axios from '@Helpers/axiosDefault';
 export default {
   namespaced: true,
   state: {
-    category: {
-      id: null,
-      name: null,
-    },
+    category: [],
     links: {
       first: null,
       last: null,
@@ -29,7 +26,8 @@ export default {
       state.errorMessage = message;
     },
     doneGetAllCategories(state, payload) {
-      state.categories = { ...state.categories, ...payload.categories };
+      state.category = { ...state.category, ...payload.category };
+      console.log(state)
     },
   },
   actions: {
@@ -40,7 +38,7 @@ export default {
         url: '/category',
       }).then(res => {
         const payload = {
-          categories: res.data,
+          category: res.data.categories,
         };
         commit('doneGetAllCategories', payload);
       }).catch(err => {
