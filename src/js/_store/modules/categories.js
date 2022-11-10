@@ -3,7 +3,7 @@ import axios from '@Helpers/axiosDefault';
 export default {
   namespaced: true,
   state: {
-    category: [],
+    category: {},
     links: {
       first: null,
       last: null,
@@ -27,7 +27,6 @@ export default {
     },
     doneGetAllCategories(state, payload) {
       state.category = { ...state.category, ...payload.category };
-      console.log(state)
     },
   },
   actions: {
