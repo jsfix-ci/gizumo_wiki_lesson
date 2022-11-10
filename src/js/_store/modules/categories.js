@@ -3,7 +3,7 @@ import axios from '@Helpers/axiosDefault';
 export default {
   namespaced: true,
   state: {
-    categoryList: {},
+    categoryList: [],
     errorMessage: '',
   },
   mutations: {
@@ -11,7 +11,7 @@ export default {
       state.errorMessage = message;
     },
     doneGetAllCategories(state, payload) {
-      state.categoryList = { ...state.categoryList, ...payload.categories };
+      state.categoryList = payload.categories;
     },
   },
   actions: {

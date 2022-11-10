@@ -102,8 +102,10 @@ export default {
       },
     },
     categories: {
-      type: Object,
-      default: () => ({}),
+      type: Array,
+      default() {
+        return [];
+      },
     },
     deleteCategoryName: {
       type: String,
