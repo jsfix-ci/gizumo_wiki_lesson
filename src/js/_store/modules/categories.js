@@ -3,7 +3,7 @@ import axios from '@Helpers/axiosDefault';
 export default {
   namespaced: true,
   state: {
-    category: {},
+    categoryList: {},
     errorMessage: '',
   },
   mutations: {
@@ -11,7 +11,7 @@ export default {
       state.errorMessage = message;
     },
     doneGetAllCategories(state, payload) {
-      state.category = { ...state.category, ...payload.category };
+      state.categoryList = { ...state.categoryList, ...payload.categories };
     },
   },
   actions: {
@@ -22,7 +22,7 @@ export default {
         url: '/category',
       }).then(res => {
         const payload = {
-          category: res.data.categories.reverse(),
+          categories: res.data.categories.reverse(),
         };
         commit('doneGetAllCategories', payload);
       }).catch(err => {

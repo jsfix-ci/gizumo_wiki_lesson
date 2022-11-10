@@ -8,7 +8,7 @@
     </section>
     <section class="category-list">
       <app-category-list
-        :categories="category"
+        :categories="categories"
         :theads="theads"
         :access="access"
       />
@@ -30,8 +30,8 @@ export default {
     };
   },
   computed: {
-    category() {
-      return this.$store.state.categories.category;
+    categories() {
+      return this.$store.state.categories.categoryList;
     },
     access() {
       return this.$store.getters['auth/access'];
