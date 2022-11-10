@@ -8,7 +8,7 @@
     </section>
     <section class="category-list">
       <app-category-list
-        :categories="categories"
+        :categories="categoryList"
         :theads="theads"
         :access="access"
       />
@@ -30,7 +30,7 @@ export default {
     };
   },
   computed: {
-    categories() {
+    categoryList() {
       const { categoryList } = this.$store.state.categories;
       return categoryList;
     },
@@ -54,7 +54,6 @@ export default {
 }
 section.category-post {
   flex-grow: 1;
-
 }
 section.category-list {
   flex-grow: 1;
