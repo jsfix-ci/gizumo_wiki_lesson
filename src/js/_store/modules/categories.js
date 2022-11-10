@@ -22,7 +22,7 @@ export default {
         url: '/category',
       }).then(res => {
         const payload = {
-          category: res.data.categories,
+          category: res.data.categories.reverse(),
         };
         commit('doneGetAllCategories', payload);
       }).catch(err => {
