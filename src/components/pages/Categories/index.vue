@@ -1,14 +1,18 @@
 <template>
   <div class="wrapper">
-    <app-category-post
-      :access="access"
-      :error-message="errorMessage"
-    />
-    <app-category-list
-      :categories="category"
-      :theads="theads"
-      :access="access"
-    />
+    <section class="category-post">
+      <app-category-post
+        :access="access"
+        :error-message="errorMessage"
+      />
+    </section>
+    <section class="category-list">
+      <app-category-list
+        :categories="category"
+        :theads="theads"
+        :access="access"
+      />
+    </section>
   </div>
 </template>
 
@@ -27,7 +31,6 @@ export default {
   },
   computed: {
     category() {
-      console.log(this)
       return this.$store.state.categories.category;
     },
     access() {
@@ -47,5 +50,15 @@ export default {
 .wrapper {
   display:flex;
   justify-content: space-between;
+}
+section.category-post {
+  flex-grow: 1;
+
+}
+section.category-list {
+  flex-grow: 1;
+  border-left:solid 1px $separator-color;
+  padding-left: 20px;
+  margin-left: 20px;
 }
 </style>
