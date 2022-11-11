@@ -1,18 +1,16 @@
 <template>
   <div class="wrapper">
-    <section class="category-post">
-      <app-category-post
-        :access="access"
-        :error-message="errorMessage"
-      />
-    </section>
-    <section class="category-list">
-      <app-category-list
-        :categories="categoryList"
-        :theads="theads"
-        :access="access"
-      />
-    </section>
+    <app-category-post
+      class="category-post"
+      :access="access"
+      :error-message="errorMessage"
+    />
+    <app-category-list
+      class="category-list"
+      :categories="categoryList"
+      :theads="theads"
+      :access="access"
+    />
   </div>
 </template>
 
@@ -51,10 +49,10 @@ export default {
   display: flex;
   justify-content: space-between;
 }
-section.category-post {
+.category-post {
   width: 30%;
 }
-section.category-list {
+.category-list {
   width: 70%;
   border-left: solid 1px $separator-color;
   padding-left: 20px;
