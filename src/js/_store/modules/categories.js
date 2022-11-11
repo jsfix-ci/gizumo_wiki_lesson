@@ -10,8 +10,8 @@ export default {
     failRequest(state, { message }) {
       state.errorMessage = message;
     },
-    doneGetAllCategories(state, payload) {
-      state.categoryList = payload.categories;
+    doneGetAllCategories(state, categories) {
+      state.categoryList = categories;
     },
   },
   actions: {
@@ -20,10 +20,7 @@ export default {
         method: 'GET',
         url: '/category',
       }).then(res => {
-        const payload = {
-          categories: res.data.categories.reverse(),
-        };
-        commit('doneGetAllCategories', payload);
+        commit('doneGetAllCategories', res.data.categories.reverse());
       }).catch(err => {
         commit('failRequest', { message: err.message });
       });
