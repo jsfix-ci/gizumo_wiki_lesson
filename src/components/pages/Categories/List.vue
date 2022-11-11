@@ -49,7 +49,7 @@ export default {
 
 <style lang="scss" scoped>
 .wrapper {
-  display:flex;
+  display: flex;
   justify-content: space-between;
 }
 section.category-post {
@@ -57,7 +57,7 @@ section.category-post {
 }
 section.category-list {
   width: 70%;
-  border-left:solid 1px $separator-color;
+  border-left: solid 1px $separator-color;
   padding-left: 20px;
   margin-left: 20px;
 }

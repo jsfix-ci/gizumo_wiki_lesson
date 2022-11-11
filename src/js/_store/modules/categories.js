@@ -15,7 +15,6 @@ export default {
     },
   },
   actions: {
-    // カテゴリー一覧取得
     getAllCategories({ commit, rootGetters }) {
       axios(rootGetters['auth/token'])({
         method: 'GET',
