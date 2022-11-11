@@ -31,8 +31,7 @@ export default {
   },
   computed: {
     categoryList() {
-      const { categoryList } = this.$store.state.categories;
-      return categoryList;
+      return this.$store.state.categories.categoryList;
     },
     access() {
       return this.$store.getters['auth/access'];
