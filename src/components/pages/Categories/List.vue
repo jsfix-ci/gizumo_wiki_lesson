@@ -53,10 +53,10 @@ export default {
   justify-content: space-between;
 }
 section.category-post {
-  flex-grow: 1;
+  width: 30%;
 }
 section.category-list {
-  flex-grow: 1;
+  width: 70%;
   border-left:solid 1px $separator-color;
   padding-left: 20px;
   margin-left: 20px;
