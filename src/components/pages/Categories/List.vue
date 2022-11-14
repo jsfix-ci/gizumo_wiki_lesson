@@ -3,6 +3,7 @@
     <app-category-post
       class="category-post"
       :access="access"
+      :category="category"
       :error-message="errorMessage"
       @update-value="updateValue"
       @clear-message="clearMessage"
@@ -37,6 +38,9 @@ export default {
     access() {
       return this.$store.getters['auth/access'];
     },
+    category() {
+      return this.$store.state.categories.category;
+    },
     errorMessage() {
       return this.$store.state.categories.errorMessage;
     },
@@ -47,7 +51,8 @@ export default {
   methods: {
     handleSubmit() {
     },
-    updateValue() {
+    updateValue($event) {
+      this.$store.dispatch('categories/updateValue', $event.target.value);
     },
     clearMessage() {
     },
