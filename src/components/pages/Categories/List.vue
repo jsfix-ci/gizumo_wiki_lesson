@@ -4,6 +4,9 @@
       class="category-post"
       :access="access"
       :error-message="errorMessage"
+      @update-value="updateValue"
+      @clear-message="clearMessage"
+      @handle-submit="handleSubmit"
     />
     <app-category-list
       class="category-list"
@@ -40,6 +43,14 @@ export default {
   },
   created() {
     this.$store.dispatch('categories/getAllCategories');
+  },
+  methods: {
+    handleSubmit() {
+    },
+    updateValue() {
+    },
+    clearMessage() {
+    },
   },
 };
 </script>
