@@ -50,6 +50,15 @@ export default {
   },
   methods: {
     handleSubmit() {
+      this.$store.dispatch('categories/postCategory', {
+        name: this.$store.state.categories.category,
+      }).then(() => {
+        console.log('submit');
+        this.$router.push({
+          path: '/categories',
+          query: { redirect: '/categories/post' },
+        });
+      });
     },
     updateValue($event) {
       this.$store.dispatch('categories/updateValue', $event.target.value);

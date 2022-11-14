@@ -32,14 +32,19 @@ export default {
     updateValue({ commit }, category) {
       commit('updateValue', category);
     },
-    postCategory({ commit, rootGetters }) {
-      axios(rootGetters['auth/token'])({
-        method: 'POST',
-        url: '/category',
-      }).then(res => {
-        commit('donePostCategories', res.data.categories.reverse());
-      }).catch(err => {
-        commit('failRequest', { message: err.message });
+    postCategory({ commit, rootGetters }, name) {
+      return new Promise((resolve, reject) => {
+        axios(rootGetters['auth/token'])({
+          method: 'POST',
+          url: '/category',
+          data: name,
+        }).then(() => {
+          console.log('resolve');
+          resolve();
+        }).catch(err => {
+          console.log('reject');
+          reject();
+        });
       });
     },
   },
