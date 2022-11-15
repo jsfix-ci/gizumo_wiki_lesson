@@ -3,17 +3,23 @@ import axios from '@Helpers/axiosDefault';
 export default {
   namespaced: true,
   state: {
+    loading: false,
     categoryList: [],
     category: '',
     doneMessage: '',
     errorMessage: '',
   },
   mutations: {
+    applyRequest(state) {
+      state.loading = true;
+    },
     failRequest(state, { message }) {
       state.errorMessage = message;
+      state.loading = false;
     },
     doneGetAllCategories(state, categories) {
       state.categoryList = categories;
+      state.loading = false;
     },
     updateValue(state, category) {
       state.category = category;
@@ -44,6 +50,8 @@ export default {
       commit('clearMessage');
     },
     postCategory({ commit, rootGetters }, name) {
+      commit('applyRequest');
+
       return new Promise((resolve, reject) => {
         axios(rootGetters['auth/token'])({
           method: 'POST',

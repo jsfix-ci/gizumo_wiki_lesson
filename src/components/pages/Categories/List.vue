@@ -2,6 +2,7 @@
   <div class="wrapper">
     <app-category-post
       class="category-post"
+      :disabled="loading ? true : false"
       :access="access"
       :category="category"
       :done-message="doneMessage"
@@ -33,6 +34,9 @@ export default {
     };
   },
   computed: {
+    loading() {
+      return this.$store.state.categories.loading;
+    },
     categoryList() {
       return this.$store.state.categories.categoryList;
     },
