@@ -58,10 +58,6 @@ export default {
         name: this.$store.state.categories.category,
       }).then(() => {
         this.$store.dispatch('categories/getAllCategories');
-        this.$router.push({
-          path: '/categories',
-          query: { redirect: '/categories' },
-        });
       });
     },
     updateValue($event) {
