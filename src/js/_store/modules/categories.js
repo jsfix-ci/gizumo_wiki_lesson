@@ -19,8 +19,7 @@ export default {
     },
     clearMessage(state) {
       state.errorMessage = '';
-      console.log('clearMessage');
-    }
+    },
   },
   actions: {
     getAllCategories({ commit, rootGetters }) {
@@ -46,7 +45,6 @@ export default {
           url: '/category',
           data: name,
         }).then(() => {
-          console.log('resolve');
           resolve();
         }).catch(err => {
           commit('failRequest', { message: err.message });

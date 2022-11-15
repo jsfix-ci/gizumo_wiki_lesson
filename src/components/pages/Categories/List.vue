@@ -53,10 +53,7 @@ export default {
       this.$store.dispatch('categories/postCategory', {
         name: this.$store.state.categories.category,
       }).then(() => {
-        console.log('submit');
-        this.$router.push({
-          path: '/categories',
-        });
+        this.$router.go({ path: this.$router.currentRoute.path, force: true });
       });
     },
     updateValue($event) {
