@@ -5,6 +5,7 @@ export default {
   state: {
     categoryList: [],
     category: '',
+    doneMessage: '',
     errorMessage: '',
   },
   mutations: {
@@ -18,7 +19,11 @@ export default {
       state.category = category;
     },
     clearMessage(state) {
+      state.doneMessage = '';
       state.errorMessage = '';
+    },
+    displayDoneMessage(state) {
+      state.doneMessage = '成功しました';
     },
   },
   actions: {
@@ -45,6 +50,7 @@ export default {
           url: '/category',
           data: name,
         }).then(() => {
+          commit('displayDoneMessage');
           resolve();
         }).catch(err => {
           commit('failRequest', { message: err.message });

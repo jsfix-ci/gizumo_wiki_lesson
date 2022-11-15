@@ -4,6 +4,7 @@
       class="category-post"
       :access="access"
       :category="category"
+      :done-message="doneMessage"
       :error-message="errorMessage"
       @update-value="updateValue"
       @clear-message="clearMessage"
@@ -40,6 +41,9 @@ export default {
     },
     category() {
       return this.$store.state.categories.category;
+    },
+    doneMessage() {
+      return this.$store.state.categories.doneMessage;
     },
     errorMessage() {
       return this.$store.state.categories.errorMessage;
