@@ -17,6 +17,10 @@ export default {
     updateValue(state, category) {
       state.category = category;
     },
+    clearMessage(state) {
+      state.errorMessage = '';
+      console.log('clearMessage');
+    }
   },
   actions: {
     getAllCategories({ commit, rootGetters }) {
@@ -32,6 +36,9 @@ export default {
     updateValue({ commit }, category) {
       commit('updateValue', category);
     },
+    clearMessage({ commit }) {
+      commit('clearMessage');
+    },
     postCategory({ commit, rootGetters }, name) {
       return new Promise((resolve, reject) => {
         axios(rootGetters['auth/token'])({
@@ -42,7 +49,7 @@ export default {
           console.log('resolve');
           resolve();
         }).catch(err => {
-          console.log('reject');
+          commit('failRequest', { message: err.message });
           reject();
         });
       });

@@ -56,7 +56,6 @@ export default {
         console.log('submit');
         this.$router.push({
           path: '/categories',
-          query: { redirect: '/categories/post' },
         });
       });
     },
@@ -64,6 +63,7 @@ export default {
       this.$store.dispatch('categories/updateValue', $event.target.value);
     },
     clearMessage() {
+      this.$store.dispatch('categories/clearMessage');
     },
   },
 };
