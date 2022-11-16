@@ -19,19 +19,34 @@ export default {
     deleteCategoryName: state => state.deleteCategoryName,
   },
   mutations: {
+    initCategory(state) {
+      state.targetCategory = {
+        id: null,
+        name: '',
+      };
+    },
+    doneGetCategories(state, payload) {
+      state.targetCategory = { ...payload };
+    },
+    editedName(state, payload) {
+      state.targetCategory = { ...state.targetCategory, name: payload.name };
+    },
     doneGetAllCategories(state, payload) {
       state.categoryList = [...payload.categories];
     },
     failRequest(state, { message }) {
       state.errorMessage = message;
     },
-    doneDeleteCategory(state) {
-      state.deleteCategoryId = null;
-      state.deleteCategoryName = '';
+    updateCategory(state, { targetCategory }) {
+      state.targetCategory = { ...state.targetCategory, ...targetCategory };
     },
     confirmDeleteCategories(state, { categoryId, categoryName }) {
       state.deleteCategoryId = categoryId;
       state.deleteCategoryName = categoryName;
+    },
+    doneDeleteCategory(state) {
+      state.deleteCategoryId = null;
+      state.deleteCategoryName = '';
     },
     toggleDisabled(state) {
       state.disabled = !state.disabled;
@@ -43,17 +58,11 @@ export default {
     displayDoneMessage(state, payload) {
       state.doneMessage = payload.message;
     },
-    editedName(state, payload) {
-      state.targetCategory = { ...state.targetCategory, name: payload.name };
-    },
-    updateCategory(state, { targetCategory }) {
-      state.targetCategory = { ...state.targetCategory, ...targetCategory };
-    },
-    doneGetCategories(state, payload) {
-      state.targetCategory = { ...payload };
-    },
   },
   actions: {
+    initCategory({ commit }) {
+      commit('initCategory');
+    },
     getAllCategories({ commit, rootGetters }) {
       commit('clearMessage');
       axios(rootGetters['auth/token'])({

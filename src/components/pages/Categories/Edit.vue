@@ -6,7 +6,8 @@
     :disabled="disabled"
     :access="access"
     @edited-name="editedName"
-    @update-categories="updateCategory"
+    @update-category="updateCategory"
+    @clear-message="clearMessage"
   />
 </template>
 
@@ -36,6 +37,7 @@ export default {
     },
   },
   created() {
+    this.$store.dispatch('categories/initCategory');
     this.$store.dispatch('categories/getCategories', this.$route.params.id);
   },
   methods: {
@@ -45,6 +47,9 @@ export default {
     updateCategory() {
       if (this.disabled) return;
       this.$store.dispatch('categories/updateCategory');
+    },
+    clearMessage() {
+      this.$store.dispatch('categories/clearMessage');
     },
   },
 };
