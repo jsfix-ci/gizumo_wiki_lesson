@@ -3,6 +3,10 @@ import axios from '@Helpers/axiosDefault';
 export default {
   namespaced: true,
   state: {
+    targetCategory: {
+      id: null,
+      name: '',
+    },
     categoryList: [],
     disabled: false,
     errorMessage: '',
@@ -15,7 +19,7 @@ export default {
     deleteCategoryName: state => state.deleteCategoryName,
   },
   mutations: {
-    doneGetCategories(state, payload) {
+    doneGetAllCategories(state, payload) {
       state.categoryList = [...payload.categories];
     },
     failRequest(state, { message }) {
@@ -39,9 +43,19 @@ export default {
     displayDoneMessage(state, payload) {
       state.doneMessage = payload.message;
     },
+    editedName(state, payload) {
+      state.targetCategory = { ...state.targetCategory, name: payload.name };
+    },
+    updateCategories(state, { targetCategory }) {
+      state.targetCategory = { ...state.targetCategory, ...targetCategory };
+    },
+    doneGetCategories(state, payload) {
+      state.targetCategory = { ...payload };
+    },
   },
   actions: {
     getAllCategories({ commit, rootGetters }) {
+      commit('clearMessage');
       axios(rootGetters['auth/token'])({
         method: 'GET',
         url: '/category',
@@ -49,9 +63,60 @@ export default {
         const payload = {
           categories: res.data.categories.reverse(),
         };
+        commit('doneGetAllCategories', payload);
+      }).catch(err => {
+        commit('failRequest', { message: err.message });
+      });
+    },
+    getCategories({ commit, rootGetters }, categoryId) {
+      commit('clearMessage');
+      axios(rootGetters['auth/token'])({
+        method: 'GET',
+        url: `/category/${categoryId}`,
+      }).then(res => {
+        // NOTE: エラー時はresponse.data.codeが0で返ってくる。
+        if (res.data.code === 0) throw new Error(res.data.message);
+        const payload = {
+          id: res.data.category.id,
+          name: res.data.category.name,
+        };
         commit('doneGetCategories', payload);
       }).catch(err => {
         commit('failRequest', { message: err.message });
+      });
+    },
+    editedName({ commit }, name) {
+      commit({
+        type: 'editedName',
+        name,
+      });
+    },
+    updateCategories({ commit, rootGetters, state }) {
+      return new Promise(resolve => {
+        commit('clearMessage');
+        commit('toggleDisabled');
+        const data = new URLSearchParams();
+        data.append('id', state.targetCategory.id);
+        data.append('name', state.targetCategory.name);
+        axios(rootGetters['auth/token'])({
+          method: 'PUT',
+          url: `/category/${state.targetCategory.id}`,
+          data,
+        }).then(res => {
+          const payload = {
+            targetCategory: {
+              id: res.data.category.id,
+              name: res.data.category.name,
+            },
+          };
+          commit('updateCategories', payload);
+          commit('toggleDisabled');
+          commit('displayDoneMessage', { message: 'カテゴリーを更新しました' });
+          resolve();
+        }).catch(err => {
+          commit('toggleDisabled');
+          commit('failRequest', { message: err.message });
+        });
       });
     },
     confirmDeleteCategories({ commit }, { categoryId, categoryName }) {
