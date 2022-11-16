@@ -56,12 +56,14 @@ export default {
   },
   methods: {
     handleSubmit() {
-      this.$store.dispatch('categories/postCategory', {
-        name: this.category,
-      }).then(() => {
-        this.category = '';
-        this.$store.dispatch('categories/getAllCategories');
-      });
+      if (!this.$store.loading) {
+        this.$store.dispatch('categories/postCategory', {
+          name: this.category,
+        }).then(() => {
+          this.category = '';
+          this.$store.dispatch('categories/getAllCategories');
+        });
+      }
     },
     updateValue($event) {
       this.category = $event.target.value;
