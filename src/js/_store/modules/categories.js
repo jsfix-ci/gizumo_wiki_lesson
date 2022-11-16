@@ -10,15 +10,13 @@ export default {
   },
   mutations: {
     toggleLoading(state) {
-      state.loading = true;
+      state.loading = !state.loading;
     },
     failRequest(state, { message }) {
       state.errorMessage = message;
-      state.loading = false;
     },
     doneGetAllCategories(state, categories) {
       state.categoryList = categories;
-      state.loading = false;
     },
     clearMessage(state) {
       state.doneMessage = '';
@@ -36,8 +34,10 @@ export default {
         url: '/category',
       }).then(res => {
         commit('doneGetAllCategories', res.data.categories.reverse());
+        commit('toggleLoading');
       }).catch(err => {
         commit('failRequest', { message: err.message });
+        commit('toggleLoading');
       });
     },
     clearMessage({ commit }) {
@@ -52,9 +52,11 @@ export default {
           data: name,
         }).then(() => {
           commit('displayDoneMessage');
+          commit('toggleLoading');
           resolve();
         }).catch(err => {
           commit('failRequest', { message: err.message });
+          commit('toggleLoading');
         });
       });
     },
