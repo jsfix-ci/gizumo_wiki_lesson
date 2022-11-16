@@ -1,41 +1,38 @@
 <template>
   <section class="category-edit">
     <app-heading :level="1">カテゴリー管理</app-heading>
-    <div class="category-edit__back">
-      <app-router-link
-        block
-        underline
-        key-color
-        hover-opacity
-        :to="`/categories`"
+    <app-router-link
+      class="category-edit__back"
+      block
+      underline
+      key-color
+      hover-opacity
+      :to="`/categories`"
+    >
+      カテゴリー一覧へ戻る
+    </app-router-link>
+
+    <form class="category-edit__form" @submit.prevent="updateCategory">
+      <app-input
+        v-validate="'required'"
+        class="category-edit__input"
+        name="categoryName"
+        type="text"
+        placeholder="カテゴリー名"
+        data-vv-as="カテゴリー名"
+        :error-messages="errors.collect('categoryName')"
+        :value="categoryName"
+        @update-value="$emit('edited-name', $event)"
+      />
+
+      <app-button
+        class="category-edit__submit"
+        button-type="submit"
+        :disabled="disabled || !access.edit"
+        round
       >
-        カテゴリー一覧へ戻る
-      </app-router-link>
-    </div>
-
-    <form class="category-edit__form" @submit.prevent="updateCategories">
-      <div class="category-edit__input">
-        <app-input
-          v-validate="'required'"
-          name="categoryName"
-          type="text"
-          placeholder="カテゴリー名"
-          data-vv-as="カテゴリー名"
-          :error-messages="errors.collect('categoryName')"
-          :value="categoryName"
-          @update-value="$emit('edited-name', $event)"
-        />
-      </div>
-
-      <div class="category-edit__submit">
-        <app-button
-          button-type="submit"
-          :disabled="disabled || !access.edit"
-          round
-        >
-          {{ buttonText }}
-        </app-button>
-      </div>
+        {{ buttonText }}
+      </app-button>
 
       <div v-if="errorMessage" class="category-edit__notice">
         <app-text bg-error>{{ errorMessage }}</app-text>
@@ -85,12 +82,12 @@ export default {
   },
   computed: {
     buttonText() {
-      if (!this.access.create) return '作成権限がありません';
-      return this.disabled ? '作成中...' : '作成';
+      if (!this.access.create) return '更新権限がありません';
+      return this.disabled ? '更新中...' : '更新';
     },
   },
   methods: {
-    updateCategories() {
+    updateCategory() {
       if (!this.access.edit) return;
       this.$emit('clear-message');
       this.$validator.validate().then(valid => {
