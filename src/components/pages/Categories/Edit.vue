@@ -1,15 +1,13 @@
 <template>
-  <div>
-    <app-category-edit
-      :category-name="categoryName"
-      :error-message="errorMessage"
-      :done-message="doneMessage"
-      :disabled="disabled"
-      :access="access"
-      @edited-name="editedName"
-      @update-categories="updateCategories"
-    />
-  </div>
+  <app-category-edit
+    :category-name="categoryName"
+    :error-message="errorMessage"
+    :done-message="doneMessage"
+    :disabled="disabled"
+    :access="access"
+    @edited-name="editedName"
+    @update-categories="updateCategory"
+  />
 </template>
 
 <script>
@@ -44,9 +42,9 @@ export default {
     editedName($event) {
       this.$store.dispatch('categories/editedName', $event.target.value);
     },
-    updateCategories() {
+    updateCategory() {
       if (this.disabled) return;
-      this.$store.dispatch('categories/updateCategories');
+      this.$store.dispatch('categories/updateCategory');
     },
   },
 };
