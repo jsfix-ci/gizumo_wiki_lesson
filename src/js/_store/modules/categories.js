@@ -28,23 +28,19 @@ export default {
   },
   actions: {
     getAllCategories({ commit, rootGetters }) {
-      commit('toggleLoading');
       axios(rootGetters['auth/token'])({
         method: 'GET',
         url: '/category',
       }).then(res => {
         commit('doneGetAllCategories', res.data.categories.reverse());
-        commit('toggleLoading');
       }).catch(err => {
         commit('failRequest', { message: err.message });
-        commit('toggleLoading');
       });
     },
     clearMessage({ commit }) {
       commit('clearMessage');
     },
     postCategory({ commit, rootGetters }, name) {
-      commit('toggleLoading');
       return new Promise(resolve => {
         axios(rootGetters['auth/token'])({
           method: 'POST',
@@ -58,6 +54,7 @@ export default {
           commit('failRequest', { message: err.message });
           commit('toggleLoading');
         });
+        commit('toggleLoading');
       });
     },
   },
