@@ -46,7 +46,7 @@ export default {
     editedName(state, payload) {
       state.targetCategory = { ...state.targetCategory, name: payload.name };
     },
-    updateCategories(state, { targetCategory }) {
+    updateCategory(state, { targetCategory }) {
       state.targetCategory = { ...state.targetCategory, ...targetCategory };
     },
     doneGetCategories(state, payload) {
@@ -74,7 +74,6 @@ export default {
         method: 'GET',
         url: `/category/${categoryId}`,
       }).then(res => {
-        // NOTE: エラー時はresponse.data.codeが0で返ってくる。
         if (res.data.code === 0) throw new Error(res.data.message);
         const payload = {
           id: res.data.category.id,
@@ -91,7 +90,7 @@ export default {
         name,
       });
     },
-    updateCategories({ commit, rootGetters, state }) {
+    updateCategory({ commit, rootGetters, state }) {
       return new Promise(resolve => {
         commit('clearMessage');
         commit('toggleDisabled');
@@ -109,7 +108,7 @@ export default {
               name: res.data.category.name,
             },
           };
-          commit('updateCategories', payload);
+          commit('updateCategory', payload);
           commit('toggleDisabled');
           commit('displayDoneMessage', { message: 'カテゴリーを更新しました' });
           resolve();
