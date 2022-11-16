@@ -42,6 +42,7 @@ export default {
     },
     postCategory({ commit, rootGetters }, name) {
       return new Promise(resolve => {
+        commit('toggleLoading');
         axios(rootGetters['auth/token'])({
           method: 'POST',
           url: '/category',
@@ -54,7 +55,6 @@ export default {
           commit('failRequest', { message: err.message });
           commit('toggleLoading');
         });
-        commit('toggleLoading');
       });
     },
   },
