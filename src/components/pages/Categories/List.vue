@@ -16,18 +16,21 @@
       :categories="categoryList"
       :theads="theads"
       :access="access"
+      @open-modal="openModal"
     />
   </div>
 </template>
 
 <script>
 import { CategoryPost, CategoryList } from '@Components/molecules';
+import Mixins from '@Helpers/mixins';
 
 export default {
   components: {
     appCategoryPost: CategoryPost,
     appCategoryList: CategoryList,
   },
+  mixins: [Mixins],
   data() {
     return {
       theads: ['カテゴリー名'],
@@ -55,6 +58,10 @@ export default {
     this.$store.dispatch('categories/getAllCategories');
   },
   methods: {
+    openModal(categoryId, categoryName) {
+      this.$store.dispatch('categories/confirmDeleteCategory', categoryId, categoryName);
+      this.toggleModal();
+    },
     handleSubmit() {
       if (!this.$store.loading) {
         this.$store.dispatch('categories/postCategory', {
