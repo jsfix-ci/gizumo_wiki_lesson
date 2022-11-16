@@ -2,8 +2,14 @@
   <div class="wrapper">
     <app-category-post
       class="category-post"
+      :disabled="loading"
       :access="access"
+      :category="category"
+      :done-message="doneMessage"
       :error-message="errorMessage"
+      @update-value="updateValue"
+      @clear-message="clearMessage"
+      @handle-submit="handleSubmit"
     />
     <app-category-list
       class="category-list"
@@ -25,14 +31,21 @@ export default {
   data() {
     return {
       theads: ['カテゴリー名'],
+      category: '',
     };
   },
   computed: {
+    loading() {
+      return this.$store.state.categories.loading;
+    },
     categoryList() {
       return this.$store.state.categories.categoryList;
     },
     access() {
       return this.$store.getters['auth/access'];
+    },
+    doneMessage() {
+      return this.$store.state.categories.doneMessage;
     },
     errorMessage() {
       return this.$store.state.categories.errorMessage;
@@ -40,6 +53,24 @@ export default {
   },
   created() {
     this.$store.dispatch('categories/getAllCategories');
+  },
+  methods: {
+    handleSubmit() {
+      if (!this.$store.loading) {
+        this.$store.dispatch('categories/postCategory', {
+          name: this.category,
+        }).then(() => {
+          this.category = '';
+          this.$store.dispatch('categories/getAllCategories');
+        });
+      }
+    },
+    updateValue($event) {
+      this.category = $event.target.value;
+    },
+    clearMessage() {
+      this.$store.dispatch('categories/clearMessage');
+    },
   },
 };
 </script>
