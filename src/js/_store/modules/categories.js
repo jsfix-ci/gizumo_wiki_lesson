@@ -9,7 +9,7 @@ export default {
     errorMessage: '',
   },
   mutations: {
-    applyRequest(state) {
+    toggleLoading(state) {
       state.loading = true;
     },
     failRequest(state, { message }) {
@@ -30,6 +30,7 @@ export default {
   },
   actions: {
     getAllCategories({ commit, rootGetters }) {
+      commit('toggleLoading');
       axios(rootGetters['auth/token'])({
         method: 'GET',
         url: '/category',
@@ -43,8 +44,7 @@ export default {
       commit('clearMessage');
     },
     postCategory({ commit, rootGetters }, name) {
-      commit('applyRequest');
-
+      commit('toggleLoading');
       return new Promise(resolve => {
         axios(rootGetters['auth/token'])({
           method: 'POST',
