@@ -2,7 +2,7 @@
   <div class="wrapper">
     <app-category-post
       class="category-post"
-      :disabled="loading ? true : false"
+      :disabled="loading"
       :access="access"
       :category="category"
       :done-message="doneMessage"
