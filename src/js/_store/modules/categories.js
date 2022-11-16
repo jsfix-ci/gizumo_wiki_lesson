@@ -5,7 +5,6 @@ export default {
   state: {
     loading: false,
     categoryList: [],
-    category: '',
     doneMessage: '',
     errorMessage: '',
   },
@@ -20,9 +19,6 @@ export default {
     doneGetAllCategories(state, categories) {
       state.categoryList = categories;
       state.loading = false;
-    },
-    updateValue(state, category) {
-      state.category = category;
     },
     clearMessage(state) {
       state.doneMessage = '';
@@ -42,9 +38,6 @@ export default {
       }).catch(err => {
         commit('failRequest', { message: err.message });
       });
-    },
-    updateValue({ commit }, category) {
-      commit('updateValue', category);
     },
     clearMessage({ commit }) {
       commit('clearMessage');

@@ -31,6 +31,7 @@ export default {
   data() {
     return {
       theads: ['カテゴリー名'],
+      category: '',
     };
   },
   computed: {
@@ -42,9 +43,6 @@ export default {
     },
     access() {
       return this.$store.getters['auth/access'];
-    },
-    category() {
-      return this.$store.state.categories.category;
     },
     doneMessage() {
       return this.$store.state.categories.doneMessage;
@@ -59,13 +57,14 @@ export default {
   methods: {
     handleSubmit() {
       this.$store.dispatch('categories/postCategory', {
-        name: this.$store.state.categories.category,
+        name: this.category,
       }).then(() => {
+        this.category = '';
         this.$store.dispatch('categories/getAllCategories');
       });
     },
     updateValue($event) {
-      this.$store.dispatch('categories/updateValue', $event.target.value);
+      this.category = $event.target.value;
     },
     clearMessage() {
       this.$store.dispatch('categories/clearMessage');
