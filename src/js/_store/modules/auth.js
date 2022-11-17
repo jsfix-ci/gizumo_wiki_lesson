@@ -36,7 +36,7 @@ export default {
       state.errorMessage = '';
     },
     signInSuccess(state, { token, user }) {
-      Cookies.set('user-token', token, { expires: 10 });
+      Cookies.set('user-token', JSON.stringify(token), { expires: 10 });
       state.token = token;
       state.user = { ...state.user, ...user };
       state.loading = false;
