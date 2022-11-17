@@ -37,8 +37,6 @@ export default {
     return {
       theads: ['カテゴリー名'],
       category: '',
-      deleteCategoryId: null,
-      deleteCategoryName: '',
     };
   },
   computed: {
@@ -50,6 +48,12 @@ export default {
     },
     access() {
       return this.$store.getters['auth/access'];
+    },
+    deleteCategoryId() {
+      return this.$store.state.categories.deleteCategoryId;
+    },
+    deleteCategoryName() {
+      return this.$store.state.categories.deleteCategoryName;
     },
     doneMessage() {
       return this.$store.state.categories.doneMessage;
@@ -64,7 +68,9 @@ export default {
   },
   methods: {
     openModal(categoryId, categoryName) {
-      this.$store.dispatch('categories/confirmDeleteCategory', categoryId, categoryName);
+      this.$store.dispatch('categories/confirmDeleteCategory', {
+        id: categoryId, name: categoryName,
+      });
       this.toggleModal();
     },
     handleSubmit() {

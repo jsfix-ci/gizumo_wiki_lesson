@@ -20,6 +20,10 @@ export default {
     doneGetAllCategories(state, categories) {
       state.categoryList = categories;
     },
+    confirmDeleteCategory(state, { id, name }) {
+      state.deleteCategoryId = id;
+      state.deleteCategoryName = name;
+    },
     clearMessage(state) {
       state.doneMessage = '';
       state.errorMessage = '';
@@ -58,6 +62,9 @@ export default {
           commit('toggleLoading');
         });
       });
+    },
+    confirmDeleteCategory({ commit }, { id, name }) {
+      commit('confirmDeleteCategory', { id, name });
     },
     deleteCategory({ commit, rootGetters }, { id }) {
       return new Promise(resolve => {
