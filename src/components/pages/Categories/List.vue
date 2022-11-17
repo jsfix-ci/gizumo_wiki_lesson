@@ -91,8 +91,8 @@ export default {
         id: this.deleteCategoryId,
       }).then(() => {
         this.$store.dispatch('categories/getAllCategories');
-        this.toggleModal();
       });
+      this.toggleModal();
     },
   },
 };
