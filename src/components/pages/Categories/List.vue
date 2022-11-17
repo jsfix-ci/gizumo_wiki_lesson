@@ -64,8 +64,6 @@ export default {
   },
   methods: {
     openModal(categoryId, categoryName) {
-      this.deleteCategoryId = categoryId;
-      this.deleteCategoryName = categoryName;
       this.$store.dispatch('categories/confirmDeleteCategory', categoryId, categoryName);
       this.toggleModal();
     },

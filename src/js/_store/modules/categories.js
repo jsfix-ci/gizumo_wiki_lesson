@@ -5,6 +5,8 @@ export default {
   state: {
     loading: false,
     categoryList: [],
+    deleteCategoryId: null,
+    deleteCategoryName: '',
     doneMessage: '',
     errorMessage: '',
   },
@@ -22,8 +24,8 @@ export default {
       state.doneMessage = '';
       state.errorMessage = '';
     },
-    displayDoneMessage(state) {
-      state.doneMessage = '成功しました';
+    displayDoneMessage(state, { message }) {
+      state.doneMessage = message;
     },
   },
   actions: {
@@ -48,7 +50,7 @@ export default {
           url: '/category',
           data: name,
         }).then(() => {
-          commit('displayDoneMessage');
+          commit('displayDoneMessage', { message: '成功しました' });
           commit('toggleLoading');
           resolve();
         }).catch(err => {
@@ -63,7 +65,7 @@ export default {
           method: 'DELETE',
           url: `/category/${id}`,
         }).then(() => {
-          commit('displayDoneMessage');
+          commit('displayDoneMessage', { message: 'カテゴリー削除しました' });
           resolve();
         }).catch(err => {
           commit('failRequest', { message: err.message });
