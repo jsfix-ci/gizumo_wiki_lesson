@@ -57,5 +57,18 @@ export default {
         });
       });
     },
+    deleteCategory({ commit, rootGetters }, { id }) {
+      return new Promise(resolve => {
+        axios(rootGetters['auth/token'])({
+          method: 'DELETE',
+          url: `/category/${id}`,
+        }).then(() => {
+          commit('displayDoneMessage');
+          resolve();
+        }).catch(err => {
+          commit('failRequest', { message: err.message });
+        });
+      });
+    },
   },
 };

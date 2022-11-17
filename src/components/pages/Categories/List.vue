@@ -85,7 +85,13 @@ export default {
       this.$store.dispatch('categories/clearMessage');
     },
     handleClick() {
-
+      this.clearMessage();
+      this.$store.dispatch('categories/deleteCategory', {
+        id: this.deleteCategoryId,
+      }).then(() => {
+        this.$store.dispatch('categories/getAllCategories');
+        this.toggleModal();
+      });
     },
   },
 };
