@@ -140,7 +140,7 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  const token = Cookies.get('user-token') || null;
+  const token = JSON.parse(Cookies.get('user-token')) || null;
   const isPublic = to.matched.some(page => page.meta.isPublic);
   const isSignIn = to.matched.some(page => page.path === '/signin');
   const isPasswordInit = to.matched.some(page => page.path === '/password/init');
